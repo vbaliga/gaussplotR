@@ -9,9 +9,9 @@ Authors@R:
                  email = "vbaliga87@gmail.com",
                  comment = c(ORCID = "0000-0002-9367-8974")
                  )
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: 
+    Functions to predict values from a two-dimensional Gaussian function and 
+    produce plots of predicted data.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -19,4 +19,6 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9000
 VignetteBuilder: knitr
 Imports: 
-    ggplot2 (>= 3.3.0)
+    ggplot2 (>= 3.3.0),
+    lattice,
+    metR
