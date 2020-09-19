@@ -69,7 +69,6 @@ ggplot_gaussian_2D <- function(gauss_data,
       axis.text = axis.text,
       axis.title = axis.title,
       axis.ticks = axis.ticks,
-      plot.margin = plot.margin,
-      legend.position="none"
+      plot.margin = plot.margin
     )
 }
