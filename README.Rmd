@@ -34,11 +34,34 @@ devtools::install_github("vbaliga/gaussplotR")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+At this time, parameters of the Gaussian will need to be known ahead of time. 
+The function `predict_gaussian_2D()` can then be used to predict values from
+the gaussian over a supplied grid of x- and y-values (generated here via 
+`expand.grid`). 
 
 ```{r example}
 library(gaussplotR)
-## basic example code
+
+## Load the sample data set
+data(gaussplot_sample_data)
+
+## Generate a grid of x- and y- values on which to predict
+grid <-
+  expand.grid(X_values = seq(from = -5, to = 0, by = 0.1),
+              Y_values = seq(from = -5, to = 4, by = 0.1))
+
+## Predict the values using predict_gaussian_2D
+predicted_values <-
+  predict_gaussian_2D(
+    X_values = grid$X_values,
+    Y_values = grid$Y_values,
+    A = gaussplot_sample_data$A[1],
+    X_peak = gaussplot_sample_data$X_peak[1],
+    Y_peak = gaussplot_sample_data$Y_peak[1],
+    Q = gaussplot_sample_data$Q[1],
+    X_var = gaussplot_sample_data$X_var[1],
+    Y_var = gaussplot_sample_data$Y_var[1]
+  )
 ```
 
 ## Citation
