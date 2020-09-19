@@ -56,8 +56,30 @@ gauss_data <-
   )
 
 ## Generate a plot
-library(ggplot2); library(metR)
+## Here's a simpler example via lattice::levelplot()
+library(lattice)
+levelplot(
+  predicted_values ~ X_values * Y_values,
+  data = gauss_data,
+  col.regions = colorRampPalette(
+    c("white", "blue")
+    )(100),
+  asp = 1
+)
 ```
+
+<img src="man/figures/README-example-1.png" width="100%" />
+
+``` r
+
+## And here's an extended example using ggplot2
+## metR::geom_contour_fill() is used to draw the contours
+library(ggplot2); library(metR)
+ggplot_gaussian_2D(gauss_data)
+#> Coordinate system already present. Adding new coordinate system, which will replace the existing one.
+```
+
+<img src="man/figures/README-example-2.png" width="100%" />
 
 ## Citation
 

@@ -46,6 +46,10 @@
 #'     X_var = gaussplot_sample_data$X_var[1],
 #'     Y_var = gaussplot_sample_data$Y_var[1]
 #'   )
+#'
+#' ## Plot via ggplot2 and metR
+#' library(ggplot2); library(metR)
+#' ggplot_gaussian_2D(gauss_data)
 
 
 predict_gaussian_2D <- function(X_values,
@@ -55,7 +59,7 @@ predict_gaussian_2D <- function(X_values,
                                 X_var,
                                 Q,
                                 Y_peak,
-                                Y_var){
+                                Y_var) {
   preds <- NULL
   for (i in 1:length(X_values)){
     preds[i] <-

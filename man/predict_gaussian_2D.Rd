@@ -57,6 +57,10 @@ gauss_data <-
     X_var = gaussplot_sample_data$X_var[1],
     Y_var = gaussplot_sample_data$Y_var[1]
   )
+
+## Plot via ggplot2 and metR
+library(ggplot2); library(metR)
+ggplot_gaussian_2D(gauss_data)
 }
 \author{
 Vikram B. Baliga
