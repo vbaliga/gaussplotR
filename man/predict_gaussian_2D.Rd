@@ -24,8 +24,9 @@ predict_gaussian_2D(X_values, Y_values, A, X_peak, X_var, Q, Y_peak, Y_var)
 \item{Y_var}{numeric value of the y-axis variance}
 }
 \value{
-A numeric vector that provides the values of the 2D gaussian,
-corresponding to the set of {\code{X_values},\code{Y_values}}
+A data.frame with the supplied \code{X_values} and \code{Y_values}
+along with the predicted values of the 2D gaussian
+(\code{predicted_values})
 }
 \description{
 Predict values from a fitted 2D gaussian
@@ -45,7 +46,7 @@ grid <-
               Y_values = seq(from = -5, to = 4, by = 0.1))
 
 ## Predict the values using predict_gaussian_2D
-predicted_values <-
+gauss_data <-
   predict_gaussian_2D(
     X_values = grid$X_values,
     Y_values = grid$Y_values,

@@ -17,8 +17,9 @@
 #' @section Warning:
 #' This function assumes raw data have been log2 transformed
 #'
-#' @return A numeric vector that provides the values of the 2D gaussian,
-#' corresponding to the set of {\code{X_values},\code{Y_values}}
+#' @return A data.frame with the supplied \code{X_values} and \code{Y_values}
+#'   along with the predicted values of the 2D gaussian
+#'   (\code{predicted_values})
 #'
 #' @author Vikram B. Baliga
 #'
@@ -34,7 +35,7 @@
 #'               Y_values = seq(from = -5, to = 4, by = 0.1))
 #'
 #' ## Predict the values using predict_gaussian_2D
-#' predicted_values <-
+#' gauss_data <-
 #'   predict_gaussian_2D(
 #'     X_values = grid$X_values,
 #'     Y_values = grid$Y_values,
@@ -55,13 +56,23 @@ predict_gaussian_2D <- function(X_values,
                                 Q,
                                 Y_peak,
                                 Y_var){
-  result <- NULL
+  preds <- NULL
   for (i in 1:length(X_values)){
-    result[i] <-
+    preds[i] <-
       A * exp(-((X_values[i] - log2(X_peak)) ^ 2) / (X_var ^ 2)) *
       exp(-(Y_values[i] - log2(2 ^ ((Q + 1) * (X_values[i] - log2(X_peak)) +
                                       log2(Y_peak)
       ))) ^ 2 / (Y_var ^ 2))
   }
+
+  ## Create a data.frame
+  result <-
+    data.frame(
+      X_values = X_values,
+      Y_values = Y_values,
+      predicted_values = preds
+    )
+
+  ## Export
   return(result)
 }

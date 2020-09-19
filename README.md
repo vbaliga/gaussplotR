@@ -26,9 +26,9 @@ devtools::install_github("vbaliga/gaussplotR")
 
 ## Example
 
-At this time, parameters of the Gaussian will need to be known ahead of
-time. The function `predict_gaussian_2D()` can then be used to predict
-values from the gaussian over a supplied grid of x- and y-values
+At this time, parameters of the Gaussian will need to be known in
+advance. The function `predict_gaussian_2D()` can then be used to
+predict values from the gaussian over a supplied grid of x- and y-values
 (generated here via `expand.grid`).
 
 ``` r
@@ -43,7 +43,7 @@ grid <-
               Y_values = seq(from = -5, to = 4, by = 0.1))
 
 ## Predict the values using predict_gaussian_2D
-predicted_values <-
+gauss_data <-
   predict_gaussian_2D(
     X_values = grid$X_values,
     Y_values = grid$Y_values,
@@ -54,6 +54,9 @@ predicted_values <-
     X_var = gaussplot_sample_data$X_var[1],
     Y_var = gaussplot_sample_data$Y_var[1]
   )
+
+## Generate a plot
+library(ggplot2); library(metR)
 ```
 
 ## Citation
