@@ -40,7 +40,7 @@ data(gaussplot_sample_data)
 ## Generate a grid of x- and y- values on which to predict
 grid <-
   expand.grid(X_values = seq(from = -5, to = 0, by = 0.1),
-              Y_values = seq(from = -5, to = 4, by = 0.1))
+              Y_values = seq(from = -1, to = 4, by = 0.1))
 
 ## Predict the values using predict_gaussian_2D
 gauss_data <-
@@ -76,7 +76,6 @@ levelplot(
 ## metR::geom_contour_fill() is used to draw the contours
 library(ggplot2); library(metR)
 ggplot_gaussian_2D(gauss_data)
-#> Coordinate system already present. Adding new coordinate system, which will replace the existing one.
 ```
 
 <img src="man/figures/README-example-2.png" width="100%" />

@@ -57,10 +57,11 @@ ggplot_gaussian_2D <- function(gauss_data,
     scale_fill_gradientn(
       colors = colors
     ) +
-    coord_cartesian(xlim = range(gauss_data$X_values),
-                    ylim = range(gauss_data$Y_values),
-                    expand = FALSE) +
-    coord_fixed() +
+    coord_fixed(
+      xlim = range(gauss_data$X_values),
+      ylim = range(gauss_data$Y_values),
+      expand = FALSE
+    ) +
     xlab(x_lab) +
     ylab(y_lab) +
     theme_classic() +
