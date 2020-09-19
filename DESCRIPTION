@@ -22,3 +22,6 @@ Imports:
     ggplot2 (>= 3.3.0),
     lattice,
     metR
+Suggests: 
+    knitr,
+    rmarkdown
