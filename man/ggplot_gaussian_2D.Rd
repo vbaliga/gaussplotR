@@ -9,8 +9,8 @@ ggplot_gaussian_2D(
   normalize = TRUE,
   contour_thickness = 0.04,
   bins = 15,
-  colors = c(rgb(0, 0, 0, maxColorValue = 255), rgb(51, 153, 255, maxColorValue = 255),
-    rgb(255, 255, 255, maxColorValue = 255)),
+  viridis_dir = 1,
+  viridis_opt = "B",
   x_lab = "X values",
   y_lab = "Y values",
   axis.text = element_text(size = 6),
@@ -30,7 +30,9 @@ to 1 scale?}
 
 \item{bins}{Number of bins for the contour plot}
 
-\item{colors}{Passed to scale_fill_gradientn()}
+\item{viridis_dir}{See "direction" in scale_fill_viridis_c()}
+
+\item{viridis_opt}{See "option" in scale_fill_viridis_c()}
 
 \item{x_lab}{Arguments passed to xlab()}
 

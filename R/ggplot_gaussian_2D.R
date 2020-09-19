@@ -11,7 +11,8 @@
 #'   to 1 scale?
 #' @param contour_thickness Thickness of contour lines
 #' @param bins Number of bins for the contour plot
-#' @param colors Passed to scale_fill_gradientn()
+#' @param viridis_dir See "direction" in scale_fill_viridis_c()
+#' @param viridis_opt See "option" in scale_fill_viridis_c()
 #' @param x_lab Arguments passed to xlab()
 #' @param y_lab Arguments passed to ylab()
 #' @param axis.text Arguments passed to axis.text
@@ -32,11 +33,8 @@ ggplot_gaussian_2D <- function(gauss_data,
                                normalize = TRUE,
                                contour_thickness = 0.04,
                                bins = 15,
-                               colors = c(
-                                 rgb(0, 0, 0, maxColorValue = 255), #black
-                                 rgb(51, 153, 255, maxColorValue = 255), #blue
-                                 rgb(255, 255, 255, maxColorValue = 255)
-                               ),
+                               viridis_dir = 1,
+                               viridis_opt = "B",
                                x_lab = "X values",
                                y_lab = "Y values",
                                axis.text = element_text(size = 6),
@@ -54,9 +52,8 @@ ggplot_gaussian_2D <- function(gauss_data,
     metR::geom_contour_fill(aes(fill = ..level..),
                             size = contour_thickness,
                             bins = bins) +
-    scale_fill_gradientn(
-      colors = colors
-    ) +
+    scale_fill_viridis_c(direction = viridis_dir,
+                         option = viridis_opt) +
     coord_fixed(
       xlim = range(gauss_data$X_values),
       ylim = range(gauss_data$Y_values),
