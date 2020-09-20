@@ -9,7 +9,7 @@ A data frame with 36 rows and 11 variables:
 \describe{
 \item{X_values}{vector of numeric values for the x-axis}
 \item{Y_values}{vector of numeric values for the y-axis}
-\item{response}{vector of numeric valeus for the response variable}
+\item{response}{vector of numeric values for the response variable}
 \item{norm_g_resp}{normalized values from the 2D gaussian fit}
 \item{g_resp}{values from the 2D gaussian fit}
 \item{A}{amplitude of 2D gaussian (repeated)}

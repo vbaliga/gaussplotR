@@ -1,7 +1,7 @@
 Package: gaussplotR
 Type: Package
 Title: Predict and Plot 2D Gaussians
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     person(given = "Vikram B.",
                  family = "Baliga", 
@@ -27,3 +27,5 @@ Suggests:
     rmarkdown
 Depends: 
     R (>= 2.10)
+URL: https://github.com/vbaliga/gaussplotR
+BugReports: https://github.com/vbaliga/gaussplotR/issues
