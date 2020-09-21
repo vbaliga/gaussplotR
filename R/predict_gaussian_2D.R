@@ -15,7 +15,9 @@
 #' @param Y_var numeric value of the y-axis variance
 #'
 #' @section Warning:
-#' This function assumes raw data have been log2 transformed
+#' This function assumes Gaussian parameters have been fitted beforehand. No
+#' fitting of parameters is done within this function; they all must be
+#' supplied.
 #'
 #' @return A data.frame with the supplied \code{X_values} and \code{Y_values}
 #'   along with the predicted values of the 2D gaussian
@@ -63,10 +65,10 @@ predict_gaussian_2D <- function(X_values,
   preds <- NULL
   for (i in 1:length(X_values)){
     preds[i] <-
-      A * exp(-((X_values[i] - log2(X_peak)) ^ 2) / (X_var ^ 2)) *
-      exp(-(Y_values[i] - log2(2 ^ ((Q + 1) * (X_values[i] - log2(X_peak)) +
-                                      log2(Y_peak)
-      ))) ^ 2 / (Y_var ^ 2))
+      A * exp(-((X_values[i] - X_peak) ^ 2) / (X_var ^ 2)) *
+      exp(-(Y_values[i] - ((Q + 1) * (X_values[i] - X_peak) +
+                             Y_peak
+      )) ^ 2 / (Y_var ^ 2))
   }
 
   ## Create a data.frame

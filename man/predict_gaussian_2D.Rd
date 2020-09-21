@@ -33,7 +33,9 @@ Predict values from a fitted 2D gaussian
 }
 \section{Warning}{
 
-This function assumes raw data have been log2 transformed
+This function assumes Gaussian parameters have been fitted beforehand. No
+fitting of parameters is done within this function; they all must be
+supplied.
 }
 
 \examples{
