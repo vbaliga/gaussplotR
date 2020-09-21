@@ -1,7 +1,7 @@
 Package: gaussplotR
 Type: Package
 Title: Predict and Plot 2D Gaussians
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: 
     person(given = "Vikram B.",
                  family = "Baliga", 
