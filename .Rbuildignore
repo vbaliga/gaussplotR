@@ -4,3 +4,4 @@
 ^README\.Rmd$
 ^\.github$
 ^codemeta\.json$
+^\.travis\.yml$

@@ -1,0 +1,20 @@
+## Adding this due to NOTE during R CMD CHECK:
+utils::globalVariables(
+  c(
+    "aes",
+    "element_text",
+    "element_line",
+    "unit",
+    "axes",
+    "X_values",
+    "Y_values",
+    "predicted_values",
+    "..level..",
+    "scale_fill_viridis_c",
+    "coord_fixed",
+    "xlab",
+    "ylab",
+    "theme_classic",
+    "theme"
+  )
+)

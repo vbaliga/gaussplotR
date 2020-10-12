@@ -21,7 +21,7 @@ VignetteBuilder: knitr
 Imports: 
     ggplot2 (>= 3.3.0),
     lattice,
-    metR
+    metR (>= 0.7.0)
 Suggests: 
     knitr,
     rmarkdown
