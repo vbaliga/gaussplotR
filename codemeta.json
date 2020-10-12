@@ -5,10 +5,10 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "gaussplotR",
-  "description": "\n    Functions to predict values from a two-dimensional Gaussian function and \n    produce plots of predicted data.",
+  "description": "\n    Functions to predict values from a two-dimensional Gaussian function and \n    produce plots of predicted data via either ggplot2 or base R plotting.",
   "name": "gaussplotR: Predict and Plot 2D Gaussians",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -25,7 +25,15 @@
     }
   ],
   "contributor": {},
-  "copyrightHolder": {},
+  "copyrightHolder": [
+    {
+      "@type": "Person",
+      "givenName": "Vikram B.",
+      "familyName": "Baliga",
+      "email": "vbaliga87@gmail.com",
+      "@id": "https://orcid.org/0000-0002-9367-8974"
+    }
+  ],
   "funder": {},
   "maintainer": [
     {
@@ -92,6 +100,7 @@
       "@type": "SoftwareApplication",
       "identifier": "metR",
       "name": "metR",
+      "version": ">= 0.7.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -109,7 +118,9 @@
   ],
   "codeRepository": "https://github.com/vbaliga/gaussplotR",
   "readme": "https://github.com/vbaliga/gaussplotR/blob/master/README.md",
-  "fileSize": "156.845KB",
+  "fileSize": "81.277KB",
   "developmentStatus": "https://www.repostatus.org/#active",
-  "issueTracker": "https://github.com/vbaliga/gaussplotR/issues"
+  "issueTracker": "https://github.com/vbaliga/gaussplotR/issues",
+  "contIntegration": "https://travis-ci.org/vbaliga/gaussplotR",
+  "keywords": ["gaussian", "r", "rstats", "gaussian-interpolation", "gaussian-plot", "plotting"]
 }

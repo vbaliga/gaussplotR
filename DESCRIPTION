@@ -5,13 +5,13 @@ Version: 0.1.2
 Authors@R: 
     person(given = "Vikram B.",
                  family = "Baliga", 
-                 role = c("aut", "cre"),
+                 role = c("aut", "cre", "cph"),
                  email = "vbaliga87@gmail.com",
                  comment = c(ORCID = "0000-0002-9367-8974")
                  )
 Description: 
     Functions to predict values from a two-dimensional Gaussian function and 
-    produce plots of predicted data.
+    produce plots of predicted data via either ggplot2 or base R plotting.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
