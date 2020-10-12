@@ -11,7 +11,7 @@ Authors@R:
                  )
 Description: 
     Functions to predict values from a two-dimensional Gaussian function and 
-    produce plots of predicted data via either ggplot2 or base R plotting.
+    produce plots of predicted data via either 'ggplot2' or base R plotting.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
