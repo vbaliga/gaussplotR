@@ -5,3 +5,4 @@
 ^\.github$
 ^codemeta\.json$
 ^\.travis\.yml$
+^cran-comments\.md$

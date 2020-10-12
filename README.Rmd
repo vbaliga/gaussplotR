@@ -73,7 +73,7 @@ ggplot_gaussian_2D(gauss_data)
 
 ## And another example via lattice::levelplot()
 library(lattice)
-levelplot(
+lattice::levelplot(
   predicted_values ~ X_values * Y_values,
   data = gauss_data,
   col.regions = colorRampPalette(
