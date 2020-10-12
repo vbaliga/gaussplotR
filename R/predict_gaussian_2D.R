@@ -1,5 +1,5 @@
 ## Part of the gaussplotR package
-## Last updated: 2020-09-19 VBB
+## Last updated: 2020-10-12 VBB
 
 ############################# predict_gaussian_2D ##############################
 
@@ -63,7 +63,7 @@ predict_gaussian_2D <- function(X_values,
                                 Y_peak,
                                 Y_var) {
   preds <- NULL
-  for (i in 1:length(X_values)){
+  for (i in seq_along(X_values)){
     preds[i] <-
       A * exp(-((X_values[i] - X_peak) ^ 2) / (X_var ^ 2)) *
       exp(-(Y_values[i] - ((Q + 1) * (X_values[i] - X_peak) +
