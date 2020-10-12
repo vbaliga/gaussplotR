@@ -47,6 +47,18 @@
   "softwareSuggestions": [
     {
       "@type": "SoftwareApplication",
+      "identifier": "lattice",
+      "name": "lattice",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=lattice"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "knitr",
       "name": "knitr",
       "provider": {
@@ -86,18 +98,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "lattice",
-      "name": "lattice",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=lattice"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "metR",
       "name": "metR",
       "version": ">= 0.7.0",
@@ -118,7 +118,7 @@
   ],
   "codeRepository": "https://github.com/vbaliga/gaussplotR",
   "readme": "https://github.com/vbaliga/gaussplotR/blob/master/README.md",
-  "fileSize": "82.288KB",
+  "fileSize": "106.986KB",
   "developmentStatus": "https://www.repostatus.org/#active",
   "issueTracker": "https://github.com/vbaliga/gaussplotR/issues",
   "contIntegration": "https://travis-ci.org/vbaliga/gaussplotR",

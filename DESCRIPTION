@@ -20,9 +20,9 @@ RoxygenNote: 7.1.1.9000
 VignetteBuilder: knitr
 Imports: 
     ggplot2 (>= 3.3.0),
-    lattice,
     metR (>= 0.7.0)
 Suggests: 
+    lattice,
     knitr,
     rmarkdown
 Depends: 

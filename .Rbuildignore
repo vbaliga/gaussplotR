@@ -6,3 +6,4 @@
 ^codemeta\.json$
 ^\.travis\.yml$
 ^cran-comments\.md$
+^revdep$
