@@ -1,3 +1,8 @@
+# gaussplotR 0.1.5.9000
+
+* Added a `compute_gaussian_volume()` function to compute the volume under a 
+given 2D gaussian
+
 # gaussplotR 0.1.4
 
 * Miscellaneous formatting fixes for CRAN checks. No changes to functions.
