@@ -1,4 +1,4 @@
-# gaussplotR 0.1.5.9000
+# gaussplotR 0.1.6
 
 * Added a `compute_gaussian_volume()` function to compute the volume under a 
 given 2D gaussian
