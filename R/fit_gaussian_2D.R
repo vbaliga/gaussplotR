@@ -50,27 +50,57 @@
 #'   ## Load the sample data set
 #'   data(gaussplot_sample_data)
 #'
+#'   ## The relevant data are in the first three columns
+#'   samp_dat <- gaussplot_sample_data[,1:3]
+#'
+#'   ## Fit a 2D Gaussian with no user-supplied constraints; this
+#'   ## will generally lead to the best fit
+#'   params_unconstrained <-
+#'     fit_gaussian_2D(samp_dat)
+#'
+#'   ## If desired, the user can specify contraints. E.g. force the
+#'   ## gaussian to be horizontally oriented.
+#'   ## Note that this will generally lead to poor fits and should
+#'   ## be performed with caution
+#'   params_horizontal <-
+#'     fit_gaussian_2D(samp_dat, Q_strategy = -1)
+#'
 #'   ## Generate a grid of x- and y- values on which to predict
 #'   grid <-
 #'     expand.grid(X_values = seq(from = -5, to = 0, by = 0.1),
 #'                 Y_values = seq(from = -1, to = 4, by = 0.1))
 #'
 #'   ## Predict the values using predict_gaussian_2D
-#'   gauss_data <-
+#'   ## First, the unconstrained
+#'   gauss_data_unconstrained <-
 #'     predict_gaussian_2D(
 #'       X_values = grid$X_values,
 #'       Y_values = grid$Y_values,
-#'       A = gaussplot_sample_data$A[1],
-#'       X_peak = gaussplot_sample_data$X_peak[1],
-#'       Y_peak = gaussplot_sample_data$Y_peak[1],
-#'       Q = gaussplot_sample_data$Q[1],
-#'       X_var = gaussplot_sample_data$X_var[1],
-#'       Y_var = gaussplot_sample_data$Y_var[1]
+#'       A = params_unconstrained[1],
+#'       Q = params_unconstrained[2],
+#'       X_peak = params_unconstrained[3],
+#'       Y_peak = params_unconstrained[4],
+#'       X_var = params_unconstrained[5],
+#'       Y_var = params_unconstrained[6]
+#'     )
+#'
+#'   ## And now the horizontal
+#'   gauss_data_horizontal <-
+#'     predict_gaussian_2D(
+#'       X_values = grid$X_values,
+#'       Y_values = grid$Y_values,
+#'       A = params_horizontal[1],
+#'       Q = params_horizontal[2],
+#'       X_peak = params_horizontal[3],
+#'       Y_peak = params_horizontal[4],
+#'       X_var = params_horizontal[5],
+#'       Y_var = params_horizontal[6]
 #'     )
 #'
 #'   ## Plot via ggplot2 and metR
 #'   library(ggplot2); library(metR)
-#'   ggplot_gaussian_2D(gauss_data)
+#'   ggplot_gaussian_2D(gauss_data_unconstrained)
+#'   ggplot_gaussian_2D(gauss_data_horizontal)
 #'  }
 
 

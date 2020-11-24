@@ -118,10 +118,9 @@
   ],
   "codeRepository": "https://github.com/vbaliga/gaussplotR",
   "readme": "https://github.com/vbaliga/gaussplotR/blob/master/README.md",
-  "fileSize": "195.161KB",
+  "fileSize": "256.563KB",
   "developmentStatus": "https://www.repostatus.org/#active",
   "issueTracker": "https://github.com/vbaliga/gaussplotR/issues",
-  "contIntegration": "https://travis-ci.org/vbaliga/gaussplotR",
   "keywords": [
     "gaussian",
     "r",
@@ -130,7 +129,8 @@
     "gaussian-plot",
     "plotting",
     "gaussian-volume",
-    "2d-gaussian"
+    "2d-gaussian",
+    "gaussian-fit"
   ],
   "releaseNotes": "https://github.com/vbaliga/gaussplotR/blob/master/NEWS.md",
   "provider": {
