@@ -1,6 +1,6 @@
 Package: gaussplotR
 Type: Package
-Title: Predict and Plot 2D Gaussians
+Title: Fit, Predict and Plot 2D Gaussians
 Version: 0.1.6.9000
 Authors@R: 
     person(given = "Vikram B.",
@@ -10,8 +10,9 @@ Authors@R:
                  comment = c(ORCID = "0000-0002-9367-8974")
                  )
 Description: 
-    Functions to predict values from a two-dimensional Gaussian function and 
-    produce plots of predicted data via either 'ggplot2' or base R plotting.
+    Functions to fit two-dimensional Gaussian functions, predict values from
+    fits, and produce plots of predicted data via either 'ggplot2' or base R 
+    plotting.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
