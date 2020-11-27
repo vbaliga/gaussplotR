@@ -6,21 +6,33 @@
 \usage{
 fit_gaussian_2D(
   data,
+  method = "elliptical",
+  orientation_strategy = "unconstrained",
   user_init = NULL,
-  Q_strategy = "unconstrained",
+  maxiter = 1000,
   verbose = FALSE,
   ...
 )
 }
 \arguments{
-\item{data}{A data.frame or tibble that contains the raw data. Columns must
-have "X_values", "Y_values" and "response" as column names.}
+\item{data}{A data.frame that contains the raw data (generally rectilinearly
+gridded data, but this is not a strict requirement). Columns must be named
+\code{"X_values"}, \code{"Y_values"} and \code{"response"}.}
+
+\item{method}{Choice of \code{"circular"}, \code{"elliptical"}, or
+\code{"elliptical_log"}. Determine which specific implementation of 2D
+Gaussian to use. See Details for more.}
+
+\item{orientation_strategy}{If using \code{"elliptical"} or \code{method =
+  "elliptical_log"}, should the orientation of the Gaussian be unconstrained
+(i.e. the best-fit orienation is returned) or should it be pre-set by the
+user? See Details for more.}
 
 \item{user_init}{Default NULL; if desired, the user can supply initial values
-for the A, X_peak, Y_peak, X_var, and Y_var parameters. See Details for more.}
+for the parameters of the chosen model. See Details for more.}
 
-\item{Q_strategy}{Should the "Q" parameter of the model be constrained? See
-Details for more.}
+\item{maxiter}{Default 1000. A positive integer specifying the maximum number
+of iterations allowed. See \code{stats::nls.control()} for more details.}
 
 \item{verbose}{TRUE or FALSE; should the trace of the iteration be
 printed? See the \code{trace} argument of \code{stats::nls()} for more
@@ -38,18 +50,45 @@ Determine the best-fit parameters of a 2D Gaussian fit to a data set
 }
 \details{
 \code{stats::nls()} is used to fit parameters for a 2D Gaussian to
-the supplied data. Such parameters include A (amplitude),
-Q (orientation parameter), X_peak (x-axis peak location), Y_peak (y-axis
-peak location), X_var (spread along x-axis), and Y_var (spread along y-axis).
+the supplied data. Each method uses (slightly) different sets of
+parameters. Note that for a small (but non-trivial) proportion of data
+sets, nonlinear least squares may fail due to singularities or other
+issues. Most often, this occurs because of the starting parameters that are
+fed in. By default, this function attempts to set default parameters by
+making an educated guess about the major aspects of the supplied data.
+Should this strategy fail, the user can make use of the \code{user_init}
+argument to supply an alternate set of starting values.
 
-The Q parameter determines the orientation of the 2D Gaussian. In most cases,
-the user should use the default "unconstrained" setting for this argument.
-Doing so will provide the best-fit 2D Gaussian (assuming that the solution
-yielded by \code{stats::nls()} converges on the global optimum). By choosing
-to supply numeric values to the \code{Q_strategy} argument, the user can
-dictate the orientation of the 2D Gaussian. Setting \code{Q_strategy = 0}
-will result in a diagonally-oriented Gaussian, whereas setting
-\code{Q_strategy = -1} will result in horizontal orientation.
+The simplest method is \code{method = "circular"}. Here, the 2D Gaussian is
+constrained to have a roughly circular shape (i.e. spread in X- and Y- are
+roughly equal). If this method is used, the fitted parameters are: A
+(amplitude), X_peak (x-axis peak location), Y_peak (y-axis peak location),
+X_sd (spread along x-axis), and Y_sd (spread along y-axis).
+
+A more generic method (and the default) is \code{method = "elliptical"}. This
+allows the fitted 2D Gaussian to take a more ellipsoid shape (but note that
+\code{method = "circular"} can be considered a special case of this). If this
+method is used, the fitted parameters are: A (amplitude), X_peak (x-axis peak
+location), Y_peak (y-axis peak location), and theta (rotation, in radians,
+from the x-axis, in the clockwise direction).
+
+A third method is \code{method = "elliptical_log"}. This is a further special
+case in which log2-transformed data may be used. See Priebe et al. 2013 for
+more details. Parameters from this model include A (amplitude), Q
+(orientation parameter), X_peak (x-axis peak location), Y_peak (y-axis peak
+location), X_sd (spread along x-axis), and Y_sd (spread along y-axis).
+
+Similarly, if using \code{method = "elliptical_log"}, the Q parameter
+determines the orientation of the 2D Gaussian. As such, a constraint could be
+applied to the Q parameter by the user to dictate the orientation of the
+ellpise.  In most cases, the user should use the default "unconstrained"
+setting for this argument. Doing so will provide the best-fit 2D Gaussian
+(assuming that the solution yielded by \code{stats::nls()} converges on the
+global optimum). By choosing to supply numeric values to the
+\code{Q_strategy} argument, the user can dictate the orientation of the 2D
+Gaussian. Setting \code{Q_strategy = 0} will result in a diagonally-oriented
+Gaussian, whereas setting \code{Q_strategy = -1} will result in horizontal
+orientation.
 
 The \code{user_init} argument can also be used to supply a
 vector of initial values for the A, Q, X_peak, Y_peak, X_var, and Y_var
