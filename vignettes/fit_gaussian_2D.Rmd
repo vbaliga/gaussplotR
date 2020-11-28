@@ -31,6 +31,7 @@ data set down to those columns before running through the examples.
 
 ```{r setup}
 library(gaussplotR)
+
 ## We'll also use lattice, ggplot2 and metR
 library(lattice); library(ggplot2); library(metR)
 

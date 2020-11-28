@@ -1,5 +1,5 @@
 ## Part of the gaussplotR package
-## Last updated: 2020-09-19 VBB
+## Last updated: 2020-11-28 VBB
 
 ############################# ggplot_gaussian_2D ###############################
 
@@ -10,6 +10,7 @@
 #' @param normalize Default TRUE, should predicted_values be normalized on a 0
 #'   to 1 scale?
 #' @param contour_thickness Thickness of contour lines
+#' @param contour_color Color of the contour lines
 #' @param bins Number of bins for the contour plot
 #' @param viridis_dir See "direction" in scale_fill_viridis_c()
 #' @param viridis_opt See "option" in scale_fill_viridis_c()
@@ -32,6 +33,7 @@
 ggplot_gaussian_2D <- function(gauss_data,
                                normalize = TRUE,
                                contour_thickness = 0.04,
+                               contour_color = "black",
                                bins = 15,
                                viridis_dir = 1,
                                viridis_opt = "B",
@@ -49,8 +51,9 @@ ggplot_gaussian_2D <- function(gauss_data,
   }
 
   ggplot2::ggplot(gauss_data, aes(X_values, Y_values, z = predicted_values)) +
-    metR::geom_contour_fill(aes(fill = ..level..),
+    metR::geom_contour_fill(#aes(fill = ..level..),
                             size = contour_thickness,
+                            color = contour_color,
                             bins = bins) +
     scale_fill_viridis_c(direction = viridis_dir,
                          option = viridis_opt) +

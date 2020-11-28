@@ -8,6 +8,7 @@ ggplot_gaussian_2D(
   gauss_data,
   normalize = TRUE,
   contour_thickness = 0.04,
+  contour_color = "black",
   bins = 15,
   viridis_dir = 1,
   viridis_opt = "B",
@@ -27,6 +28,8 @@ e.g. exported from \code{predict_gaussian_2D()}}
 to 1 scale?}
 
 \item{contour_thickness}{Thickness of contour lines}
+
+\item{contour_color}{Color of the contour lines}
 
 \item{bins}{Number of bins for the contour plot}
 

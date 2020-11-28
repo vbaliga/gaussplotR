@@ -3,7 +3,7 @@ pkgdown: 1.6.1.9000
 pkgdown_sha: e1e46f2e13c7efdb17bc4eae40bc3779c2b0b517
 articles:
   fit_gaussian_2D: fit_gaussian_2D.html
-last_built: 2020-11-28T18:36Z
+last_built: 2020-11-28T19:10Z
 urls:
   reference: https://vbaliga.github.io/gaussplotR//reference
   article: https://vbaliga.github.io/gaussplotR//articles
