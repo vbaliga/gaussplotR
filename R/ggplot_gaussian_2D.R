@@ -27,7 +27,7 @@
 #'
 #' @export
 #'
-#' @inherit predict_gaussian_2D examples
+#' @inherit fit_gaussian_2D examples
 
 ggplot_gaussian_2D <- function(gauss_data,
                                normalize = TRUE,

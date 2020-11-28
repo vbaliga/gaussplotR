@@ -25,7 +25,7 @@ Gaussian to use. See Details for more.}
 
 \item{orientation_strategy}{If using \code{"elliptical"} or \code{method =
   "elliptical_log"}, should the orientation of the Gaussian be unconstrained
-(i.e. the best-fit orienation is returned) or should it be pre-set by the
+(i.e. the best-fit orientation is returned) or should it be pre-set by the
 user? See Details for more.}
 
 \item{user_init}{Default NULL; if desired, the user can supply initial values
@@ -41,9 +41,8 @@ detail.}
 \item{...}{Additional arguments passed to \code{stats::nls()}}
 }
 \value{
-A vector that provides the best-fitting values of A (amplitude),
-Q (orientation parameter), X_peak (x-axis peak location), Y_peak (y-axis
-peak location), X_var (spread along x-axis), and Y_var (spread along y-axis).
+A data.frame that provides the best-fitting values for the specified
+method. Refer to the Details section for the names of parameters.
 }
 \description{
 Determine the best-fit parameters of a 2D Gaussian fit to a data set
@@ -61,61 +60,66 @@ argument to supply an alternate set of starting values.
 
 The simplest method is \code{method = "circular"}. Here, the 2D Gaussian is
 constrained to have a roughly circular shape (i.e. spread in X- and Y- are
-roughly equal). If this method is used, the fitted parameters are: A
+roughly equal). If this method is used, the fitted parameters are: Amp
 (amplitude), X_peak (x-axis peak location), Y_peak (y-axis peak location),
-X_sd (spread along x-axis), and Y_sd (spread along y-axis).
+X_sig (spread along x-axis), and Y_sig (spread along y-axis).
 
 A more generic method (and the default) is \code{method = "elliptical"}. This
 allows the fitted 2D Gaussian to take a more ellipsoid shape (but note that
 \code{method = "circular"} can be considered a special case of this). If this
-method is used, the fitted parameters are: A (amplitude), X_peak (x-axis peak
-location), Y_peak (y-axis peak location), and theta (rotation, in radians,
-from the x-axis, in the clockwise direction).
+method is used, the fitted parameters are: A_o (a constant term), Amp
+(amplitude), theta (rotation, in radians, from the x-axis in the clockwise
+direction), X_peak (x-axis peak location), Y_peak (y-axis peak location), a
+(width of Gaussian along x-axis), and b (width of Gaussian along y-axis).
 
 A third method is \code{method = "elliptical_log"}. This is a further special
-case in which log2-transformed data may be used. See Priebe et al. 2013 for
-more details. Parameters from this model include A (amplitude), Q
+case in which log2-transformed data may be used. See Priebe et al. 2003 for
+more details. Parameters from this model include: Amp (amplitude), Q
 (orientation parameter), X_peak (x-axis peak location), Y_peak (y-axis peak
-location), X_sd (spread along x-axis), and Y_sd (spread along y-axis).
+location), X_sig (spread along x-axis), and Y_sig (spread along y-axis).
 
-Similarly, if using \code{method = "elliptical_log"}, the Q parameter
-determines the orientation of the 2D Gaussian. As such, a constraint could be
-applied to the Q parameter by the user to dictate the orientation of the
-ellpise.  In most cases, the user should use the default "unconstrained"
-setting for this argument. Doing so will provide the best-fit 2D Gaussian
-(assuming that the solution yielded by \code{stats::nls()} converges on the
-global optimum). By choosing to supply numeric values to the
-\code{Q_strategy} argument, the user can dictate the orientation of the 2D
-Gaussian. Setting \code{Q_strategy = 0} will result in a diagonally-oriented
-Gaussian, whereas setting \code{Q_strategy = -1} will result in horizontal
-orientation.
+If using either \code{method = "elliptical"} or \code{method =
+"elliptical_log"}, the \code{"orientation_strategy"} argument can be
+used to specify how the orientation is set. In most cases, the user should
+use the default "unconstrained" setting for this argument. Doing so will
+provide the best-fit 2D Gaussian (assuming that the solution yielded by
+\code{stats::nls()} converges on the global optimum).
+
+Setting \code{orientation_strategy} to a numeric (e.g.
+\code{orientation_strategy = pi/2}) will force the orientation of the
+Gaussian to the specified value. Note that this is handled differently by
+\code{method = "elliptical"} vs \code{method = "elliptical_log"}. In
+\code{method = "elliptical"}, the theta parameter dictates the rotation, in
+radians, from the x-axis in the clockwise direction. In contrast, the
+\code{method = "elliptical_log"} procedure uses a Q parameter to determine
+the orientation of the 2D Gaussian. Setting \code{Q_strategy = 0} will result
+in a diagonally-oriented Gaussian, whereas setting \code{Q_strategy = -1}
+will result in horizontal orientation. See Priebe et al. 2003 for more
+details.
 
 The \code{user_init} argument can also be used to supply a
 vector of initial values for the A, Q, X_peak, Y_peak, X_var, and Y_var
 parameters. If the user chooses to make use of \code{user_init}, then a
-vector containing all 6 parameters must be supplied in that particular order.
-Additional arguments (e.g. \code{control}) can be supplied to
-\code{stats::nls()} via \code{...}.
+vector containing all parameters must be supplied in a particular order.
+
+Additional arguments to the \code{control} argument in \code{stats::nls()}
+can be supplied via \code{...}.
 }
 \examples{
 if (interactive()) {
   ## Load the sample data set
   data(gaussplot_sample_data)
 
-  ## The relevant data are in the first three columns
-  samp_dat <- gaussplot_sample_data[,1:3]
+  ## The raw data we'd like to use are in columns 1:3
+  samp_dat <-
+    gaussplot_sample_data[,1:3]
 
-  ## Fit a 2D Gaussian with no user-supplied constraints; this
-  ## will generally lead to the best fit
-  params_unconstrained <-
+
+  #### Example 1: Unconstrained elliptical ####
+  gauss_fit <-
     fit_gaussian_2D(samp_dat)
-
-  ## If desired, the user can specify contraints. E.g. force the
-  ## gaussian to be horizontally oriented.
-  ## Note that this will generally lead to poor fits and should
-  ## be performed with caution
-  params_horizontal <-
-    fit_gaussian_2D(samp_dat, Q_strategy = -1)
+  ## This fits an unconstrained elliptical by default
+  attr(gauss_fit, "fit_method")
 
   ## Generate a grid of x- and y- values on which to predict
   grid <-
@@ -123,37 +127,48 @@ if (interactive()) {
                 Y_values = seq(from = -1, to = 4, by = 0.1))
 
   ## Predict the values using predict_gaussian_2D
-  ## First, the unconstrained
-  gauss_data_unconstrained <-
+  gauss_data <-
     predict_gaussian_2D(
+      fit_params = gauss_fit,
       X_values = grid$X_values,
       Y_values = grid$Y_values,
-      A = params_unconstrained[1],
-      Q = params_unconstrained[2],
-      X_peak = params_unconstrained[3],
-      Y_peak = params_unconstrained[4],
-      X_var = params_unconstrained[5],
-      Y_var = params_unconstrained[6]
-    )
-
-  ## And now the horizontal
-  gauss_data_horizontal <-
-    predict_gaussian_2D(
-      X_values = grid$X_values,
-      Y_values = grid$Y_values,
-      A = params_horizontal[1],
-      Q = params_horizontal[2],
-      X_peak = params_horizontal[3],
-      Y_peak = params_horizontal[4],
-      X_var = params_horizontal[5],
-      Y_var = params_horizontal[6]
     )
 
   ## Plot via ggplot2 and metR
   library(ggplot2); library(metR)
-  ggplot_gaussian_2D(gauss_data_unconstrained)
-  ggplot_gaussian_2D(gauss_data_horizontal)
- }
+  ggplot_gaussian_2D(gauss_data)
+
+  #### Example 2: Constrained elliptical_log ####
+  gauss_fit <-
+    fit_gaussian_2D(
+      samp_dat,
+      method = "elliptical_log",
+      orientation_strategy = -1
+    )
+  ## This fits a constrained elliptical, as in Priebe et al. 2003
+  attr(gauss_fit, "fit_method")
+
+  ## Generate a grid of x- and y- values on which to predict
+  grid <-
+    expand.grid(X_values = seq(from = -5, to = 0, by = 0.1),
+                Y_values = seq(from = -1, to = 4, by = 0.1))
+
+  ## Predict the values using predict_gaussian_2D
+  gauss_data <-
+    predict_gaussian_2D(
+      fit_params = gauss_fit,
+      X_values = grid$X_values,
+      Y_values = grid$Y_values,
+    )
+
+  ## Plot via ggplot2 and metR
+  ggplot_gaussian_2D(gauss_data)
+}
+}
+\references{
+Priebe NJ, Cassanello CR, Lisberger SG. The neural representation
+of speed in macaque area MT/V5. J Neurosci. 2003 Jul 2;23(13):5650-61. doi:
+10.1523/JNEUROSCI.23-13-05650.2003.
 }
 \author{
 Vikram B. Baliga

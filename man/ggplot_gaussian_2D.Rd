@@ -58,6 +58,17 @@ if (interactive()) {
   ## Load the sample data set
   data(gaussplot_sample_data)
 
+  ## The raw data we'd like to use are in columns 1:3
+  samp_dat <-
+    gaussplot_sample_data[,1:3]
+
+
+  #### Example 1: Unconstrained elliptical ####
+  gauss_fit <-
+    fit_gaussian_2D(samp_dat)
+  ## This fits an unconstrained elliptical by default
+  attr(gauss_fit, "fit_method")
+
   ## Generate a grid of x- and y- values on which to predict
   grid <-
     expand.grid(X_values = seq(from = -5, to = 0, by = 0.1),
@@ -66,20 +77,41 @@ if (interactive()) {
   ## Predict the values using predict_gaussian_2D
   gauss_data <-
     predict_gaussian_2D(
+      fit_params = gauss_fit,
       X_values = grid$X_values,
       Y_values = grid$Y_values,
-      A = gaussplot_sample_data$A[1],
-      X_peak = gaussplot_sample_data$X_peak[1],
-      Y_peak = gaussplot_sample_data$Y_peak[1],
-      Q = gaussplot_sample_data$Q[1],
-      X_var = gaussplot_sample_data$X_var[1],
-      Y_var = gaussplot_sample_data$Y_var[1]
     )
 
   ## Plot via ggplot2 and metR
   library(ggplot2); library(metR)
   ggplot_gaussian_2D(gauss_data)
- }
+
+  #### Example 2: Constrained elliptical_log ####
+  gauss_fit <-
+    fit_gaussian_2D(
+      samp_dat,
+      method = "elliptical_log",
+      orientation_strategy = -1
+    )
+  ## This fits a constrained elliptical, as in Priebe et al. 2003
+  attr(gauss_fit, "fit_method")
+
+  ## Generate a grid of x- and y- values on which to predict
+  grid <-
+    expand.grid(X_values = seq(from = -5, to = 0, by = 0.1),
+                Y_values = seq(from = -1, to = 4, by = 0.1))
+
+  ## Predict the values using predict_gaussian_2D
+  gauss_data <-
+    predict_gaussian_2D(
+      fit_params = gauss_fit,
+      X_values = grid$X_values,
+      Y_values = grid$Y_values,
+    )
+
+  ## Plot via ggplot2 and metR
+  ggplot_gaussian_2D(gauss_data)
+}
 }
 \author{
 Vikram B. Baliga
