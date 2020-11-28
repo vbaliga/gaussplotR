@@ -28,13 +28,17 @@ predict values from such functions, and produce plots of predicted data.
 
 ## Installation
 
-You can install `gaussplotR` via:
-  
-`install.packages("gaussplotR")`
+You can install `gaussplotR` from CRAN via:
+
+``` {r install_cran, eval = FALSE}
+install.packages("gaussplotR")
+```
 
 Or to get the latest (developmental) version through github, use:
   
-`devtools::install_github("vbaliga/gaussplotR")`
+``` {r install_github, eval = FALSE}
+devtools::install_github("vbaliga/gaussplotR")
+```
 
 
 ## Example
@@ -125,8 +129,8 @@ ggplot_gaussian_2D(gauss_data_cel)
 
 ## Citation
 
-Baliga, VB. 2020. gaussplotR: Predict and plot 2D gaussians in R. figshare.
-Software. https://doi.org/10.6084/m9.figshare.12980717
+Baliga, VB. 2020. gaussplotR: Fit, predict, and plot 2D gaussians in R. 
+figshare. Software. https://doi.org/10.6084/m9.figshare.12980717
 
 ## License
 

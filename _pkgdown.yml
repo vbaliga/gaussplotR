@@ -1,0 +1,18 @@
+url: https://vbaliga.github.io/gaussplotR/
+
+destination: docs
+
+template:
+package: rotemplate
+
+authors:
+  Vikram B. Baliga:
+    href: https://www.vikram-baliga.com/
+
+navbar:
+  components:
+    articles:
+      text: Vignettes
+      menu:
+      - text: 'Fitting 2D Gaussians to Data'
+        href: articles/fit_gaussian_2D.html

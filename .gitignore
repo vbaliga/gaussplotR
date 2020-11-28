@@ -5,3 +5,5 @@
 .Rproj
 .DS_Store
 gaussplotR.Rproj
+inst/doc
+docs

@@ -8,9 +8,9 @@
 #' @param data A data.frame that contains the raw data (generally rectilinearly
 #'   gridded data, but this is not a strict requirement). Columns must be named
 #'   \code{"X_values"}, \code{"Y_values"} and \code{"response"}.
-#' @param method Choice of \code{"circular"}, \code{"elliptical"}, or
-#'   \code{"elliptical_log"}. Determine which specific implementation of 2D
-#'   Gaussian to use. See Details for more.
+#' @param method Choice of \code{"elliptical"}, \code{"elliptical_log"}, or
+#'   \code{"circular"}. Determine which specific implementation of 2D Gaussian
+#'   to use. See Details for more.
 #' @param orientation_strategy If using \code{"elliptical"} or \code{method =
 #'   "elliptical_log"}, should the orientation of the Gaussian be unconstrained
 #'   (i.e. the best-fit orientation is returned) or should it be pre-set by the
@@ -68,10 +68,10 @@
 #' \code{method = "elliptical"}, the theta parameter dictates the rotation, in
 #' radians, from the x-axis in the clockwise direction. In contrast, the
 #' \code{method = "elliptical_log"} procedure uses a Q parameter to determine
-#' the orientation of the 2D Gaussian. Setting \code{Q_strategy = 0} will result
-#' in a diagonally-oriented Gaussian, whereas setting \code{Q_strategy = -1}
-#' will result in horizontal orientation. See Priebe et al. 2003 for more
-#' details.
+#' the orientation of the 2D Gaussian. Setting \code{orientation_strategy = 0}
+#' will result in a diagonally-oriented Gaussian, whereas setting
+#' \code{orientation_strategy = -1} will result in horizontal orientation. See
+#' Priebe et al. 2003 for more details.
 #'
 #' The \code{user_init} argument can also be used to supply a
 #' vector of initial values for the A, Q, X_peak, Y_peak, X_var, and Y_var
