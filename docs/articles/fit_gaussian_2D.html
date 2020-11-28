@@ -102,6 +102,8 @@
 <p>We’ll begin by loading <code>gaussplotR</code> and loading the sample data set provided within. The raw data we’d like to use are in columns 1:3, so we’ll shave the data set down to those columns before running through the examples.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/vbaliga/gaussplotR">gaussplotR</a></span><span class="op">)</span>
+<span class="co">## We'll also use lattice, ggplot2 and metR</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://lattice.r-forge.r-project.org/">lattice</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/eliocamp/metR">metR</a></span><span class="op">)</span>
 
 <span class="co">## Load the sample data set</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">gaussplot_sample_data</span><span class="op">)</span>
@@ -111,20 +113,14 @@
   <span class="va">gaussplot_sample_data</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></pre></div>
 <p>It generally helps to plot the data beforehand to get a sense of its overall shape. We’ll simply produce a contour plot.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/eliocamp/metR">metR</a></span><span class="op">)</span>
-
-<span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">samp_dat</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">X_values</span>, <span class="va">Y_values</span>, z <span class="op">=</span> <span class="va">response</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">metR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/metR/man/geom_contour_fill.html">geom_contour_fill</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">..level..</span><span class="op">)</span>,
-                          size <span class="op">=</span> <span class="fl">0.04</span>,
-                          bins <span class="op">=</span> <span class="fl">14</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span>direction <span class="op">=</span> <span class="fl">1</span>,
-                       option <span class="op">=</span> <span class="st">"B"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_fixed</a></span><span class="op">(</span>
-    xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">0</span><span class="op">)</span>,
-    ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span>, 
-    expand <span class="op">=</span> <span class="cn">FALSE</span>
-  <span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></pre></div>
+<span class="fu">lattice</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/levelplot.html">levelplot</a></span><span class="op">(</span>
+  <span class="va">response</span> <span class="op">~</span> <span class="va">X_values</span> <span class="op">*</span> <span class="va">Y_values</span>,
+  data <span class="op">=</span> <span class="va">samp_dat</span>,
+  col.regions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html">colorRampPalette</a></span><span class="op">(</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="st">"blue"</span><span class="op">)</span>
+    <span class="op">)</span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>,
+  asp <span class="op">=</span> <span class="fl">1</span>
+<span class="op">)</span></pre></div>
 <p><img src="fit_gaussian_2D_files/figure-html/raw_data_contour-1.png" width="700"></p>
 </div>
 <div id="the-method-and-orientation_strategy-arguments" class="section level2">

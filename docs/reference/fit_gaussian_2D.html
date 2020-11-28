@@ -155,9 +155,9 @@ gridded data, but this is not a strict requirement). Columns must be named
     </tr>
     <tr>
       <th>method</th>
-      <td><p>Choice of <code>"circular"</code>, <code>"elliptical"</code>, or
-<code>"elliptical_log"</code>. Determine which specific implementation of 2D
-Gaussian to use. See Details for more.</p></td>
+      <td><p>Choice of <code>"elliptical"</code>, <code>"elliptical_log"</code>, or
+<code>"circular"</code>. Determine which specific implementation of 2D Gaussian
+to use. See Details for more.</p></td>
     </tr>
     <tr>
       <th>orientation_strategy</th>
@@ -233,10 +233,10 @@ Gaussian to the specified value. Note that this is handled differently by
 <code>method = "elliptical"</code>, the theta parameter dictates the rotation, in
 radians, from the x-axis in the clockwise direction. In contrast, the
 <code>method = "elliptical_log"</code> procedure uses a Q parameter to determine
-the orientation of the 2D Gaussian. Setting <code>Q_strategy = 0</code> will result
-in a diagonally-oriented Gaussian, whereas setting <code>Q_strategy = -1</code>
-will result in horizontal orientation. See Priebe et al. 2003 for more
-details.</p>
+the orientation of the 2D Gaussian. Setting <code>orientation_strategy = 0</code>
+will result in a diagonally-oriented Gaussian, whereas setting
+<code>orientation_strategy = -1</code> will result in horizontal orientation. See
+Priebe et al. 2003 for more details.</p>
 <p>The <code>user_init</code> argument can also be used to supply a
 vector of initial values for the A, Q, X_peak, Y_peak, X_var, and Y_var
 parameters. If the user chooses to make use of <code>user_init</code>, then a

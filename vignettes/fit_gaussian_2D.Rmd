@@ -8,6 +8,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteDepends{ggplot2}
   %\VignetteDepends{metR}
+  %\VignetteDepends{lattice}
   %\VignetteEncoding{UTF-8}
 ---
 
@@ -30,6 +31,8 @@ data set down to those columns before running through the examples.
 
 ```{r setup}
 library(gaussplotR)
+## We'll also use lattice, ggplot2 and metR
+library(lattice); library(ggplot2); library(metR)
 
 ## Load the sample data set
 data(gaussplot_sample_data)
@@ -43,20 +46,14 @@ It generally helps to plot the data beforehand to get a sense of its overall
 shape. We'll simply produce a contour plot.
 
 ```{r raw_data_contour}
-library(ggplot2); library(metR)
-
-ggplot2::ggplot(samp_dat, aes(X_values, Y_values, z = response)) +
-  metR::geom_contour_fill(aes(fill = ..level..),
-                          size = 0.04,
-                          bins = 14) +
-  scale_fill_viridis_c(direction = 1,
-                       option = "B") +
-  coord_fixed(
-    xlim = c(-5, 0),
-    ylim = c(-1, 4), 
-    expand = FALSE
-  ) +
-  theme_classic()
+lattice::levelplot(
+  response ~ X_values * Y_values,
+  data = samp_dat,
+  col.regions = colorRampPalette(
+    c("white", "blue")
+    )(100),
+  asp = 1
+)
 ```
 
 
