@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://vbaliga.github.io/gaussplotR//index.html</loc>
+  </url>
+  <url>
+    <loc>https://vbaliga.github.io/gaussplotR//reference/fit_gaussian_2D.html</loc>
+  </url>
+  <url>
+    <loc>https://vbaliga.github.io/gaussplotR//reference/gaussplot_sample_data.html</loc>
+  </url>
+  <url>
+    <loc>https://vbaliga.github.io/gaussplotR//reference/get_volume_gaussian_2D.html</loc>
+  </url>
+  <url>
+    <loc>https://vbaliga.github.io/gaussplotR//reference/ggplot_gaussian_2D.html</loc>
+  </url>
+  <url>
+    <loc>https://vbaliga.github.io/gaussplotR//reference/predict_gaussian_2D.html</loc>
+  </url>
+  <url>
+    <loc>https://vbaliga.github.io/gaussplotR//articles/fit_gaussian_2D.html</loc>
+  </url>
+</urlset>
