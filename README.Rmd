@@ -9,7 +9,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  out.width = "100%",
+  dpi = 300
 )
 ```
 
@@ -43,7 +44,7 @@ devtools::install_github("vbaliga/gaussplotR")
 
 ## Example
 
-The function `fit_gaussian_2D()` uses `stats::nls()` to find the best-fit 
+The function `fit_gaussian_2D()` uses `stats::nls()` to find the best-fitting 
 parameters of a 2D Gaussian fit to supplied data. 
 
 The `predict_gaussian_2D()` function can then be used to predict values from

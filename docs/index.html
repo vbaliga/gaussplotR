@@ -60,6 +60,9 @@
 <li>
       <a href="articles/fit_gaussian_2D.html">Fitting 2D Gaussians to Data</a>
     </li>
+    <li>
+      <a href="articles/formulas-used-by-fit-gaussian-2D.html">Formulas used by fit_gaussian_2D</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -105,7 +108,7 @@
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
-<p>The function <code><a href="reference/fit_gaussian_2D.html">fit_gaussian_2D()</a></code> uses <code><a href="https://rdrr.io/r/stats/nls.html">stats::nls()</a></code> to find the best-fit parameters of a 2D Gaussian fit to supplied data.</p>
+<p>The function <code><a href="reference/fit_gaussian_2D.html">fit_gaussian_2D()</a></code> uses <code><a href="https://rdrr.io/r/stats/nls.html">stats::nls()</a></code> to find the best-fitting parameters of a 2D Gaussian fit to supplied data.</p>
 <p>The <code><a href="reference/predict_gaussian_2D.html">predict_gaussian_2D()</a></code> function can then be used to predict values from the Gaussian over a supplied grid of x- and y-values (generated here via <code>expand.grid</code>). This is useful if the original data is relatively sparse and interpolation of values is desired.</p>
 <p>Plotting can then be achieved via <code><a href="reference/ggplot_gaussian_2D.html">ggplot_gaussian_2D()</a></code>, but note that the <code>data.frame</code> created by <code><a href="reference/predict_gaussian_2D.html">predict_gaussian_2D()</a></code> can be supplied to other plotting frameworks such as <code><a href="https://rdrr.io/pkg/lattice/man/levelplot.html">lattice::levelplot()</a></code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">

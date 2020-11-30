@@ -37,7 +37,7 @@ devtools::install_github("vbaliga/gaussplotR")
 ## Example
 
 The function `fit_gaussian_2D()` uses `stats::nls()` to find the
-best-fit parameters of a 2D Gaussian fit to supplied data.
+best-fitting parameters of a 2D Gaussian fit to supplied data.
 
 The `predict_gaussian_2D()` function can then be used to predict values
 from the Gaussian over a supplied grid of x- and y-values (generated

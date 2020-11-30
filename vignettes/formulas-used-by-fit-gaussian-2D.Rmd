@@ -1,0 +1,103 @@
+---
+title: "Formulas used by fit_gaussian_2D"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Formulas used by fit_gaussian_2D}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Overview
+
+This document will provide specific details of 2D Gaussian equations used by
+the different `method` options within `gaussplotR::fit_gaussian_2D()`.
+
+## `method = "elliptical"`
+
+Using `method = "elliptical"` fits a two-dimensional, elliptical Gaussian
+equation to gridded data.
+
+$$G(x,y) = A_o + A * e^{-U/2}$$
+
+where G is the value of the 2D Gaussian at each ${(x,y)}$ point, $A_o$ is a 
+constant term, and $A$ is the amplitude (i.e. scale factor).
+
+The elliptical function, $U$, is:
+
+$$U = (x'/a)^{2} + (y'/b)^{2}$$
+
+where $a$ is the spread of Gaussian along the x-axis and $b$ is the spread of
+Gaussian along the y-axis. 
+
+$x'$ and $y'$ are defined as:
+
+$$x' = (x - x_0)cos(\theta) - (y - y_0)sin(\theta)$$
+$$y' = (x - x_0)sin(\theta) + (y - y_0)cos(\theta)$$
+where $x_0$ is the center (peak) of the Gaussian along the x-axis, $y_0$ is the
+center (peak) of the Gaussian along the y-axis, and $\theta$ is the rotation of
+the ellipse from the x-axis in radians, counter-clockwise.
+
+Therefore, all together:
+
+$$G(x,y) = A_o + A * e^{-((((x - x_0)cos(\theta) - (y - y_0)sin(\theta))/a)^{2}+ 
+(((x - x_0)sin(\theta) + (y - y_0)cos(\theta))/b)^{2})/2}$$
+
+Setting the `orientation_strategy` argument to a numeric will optionally
+constrain the value of $\theta$ to a user-specified value. If a numeric is
+supplied here, please note that the value will be interpreted as a value in
+radians. Constraining $\theta$ to a user-supplied value can lead to considerably
+poorer-fitting Gaussians and/or trouble with converging on a stable solution; in
+most cases `orientation_strategy` should remain its default: `"unconstrained"`.
+
+
+## `method = "elliptical_log"`
+
+The formula used in `method = "elliptical_log"` uses the modification of a 2D
+Gaussian fit used by Priebe et al. 2003^[Priebe NJ, Cassanello CR, Lisberger SG.
+The neural representation of speed in macaque area MT/V5. J Neurosci. 2003 Jul
+2;23(13):5650-61. doi: 10.1523/JNEUROSCI.23-13-05650.2003.].
+
+$$G(x,y) = A * e^{(-(x - x_0)^2)/\sigma_x^2} * e^{(-(y - y'(x)))/\sigma_y^2}$$
+
+and 
+
+$$y'(x) = 2^{(Q+1) * (x - x_0) + y_0}$$
+where $A$ is the amplitude (i.e. scale factor), $x_0$ is the center (peak) of
+the Gaussian along the x-axis, $y_0$ is the center (peak) of the Gaussian along
+the y-axis, $\sigma_x$ is the spread along the x-axis, $\sigma_y$ is the spread
+along the y-axis and $Q$ is an orientation parameter.
+
+Therefore, all together:
+
+$$G(x,y) = A * e^{(-(x - x_0)^2)/\sigma_x^2} * e^{(-(y - (2^{(Q+1) * (x - x_0) +
+y_0})))/\sigma_y^2}$$
+
+This formula is intended for use with log2-transformed data. 
+
+Setting the `orientation_strategy` argument to a numeric will optionally
+constrain the value of $Q$ to a user-specified value, which can be useful for
+certain kinds of analyses (see Priebe et al. 2003 for more). Keep in mind that 
+constraining $Q$ to a user-supplied value can lead to considerably
+poorer-fitting Gaussians and/or trouble with converging on a stable solution; in
+most cases `orientation_strategy` should remain its default: `"unconstrained"`.
+
+
+## `method = "circular"`
+
+This method uses a relatively simple formula:
+
+$$G(x,y) = A * e^{(-(
+((x-x_0)^2/2\sigma_x^2) + ((y-y_0)^2/2\sigma_y^2))
+)}$$
+
+where $A$ is the amplitude (i.e. scale factor), $x_0$ is the center (peak) of
+the Gaussian along the x-axis, $y_0$ is the center (peak) of the Gaussian along
+the y-axis, $\sigma_x$ is the spread along the x-axis, and $\sigma_y$ is the
+spread along the y-axis.

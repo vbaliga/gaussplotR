@@ -16,3 +16,5 @@ navbar:
       menu:
       - text: 'Fitting 2D Gaussians to Data'
         href: articles/fit_gaussian_2D.html
+      - text: 'Formulas used by fit_gaussian_2D'
+        href: articles/formulas-used-by-fit-gaussian-2D.html
