@@ -53,8 +53,11 @@ lattice::levelplot(
   col.regions = colorRampPalette(
     c("white", "blue")
     )(100),
+  xlim = c(-5, 0),
+  ylim = c(-1, 4), 
   asp = 1
 )
+
 ```
 
 

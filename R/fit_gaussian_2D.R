@@ -169,10 +169,20 @@ fit_gaussian_2D <- function(data,
   Amp_init <- max(data[,"response"])
   X_peak_init <- data[max_row,"X_values"]
   Y_peak_init <- data[max_row,"Y_values"]
-  X_sig_init <- stats::sd(data[,"X_values"])
-  Y_sig_init <- stats::sd(data[,"Y_values"])
-  a_init <- stats::sd(data[,"X_values"])
-  b_init <- stats::sd(data[,"Y_values"])
+
+  ## find 66%
+  qtile_val <- quantile(data[,"response"], 0.66)
+  upperdat <- data[which(data[,"response"] > qtile_val),]
+  ud_xrange <- range(upperdat$X_values)
+  ud_xr <- abs(ud_xrange[2] - ud_xrange[1])
+  ud_yrange <- range(upperdat$Y_values)
+  ud_yr <- abs(ud_yrange[2] - ud_yrange[1])
+
+  ## Use these ranges to guesstimate initial spread values
+  X_sig_init <- ud_xr/2
+  Y_sig_init <- ud_yr/2
+  a_init <- X_sig_init/2
+  b_init <- Y_sig_init/2
 
   #### elliptical ####
   if (method == "elliptical"){
