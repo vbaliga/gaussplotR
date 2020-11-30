@@ -4,12 +4,10 @@
 \alias{predict_gaussian_2D}
 \title{Predict values from a fitted 2D gaussian}
 \usage{
-predict_gaussian_2D(fit_params, X_values, Y_values, ...)
+predict_gaussian_2D(fit_object, X_values, Y_values, ...)
 }
 \arguments{
-\item{fit_params}{vector of parameters for a 2D Gaussian that have been
-fitted to a data set. See \code{gaussplotR::fit_gaussian_2D()} for details.
-The resultant object from that function can be used here.}
+\item{fit_object}{The output of \code{gaussplotR::fit_gaussian_2D()}.}
 
 \item{X_values}{vector of numeric values for the x-axis}
 
@@ -43,10 +41,9 @@ if (interactive()) {
 
 
   #### Example 1: Unconstrained elliptical ####
+  ## This fits an unconstrained elliptical by default
   gauss_fit <-
     fit_gaussian_2D(samp_dat)
-  ## This fits an unconstrained elliptical by default
-  attr(gauss_fit, "fit_method")
 
   ## Generate a grid of x- and y- values on which to predict
   grid <-
@@ -56,7 +53,7 @@ if (interactive()) {
   ## Predict the values using predict_gaussian_2D
   gauss_data <-
     predict_gaussian_2D(
-      fit_params = gauss_fit,
+      fit_object = gauss_fit,
       X_values = grid$X_values,
       Y_values = grid$Y_values,
     )
@@ -66,14 +63,13 @@ if (interactive()) {
   ggplot_gaussian_2D(gauss_data)
 
   #### Example 2: Constrained elliptical_log ####
+  ## This fits a constrained elliptical, as in Priebe et al. 2003
   gauss_fit <-
     fit_gaussian_2D(
       samp_dat,
       method = "elliptical_log",
       orientation_strategy = -1
     )
-  ## This fits a constrained elliptical, as in Priebe et al. 2003
-  attr(gauss_fit, "fit_method")
 
   ## Generate a grid of x- and y- values on which to predict
   grid <-
@@ -83,7 +79,7 @@ if (interactive()) {
   ## Predict the values using predict_gaussian_2D
   gauss_data <-
     predict_gaussian_2D(
-      fit_params = gauss_fit,
+      fit_object = gauss_fit,
       X_values = grid$X_values,
       Y_values = grid$Y_values,
     )

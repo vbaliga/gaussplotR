@@ -123,6 +123,8 @@
   col.regions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html">colorRampPalette</a></span><span class="op">(</span>
     <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="st">"blue"</span><span class="op">)</span>
     <span class="op">)</span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>,
+  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">0</span><span class="op">)</span>,
+  ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span>, 
   asp <span class="op">=</span> <span class="fl">1</span>
 <span class="op">)</span></pre></div>
 <p><img src="fit_gaussian_2D_files/figure-html/raw_data_contour-1.png" width="700"></p>
@@ -157,20 +159,31 @@
     <span class="fu"><a href="../reference/fit_gaussian_2D.html">fit_gaussian_2D</a></span><span class="op">(</span><span class="va">samp_dat</span><span class="op">)</span>
 
 <span class="va">gauss_fit_ue</span>
+<span class="co">#&gt; $coefs</span>
 <span class="co">#&gt;         A_o      Amp    theta    X_peak   Y_peak         a         b</span>
-<span class="co">#&gt; 1 0.8272979 32.25134 3.581234 -2.638124 2.021262 0.9072481 0.9611334</span>
-<span class="fu"><a href="https://rdrr.io/r/base/attributes.html">attributes</a></span><span class="op">(</span><span class="va">gauss_fit_ue</span><span class="op">)</span>
-<span class="co">#&gt; $names</span>
-<span class="co">#&gt; [1] "A_o"    "Amp"    "theta"  "X_peak" "Y_peak" "a"      "b"     </span>
+<span class="co">#&gt; 1 0.8272942 32.25132 3.581234 -2.638124 2.021262 0.9072492 0.9611345</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; $class</span>
-<span class="co">#&gt; [1] "data.frame"</span>
+<span class="co">#&gt; $model</span>
+<span class="co">#&gt; Nonlinear regression model</span>
+<span class="co">#&gt;   model: response ~ A_o + Amp * exp(-((((X_values - X_peak) * cos(theta) -     (Y_values - Y_peak) * sin(theta))/a)^2 + (((X_values - X_peak) *     sin(theta) - (Y_values - Y_peak) * cos(theta))/b)^2)/2)</span>
+<span class="co">#&gt;    data: data</span>
+<span class="co">#&gt;     A_o     Amp   theta  X_peak  Y_peak       a       b </span>
+<span class="co">#&gt;  0.8273 32.2513  3.5812 -2.6381  2.0213  0.9072  0.9611 </span>
+<span class="co">#&gt;  residual sum-of-squares: 156.2</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; $row.names</span>
-<span class="co">#&gt; [1] 1</span>
+<span class="co">#&gt; Number of iterations to convergence: 13 </span>
+<span class="co">#&gt; Achieved convergence tolerance: 3.935e-06</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $model_error_stats</span>
+<span class="co">#&gt;        rss     rmse deviance</span>
+<span class="co">#&gt; 1 156.2272 2.083181 156.2272</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $fit_method</span>
-<span class="co">#&gt; [1] "elliptical_unconstr"</span></pre></div>
+<span class="co">#&gt; [1] "elliptical_unconstr"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/attributes.html">attributes</a></span><span class="op">(</span><span class="va">gauss_fit_ue</span><span class="op">)</span>
+<span class="co">#&gt; $names</span>
+<span class="co">#&gt; [1] "coefs"             "model"             "model_error_stats"</span>
+<span class="co">#&gt; [4] "fit_method"</span></pre></div>
 <p>Fitting an unconstrained ellipse returns an object (here: <code>gauss_fit_ue</code>) that is a <code>data.frame</code> with one column per fitted parameter. The fitted parameters are: <code>A_o</code> (a constant term), <code>Amp</code> (amplitude), <code>theta</code> (rotation, in radians, from the x-axis in the clockwise direction), <code>X_peak</code> (x-axis peak location), <code>Y_peak</code> (y-axis peak location), <code>a</code> (width of Gaussian along x-axis), and <code>b</code> (width of Gaussian along y-axis).</p>
 <p>Note that the attribute <code>fit_method</code> indicates that an <code>"elliptical_unconstr"</code> approach was used. This attribute is used by <code><a href="../reference/predict_gaussian_2D.html">predict_gaussian_2D()</a></code> to automatically determine what method (and therefore, identity of parameters) was used and then sample points from that fitted Gaussian.</p>
 <p>We can elect to sample more points from the fitted Gaussian by feeding in a grid of x- and y- values on which to predict (via <code><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid()</a></code>.</p>
@@ -184,7 +197,7 @@
 <span class="co">## Predict the values using predict_gaussian_2D</span>
 <span class="va">gauss_data_ue</span> <span class="op">&lt;-</span>
   <span class="fu"><a href="../reference/predict_gaussian_2D.html">predict_gaussian_2D</a></span><span class="op">(</span>
-    fit_params <span class="op">=</span> <span class="va">gauss_fit_ue</span>,
+    fit_object <span class="op">=</span> <span class="va">gauss_fit_ue</span>,
     X_values <span class="op">=</span> <span class="va">grid</span><span class="op">$</span><span class="va">X_values</span>,
     Y_values <span class="op">=</span> <span class="va">grid</span><span class="op">$</span><span class="va">Y_values</span>,
   <span class="op">)</span>
@@ -204,14 +217,33 @@
                     orientation_strategy <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
 
 <span class="va">gauss_fit_ce</span>
-<span class="co">#&gt;        A_o     Amp theta    X_peak  Y_peak        a        b</span>
-<span class="co">#&gt; 1 1.258792 24.7628     0 -2.526293 1.94949 1.199365 1.327613</span></pre></div>
+<span class="co">#&gt; $coefs</span>
+<span class="co">#&gt;        A_o      Amp theta    X_peak   Y_peak        a        b</span>
+<span class="co">#&gt; 1 1.259775 24.76887     0 -2.526168 1.949814 1.199245 1.327056</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $model</span>
+<span class="co">#&gt; Nonlinear regression model</span>
+<span class="co">#&gt;   model: response ~ A_o + Amp * exp(-((((X_values - X_peak) * cos(orientation_strategy) -     (Y_values - Y_peak) * sin(orientation_strategy))/a)^2 + (((X_values -     X_peak) * sin(orientation_strategy) - (Y_values - Y_peak) *     cos(orientation_strategy))/b)^2)/2)</span>
+<span class="co">#&gt;    data: data</span>
+<span class="co">#&gt;    A_o    Amp X_peak Y_peak      a      b </span>
+<span class="co">#&gt;  1.260 24.769 -2.526  1.950  1.199  1.327 </span>
+<span class="co">#&gt;  residual sum-of-squares: 885.8</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Number of iterations to convergence: 157 </span>
+<span class="co">#&gt; Achieved convergence tolerance: 9.808e-06</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $model_error_stats</span>
+<span class="co">#&gt;       rss     rmse deviance</span>
+<span class="co">#&gt; 1 885.831 4.960486  885.831</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $fit_method</span>
+<span class="co">#&gt; [1] "elliptical_constr"</span></pre></div>
 <p>We’ll use the same grid of x- and y- points as above</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="co">## Predict the values using predict_gaussian_2D</span>
 <span class="va">gauss_data_ce</span> <span class="op">&lt;-</span>
   <span class="fu"><a href="../reference/predict_gaussian_2D.html">predict_gaussian_2D</a></span><span class="op">(</span>
-    fit_params <span class="op">=</span> <span class="va">gauss_fit_ce</span>,
+    fit_object <span class="op">=</span> <span class="va">gauss_fit_ce</span>,
     X_values <span class="op">=</span> <span class="va">grid</span><span class="op">$</span><span class="va">X_values</span>,
     Y_values <span class="op">=</span> <span class="va">grid</span><span class="op">$</span><span class="va">Y_values</span>,
   <span class="op">)</span>
@@ -231,13 +263,32 @@
                     method <span class="op">=</span> <span class="st">"elliptical_log"</span><span class="op">)</span>
 
 <span class="va">gauss_fit_uel</span>
-<span class="co">#&gt;        Amp         Q    X_peak   Y_peak    X_sig   Y_sig</span>
-<span class="co">#&gt; 1 25.72529 -0.138314 -2.600045 2.016568 2.385995 1.63209</span>
+<span class="co">#&gt; $coefs</span>
+<span class="co">#&gt;        Amp          Q    X_peak   Y_peak    X_sig   Y_sig</span>
+<span class="co">#&gt; 1 25.72529 -0.1383128 -2.600046 2.016566 2.385997 1.63209</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $model</span>
+<span class="co">#&gt; Nonlinear regression model</span>
+<span class="co">#&gt;   model: response ~ Amp_init * exp(-((X_values - X_peak)^2)/(X_sig^2)) *     exp(-(Y_values - ((Q + 1) * (X_values - X_peak) + Y_peak))^2/(Y_sig^2))</span>
+<span class="co">#&gt;    data: data</span>
+<span class="co">#&gt;       Q  X_peak  Y_peak   X_sig   Y_sig </span>
+<span class="co">#&gt; -0.1383 -2.6000  2.0166  2.3860  1.6321 </span>
+<span class="co">#&gt;  residual sum-of-squares: 214.4</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Number of iterations to convergence: 13 </span>
+<span class="co">#&gt; Achieved convergence tolerance: 9.296e-06</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $model_error_stats</span>
+<span class="co">#&gt;        rss     rmse deviance</span>
+<span class="co">#&gt; 1 214.3652 2.440203 214.3652</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $fit_method</span>
+<span class="co">#&gt; [1] "elliptical_log_unconstr"</span>
 
 <span class="co">## Predict the values using predict_gaussian_2D</span>
 <span class="va">gauss_data_uel</span> <span class="op">&lt;-</span>
   <span class="fu"><a href="../reference/predict_gaussian_2D.html">predict_gaussian_2D</a></span><span class="op">(</span>
-    fit_params <span class="op">=</span> <span class="va">gauss_fit_uel</span>,
+    fit_object <span class="op">=</span> <span class="va">gauss_fit_uel</span>,
     X_values <span class="op">=</span> <span class="va">grid</span><span class="op">$</span><span class="va">X_values</span>,
     Y_values <span class="op">=</span> <span class="va">grid</span><span class="op">$</span><span class="va">Y_values</span>,
   <span class="op">)</span>
@@ -259,13 +310,32 @@
     <span class="op">)</span>
 
 <span class="va">gauss_fit_cel</span>
+<span class="co">#&gt; $coefs</span>
 <span class="co">#&gt;        Amp     Q    X_peak   Y_peak    X_sig    Y_sig</span>
 <span class="co">#&gt; 1 25.72529 -0.66 -2.552716 2.034853 2.201506 1.678929</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $model</span>
+<span class="co">#&gt; Nonlinear regression model</span>
+<span class="co">#&gt;   model: response ~ Amp_init * exp(-((X_values - X_peak)^2)/(X_sig^2)) *     exp(-(Y_values - ((orientation_strategy + 1) * (X_values -         X_peak) + Y_peak))^2/(Y_sig^2))</span>
+<span class="co">#&gt;    data: data</span>
+<span class="co">#&gt; X_peak Y_peak  X_sig  Y_sig </span>
+<span class="co">#&gt; -2.553  2.035  2.202  1.679 </span>
+<span class="co">#&gt;  residual sum-of-squares: 494.9</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Number of iterations to convergence: 24 </span>
+<span class="co">#&gt; Achieved convergence tolerance: 9.608e-06</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $model_error_stats</span>
+<span class="co">#&gt;        rss     rmse deviance</span>
+<span class="co">#&gt; 1 494.9221 3.707808 494.9221</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $fit_method</span>
+<span class="co">#&gt; [1] "elliptical_log_constr"</span>
 
 <span class="co">## Predict the values using predict_gaussian_2D</span>
 <span class="va">gauss_data_cel</span> <span class="op">&lt;-</span>
   <span class="fu"><a href="../reference/predict_gaussian_2D.html">predict_gaussian_2D</a></span><span class="op">(</span>
-    fit_params <span class="op">=</span> <span class="va">gauss_fit_cel</span>,
+    fit_object <span class="op">=</span> <span class="va">gauss_fit_cel</span>,
     X_values <span class="op">=</span> <span class="va">grid</span><span class="op">$</span><span class="va">X_values</span>,
     Y_values <span class="op">=</span> <span class="va">grid</span><span class="op">$</span><span class="va">Y_values</span>,
   <span class="op">)</span>
@@ -286,13 +356,32 @@
                     method <span class="op">=</span> <span class="st">"circular"</span><span class="op">)</span>
 
 <span class="va">gauss_fit_cir</span>
-<span class="co">#&gt;        Amp    X_peak  Y_peak    X_sig    Y_sig</span>
-<span class="co">#&gt; 1 23.17999 -2.546653 1.81116 1.316288 1.642647</span>
+<span class="co">#&gt; $coefs</span>
+<span class="co">#&gt;        Amp    X_peak   Y_peak    X_sig    Y_sig</span>
+<span class="co">#&gt; 1 23.18005 -2.546643 1.811152 1.316288 1.642641</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $model</span>
+<span class="co">#&gt; Nonlinear regression model</span>
+<span class="co">#&gt;   model: response ~ Amp * exp(-((((X_values - X_peak)^2)/(2 * X_sig^2) +     ((Y_values - Y_peak)^2)/(2 * Y_sig^2))))</span>
+<span class="co">#&gt;    data: data</span>
+<span class="co">#&gt;    Amp X_peak Y_peak  X_sig  Y_sig </span>
+<span class="co">#&gt; 23.180 -2.547  1.811  1.316  1.643 </span>
+<span class="co">#&gt;  residual sum-of-squares: 899.6</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Number of iterations to convergence: 22 </span>
+<span class="co">#&gt; Achieved convergence tolerance: 9.054e-06</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $model_error_stats</span>
+<span class="co">#&gt;       rss     rmse deviance</span>
+<span class="co">#&gt; 1 899.613 4.998925  899.613</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $fit_method</span>
+<span class="co">#&gt; [1] "circular"</span>
 
 <span class="co">## Predict the values using predict_gaussian_2D</span>
 <span class="va">gauss_data_cir</span> <span class="op">&lt;-</span>
   <span class="fu"><a href="../reference/predict_gaussian_2D.html">predict_gaussian_2D</a></span><span class="op">(</span>
-    fit_params <span class="op">=</span> <span class="va">gauss_fit_cir</span>,
+    fit_object <span class="op">=</span> <span class="va">gauss_fit_cir</span>,
     X_values <span class="op">=</span> <span class="va">grid</span><span class="op">$</span><span class="va">X_values</span>,
     Y_values <span class="op">=</span> <span class="va">grid</span><span class="op">$</span><span class="va">Y_values</span>,
   <span class="op">)</span>

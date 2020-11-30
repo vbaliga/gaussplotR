@@ -145,7 +145,7 @@ grid <-
 ## Predict the values using predict_gaussian_2D
 gauss_data_ue <-
   predict_gaussian_2D(
-    fit_params = gauss_fit_ue,
+    fit_object = gauss_fit_ue,
     X_values = grid$X_values,
     Y_values = grid$Y_values,
   )
@@ -176,7 +176,7 @@ We'll use the same grid of x- and y- points as above
 ## Predict the values using predict_gaussian_2D
 gauss_data_ce <-
   predict_gaussian_2D(
-    fit_params = gauss_fit_ce,
+    fit_object = gauss_fit_ce,
     X_values = grid$X_values,
     Y_values = grid$Y_values,
   )
@@ -204,7 +204,7 @@ gauss_fit_uel
 ## Predict the values using predict_gaussian_2D
 gauss_data_uel <-
   predict_gaussian_2D(
-    fit_params = gauss_fit_uel,
+    fit_object = gauss_fit_uel,
     X_values = grid$X_values,
     Y_values = grid$Y_values,
   )
@@ -234,7 +234,7 @@ gauss_fit_cel
 ## Predict the values using predict_gaussian_2D
 gauss_data_cel <-
   predict_gaussian_2D(
-    fit_params = gauss_fit_cel,
+    fit_object = gauss_fit_cel,
     X_values = grid$X_values,
     Y_values = grid$Y_values,
   )
@@ -267,7 +267,7 @@ gauss_fit_cir
 ## Predict the values using predict_gaussian_2D
 gauss_data_cir <-
   predict_gaussian_2D(
-    fit_params = gauss_fit_cir,
+    fit_object = gauss_fit_cir,
     X_values = grid$X_values,
     Y_values = grid$Y_values,
   )

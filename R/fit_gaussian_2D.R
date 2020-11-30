@@ -1,5 +1,5 @@
 ## Part of the gaussplotR package
-## Last updated: 2020-11-27 VBB
+## Last updated: 2020-11-29 VBB
 
 ############################# fit_gaussian_2D ##############################
 
@@ -81,8 +81,15 @@
 #' Additional arguments to the \code{control} argument in \code{stats::nls()}
 #' can be supplied via \code{...}.
 #'
-#' @return A data.frame that provides the best-fitting values for the specified
-#' method. Refer to the Details section for the names of parameters.
+#' @return A list with the components:
+##' \itemize{
+##'  \item{"coefs"} {A data.frame of fitted model parameters.}
+##'  \item{"model"} {The model object, fitted by \code{stats::nls()}.}
+##'  \item{"model_error_stats"} {A data.frame detailing the rss, rmse, and
+##'  deviance of the fitted model.}
+##'  \item{"fit_method"} {A character vector that indicates which method and
+##'  orientation strategy was used by this function.}
+##' }
 #'
 #' @author Vikram B. Baliga
 #'
@@ -103,10 +110,9 @@
 #'
 #'
 #'   #### Example 1: Unconstrained elliptical ####
+#'   ## This fits an unconstrained elliptical by default
 #'   gauss_fit <-
 #'     fit_gaussian_2D(samp_dat)
-#'   ## This fits an unconstrained elliptical by default
-#'   attr(gauss_fit, "fit_method")
 #'
 #'   ## Generate a grid of x- and y- values on which to predict
 #'   grid <-
@@ -116,7 +122,7 @@
 #'   ## Predict the values using predict_gaussian_2D
 #'   gauss_data <-
 #'     predict_gaussian_2D(
-#'       fit_params = gauss_fit,
+#'       fit_object = gauss_fit,
 #'       X_values = grid$X_values,
 #'       Y_values = grid$Y_values,
 #'     )
@@ -126,14 +132,13 @@
 #'   ggplot_gaussian_2D(gauss_data)
 #'
 #'   #### Example 2: Constrained elliptical_log ####
+#'   ## This fits a constrained elliptical, as in Priebe et al. 2003
 #'   gauss_fit <-
 #'     fit_gaussian_2D(
 #'       samp_dat,
 #'       method = "elliptical_log",
 #'       orientation_strategy = -1
 #'     )
-#'   ## This fits a constrained elliptical, as in Priebe et al. 2003
-#'   attr(gauss_fit, "fit_method")
 #'
 #'   ## Generate a grid of x- and y- values on which to predict
 #'   grid <-
@@ -143,7 +148,7 @@
 #'   ## Predict the values using predict_gaussian_2D
 #'   gauss_data <-
 #'     predict_gaussian_2D(
-#'       fit_params = gauss_fit,
+#'       fit_object = gauss_fit,
 #'       X_values = grid$X_values,
 #'       Y_values = grid$Y_values,
 #'     )
@@ -222,9 +227,24 @@ fit_gaussian_2D <- function(data,
           trace = verbose,
           control = list(maxiter = maxiter, ...)
         )
+
+      ## create a data.frame of model error stats
+      m_e_s <-
+        data.frame(
+          rss = sum(resid(fit_generic)^2),
+          rmse = sqrt((1/nrow(data))*sum(resid(fit_generic)^2)),
+          deviance = deviance(fit_generic)
+        )
+
       res <- as.data.frame(t(stats::coef(fit_generic)))
-      attr(res, "fit_method") = "elliptical_unconstr"
-      return(res)
+      output <-
+        list(
+          coefs = res,
+          model = fit_generic,
+          model_error_stats = m_e_s,
+          fit_method = "elliptical_unconstr"
+        )
+      return(output)
     }
 
     if (is.numeric(orientation_strategy)) {
@@ -251,13 +271,28 @@ fit_gaussian_2D <- function(data,
           trace = verbose,
           control = list(maxiter = maxiter, ...)
         )
+
+      ## create a data.frame of model error stats
+      m_e_s <-
+        data.frame(
+          rss = sum(resid(fit_generic_const)^2),
+          rmse = sqrt((1/nrow(data))*sum(resid(fit_generic_const)^2)),
+          deviance = deviance(fit_generic_const)
+        )
+
       fit_coefs <- stats::coef(fit_generic_const)
       coef_result <- c(
         fit_coefs[c(1,2)], theta = orientation_strategy, fit_coefs[c(3:6)]
       )
       res <- as.data.frame(t(coef_result))
-      attr(res, "fit_method") = "elliptical_constr"
-      return(res)
+      output <-
+        list(
+          coefs = res,
+          model = fit_generic_const,
+          model_error_stats = m_e_s,
+          fit_method = "elliptical_constr"
+        )
+      return(output)
     }
 
   }
@@ -294,13 +329,26 @@ fit_gaussian_2D <- function(data,
           control = list(maxiter = maxiter, ...)
           )
 
-      ## Export
+      ## create a data.frame of model error stats
+      m_e_s <-
+        data.frame(
+          rss = sum(resid(result)^2),
+          rmse = sqrt((1/nrow(data))*sum(resid(result)^2)),
+          deviance = deviance(result)
+        )
+
       fit_coefs <- stats::coef(result)
       coef_result <-
         c(Amp = Amp_init, fit_coefs)
-      coef_result <- as.data.frame(t(coef_result))
-      attr(coef_result, "fit_method") <- "elliptical_log_unconstr"
-      return(coef_result)
+      res <- as.data.frame(t(coef_result))
+      output <-
+        list(
+          coefs = res,
+          model = result,
+          model_error_stats = m_e_s,
+          fit_method = "elliptical_log_unconstr"
+        )
+      return(output)
     }
 
     if (is.numeric(orientation_strategy)) {
@@ -321,13 +369,26 @@ fit_gaussian_2D <- function(data,
           control = list(maxiter = maxiter, ...)
           )
 
-      ## Export
+      ## create a data.frame of model error stats
+      m_e_s <-
+        data.frame(
+          rss = sum(resid(result)^2),
+          rmse = sqrt((1/nrow(data))*sum(resid(result)^2)),
+          deviance = deviance(result)
+        )
+
       fit_coefs <- stats::coef(result)
       coef_result <-
         c(Amp = Amp_init, Q = orientation_strategy, fit_coefs)
-      coef_result <- as.data.frame(t(coef_result))
-      attr(coef_result, "fit_method") <- "elliptical_log_constr"
-      return(coef_result)
+      res <- as.data.frame(t(coef_result))
+      output <-
+        list(
+          coefs = res,
+          model = result,
+          model_error_stats = m_e_s,
+          fit_method = "elliptical_log_constr"
+        )
+      return(output)
     }
   }
 
@@ -362,9 +423,23 @@ fit_gaussian_2D <- function(data,
         trace = verbose,
         control = list(maxiter = maxiter, ...)
       )
-    res <- as.data.frame(t(stats::coef(fit_circ)))
-    attr(res, "fit_method") = "circular"
-    return(res)
 
+    ## create a data.frame of model error stats
+    m_e_s <-
+      data.frame(
+        rss = sum(resid(fit_circ)^2),
+        rmse = sqrt((1/nrow(data))*sum(resid(fit_circ)^2)),
+        deviance = deviance(fit_circ)
+      )
+
+    res <- as.data.frame(t(stats::coef(fit_circ)))
+    output <-
+      list(
+        coefs = res,
+        model = fit_circ,
+        model_error_stats = m_e_s,
+        fit_method = "circular"
+      )
+    return(output)
   }
 }

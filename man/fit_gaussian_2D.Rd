@@ -41,8 +41,15 @@ detail.}
 \item{...}{Additional arguments passed to \code{stats::nls()}}
 }
 \value{
-A data.frame that provides the best-fitting values for the specified
-method. Refer to the Details section for the names of parameters.
+A list with the components:
+\itemize{
+\item{"coefs"} {A data.frame of fitted model parameters.}
+\item{"model"} {The model object, fitted by \code{stats::nls()}.}
+\item{"model_error_stats"} {A data.frame detailing the rss, rmse, and
+deviance of the fitted model.}
+\item{"fit_method"} {A character vector that indicates which method and
+orientation strategy was used by this function.}
+}
 }
 \description{
 Determine the best-fit parameters of a 2D Gaussian fit to a data set
@@ -116,10 +123,9 @@ if (interactive()) {
 
 
   #### Example 1: Unconstrained elliptical ####
+  ## This fits an unconstrained elliptical by default
   gauss_fit <-
     fit_gaussian_2D(samp_dat)
-  ## This fits an unconstrained elliptical by default
-  attr(gauss_fit, "fit_method")
 
   ## Generate a grid of x- and y- values on which to predict
   grid <-
@@ -129,7 +135,7 @@ if (interactive()) {
   ## Predict the values using predict_gaussian_2D
   gauss_data <-
     predict_gaussian_2D(
-      fit_params = gauss_fit,
+      fit_object = gauss_fit,
       X_values = grid$X_values,
       Y_values = grid$Y_values,
     )
@@ -139,14 +145,13 @@ if (interactive()) {
   ggplot_gaussian_2D(gauss_data)
 
   #### Example 2: Constrained elliptical_log ####
+  ## This fits a constrained elliptical, as in Priebe et al. 2003
   gauss_fit <-
     fit_gaussian_2D(
       samp_dat,
       method = "elliptical_log",
       orientation_strategy = -1
     )
-  ## This fits a constrained elliptical, as in Priebe et al. 2003
-  attr(gauss_fit, "fit_method")
 
   ## Generate a grid of x- and y- values on which to predict
   grid <-
@@ -156,7 +161,7 @@ if (interactive()) {
   ## Predict the values using predict_gaussian_2D
   gauss_data <-
     predict_gaussian_2D(
-      fit_params = gauss_fit,
+      fit_object = gauss_fit,
       X_values = grid$X_values,
       Y_values = grid$Y_values,
     )

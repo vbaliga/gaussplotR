@@ -60,11 +60,9 @@ samp_dat <-
 
 
 #### Example 1: Unconstrained elliptical ####
+## This fits an unconstrained elliptical by default
 gauss_fit_ue <-
   fit_gaussian_2D(samp_dat)
-## This fits an unconstrained elliptical by default
-attr(gauss_fit_ue, "fit_method")
-#> [1] "elliptical_unconstr"
 
 ## Generate a grid of x- and y- values on which to predict
 grid <-
@@ -74,7 +72,7 @@ grid <-
 ## Predict the values using predict_gaussian_2D
 gauss_data_ue <-
   predict_gaussian_2D(
-    fit_params = gauss_fit_ue,
+    fit_object = gauss_fit_ue,
     X_values = grid$X_values,
     Y_values = grid$Y_values,
   )
@@ -105,15 +103,13 @@ lattice::levelplot(
 ``` r
 
 #### Example 2: Constrained elliptical_log ####
+## This fits a constrained elliptical, as in Priebe et al. 2003
 gauss_fit_cel <-
   fit_gaussian_2D(
     samp_dat,
     method = "elliptical_log",
     orientation_strategy = -1
   )
-## This fits a constrained elliptical, as in Priebe et al. 2003
-attr(gauss_fit_cel, "fit_method")
-#> [1] "elliptical_log_constr"
 
 ## Generate a grid of x- and y- values on which to predict
 grid <-
@@ -123,7 +119,7 @@ grid <-
 ## Predict the values using predict_gaussian_2D
 gauss_data_cel <-
   predict_gaussian_2D(
-    fit_params = gauss_fit_cel,
+    fit_object = gauss_fit_cel,
     X_values = grid$X_values,
     Y_values = grid$Y_values,
   )
