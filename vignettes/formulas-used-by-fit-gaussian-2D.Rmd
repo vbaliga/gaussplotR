@@ -101,3 +101,7 @@ where $A$ is the amplitude (i.e. scale factor), $x_0$ is the center (peak) of
 the Gaussian along the x-axis, $y_0$ is the center (peak) of the Gaussian along
 the y-axis, $\sigma_x$ is the spread along the x-axis, and $\sigma_y$ is the
 spread along the y-axis.
+
+That's all!  
+
+🐢
