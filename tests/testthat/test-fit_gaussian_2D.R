@@ -71,3 +71,41 @@ test_that("RSSes are what we expect", {
   expect_equal(gauss_fit_cel$model_error_stats$rss, 906.8782, tolerance = 1e-5)
   expect_equal(gauss_fit_cir$model_error_stats$rss, 899.613, tolerance = 1e-5)
 })
+
+## supply user-initialized values
+ui_e <- c(0.83, 32, 3.57, -3, 2, 1, 1)
+ui_el <- c(25, -0.1, -3, 2, 2.2, 1.7)
+ui_cir <- c(23, -2.5, 1.7, 1.3, 1.6)
+
+gauss_fit_ue_ui <-
+  fit_gaussian_2D(samp_dat,
+                  method = "elliptical",
+                  orientation_strategy = "unconstrained",
+                  user_init = ui_e)
+gauss_fit_uel_ui <-
+  fit_gaussian_2D(samp_dat,
+                  method = "elliptical_log",
+                  orientation_strategy = "unconstrained",
+                  user_init = ui_el)
+gauss_fit_cir_ui <-
+  fit_gaussian_2D(samp_dat,
+                  method = "circular",
+                  user_init = ui_cir)
+
+test_that("User-init Amplitudes are what we expect", {
+  expect_equal(gauss_fit_ue_ui$coefs$Amp, 32.25132, tolerance = 1e-5)
+  expect_equal(gauss_fit_uel_ui$coefs$Amp, 25.72529, tolerance = 1e-5)
+  expect_equal(gauss_fit_cir_ui$coefs$Amp, 23.18005, tolerance = 1e-5)
+})
+
+test_that("User-init RSSes are what we expect", {
+  expect_equal(gauss_fit_ue_ui$model_error_stats$rss,
+               156.2272,
+               tolerance = 1e-5)
+  expect_equal(gauss_fit_uel_ui$model_error_stats$rss,
+               214.3652,
+               tolerance = 1e-5)
+  expect_equal(gauss_fit_cir_ui$model_error_stats$rss,
+               899.613,
+               tolerance = 1e-5)
+})

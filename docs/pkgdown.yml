@@ -4,7 +4,7 @@ pkgdown_sha: e1e46f2e13c7efdb17bc4eae40bc3779c2b0b517
 articles:
   fit_gaussian_2D: fit_gaussian_2D.html
   formulas-used-by-fit-gaussian-2D: formulas-used-by-fit-gaussian-2D.html
-last_built: 2020-11-30T07:54Z
+last_built: 2020-11-30T08:07Z
 urls:
   reference: https://vbaliga.github.io/gaussplotR//reference
   article: https://vbaliga.github.io/gaussplotR//articles

@@ -130,7 +130,7 @@
   ],
   "codeRepository": "https://github.com/vbaliga/gaussplotR",
   "readme": "https://github.com/vbaliga/gaussplotR/blob/master/README.md",
-  "fileSize": "4201.448KB",
+  "fileSize": "4203.799KB",
   "developmentStatus": "https://www.repostatus.org/#active",
   "issueTracker": "https://github.com/vbaliga/gaussplotR/issues",
   "keywords": [
@@ -151,5 +151,6 @@
     "name": "Comprehensive R Archive Network (CRAN)",
     "url": "https://cran.r-project.org"
   },
-  "relatedLink": "https://CRAN.R-project.org/package=gaussplotR"
+  "relatedLink": "https://CRAN.R-project.org/package=gaussplotR",
+  "contIntegration": "https://codecov.io/gh/vbaliga/gaussplotR?branch=master"
 }

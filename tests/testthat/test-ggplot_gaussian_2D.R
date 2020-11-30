@@ -1,6 +1,7 @@
 ## Tests of ggplot_gaussian_2D()
 
-library(ggplot2); library(metR)
+library(ggplot2)
+library(metR)
 
 data(gaussplot_sample_data)
 samp_dat <-

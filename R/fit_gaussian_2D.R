@@ -176,7 +176,7 @@ fit_gaussian_2D <- function(data,
   Y_peak_init <- data[max_row,"Y_values"]
 
   ## find 66%
-  qtile_val <- quantile(data[,"response"], 0.66)
+  qtile_val <- stats::quantile(data[,"response"], 0.66)
   upperdat <- data[which(data[,"response"] > qtile_val),]
   ud_xrange <- range(upperdat$X_values)
   ud_xr <- abs(ud_xrange[2] - ud_xrange[1])
@@ -231,9 +231,9 @@ fit_gaussian_2D <- function(data,
       ## create a data.frame of model error stats
       m_e_s <-
         data.frame(
-          rss = sum(resid(fit_generic)^2),
-          rmse = sqrt((1/nrow(data))*sum(resid(fit_generic)^2)),
-          deviance = deviance(fit_generic)
+          rss = sum(stats::resid(fit_generic)^2),
+          rmse = sqrt((1/nrow(data))*sum(stats::resid(fit_generic)^2)),
+          deviance = stats::deviance(fit_generic)
         )
 
       res <- as.data.frame(t(stats::coef(fit_generic)))
@@ -275,9 +275,9 @@ fit_gaussian_2D <- function(data,
       ## create a data.frame of model error stats
       m_e_s <-
         data.frame(
-          rss = sum(resid(fit_generic_const)^2),
-          rmse = sqrt((1/nrow(data))*sum(resid(fit_generic_const)^2)),
-          deviance = deviance(fit_generic_const)
+          rss = sum(stats::resid(fit_generic_const)^2),
+          rmse = sqrt((1/nrow(data))*sum(stats::resid(fit_generic_const)^2)),
+          deviance = stats::deviance(fit_generic_const)
         )
 
       fit_coefs <- stats::coef(fit_generic_const)
@@ -332,9 +332,9 @@ fit_gaussian_2D <- function(data,
       ## create a data.frame of model error stats
       m_e_s <-
         data.frame(
-          rss = sum(resid(result)^2),
-          rmse = sqrt((1/nrow(data))*sum(resid(result)^2)),
-          deviance = deviance(result)
+          rss = sum(stats::resid(result)^2),
+          rmse = sqrt((1/nrow(data))*sum(stats::resid(result)^2)),
+          deviance = stats::deviance(result)
         )
 
       fit_coefs <- stats::coef(result)
@@ -372,9 +372,9 @@ fit_gaussian_2D <- function(data,
       ## create a data.frame of model error stats
       m_e_s <-
         data.frame(
-          rss = sum(resid(result)^2),
-          rmse = sqrt((1/nrow(data))*sum(resid(result)^2)),
-          deviance = deviance(result)
+          rss = sum(stats::resid(result)^2),
+          rmse = sqrt((1/nrow(data))*sum(stats::resid(result)^2)),
+          deviance = stats::deviance(result)
         )
 
       fit_coefs <- stats::coef(result)
@@ -427,9 +427,9 @@ fit_gaussian_2D <- function(data,
     ## create a data.frame of model error stats
     m_e_s <-
       data.frame(
-        rss = sum(resid(fit_circ)^2),
-        rmse = sqrt((1/nrow(data))*sum(resid(fit_circ)^2)),
-        deviance = deviance(fit_circ)
+        rss = sum(stats::resid(fit_circ)^2),
+        rmse = sqrt((1/nrow(data))*sum(stats::resid(fit_circ)^2)),
+        deviance = stats::deviance(fit_circ)
       )
 
     res <- as.data.frame(t(stats::coef(fit_circ)))
