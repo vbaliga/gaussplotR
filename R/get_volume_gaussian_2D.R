@@ -1,5 +1,5 @@
 ## Part of the gaussplotR package
-## Last updated: 2020-11-27 VBB
+## Last updated: 2020-11-30 VBB
 
 ########################## get_volume_gaussian_2D #############################
 

@@ -233,7 +233,8 @@ fit_gaussian_2D <- function(data,
         data.frame(
           rss = sum(stats::resid(fit_generic)^2),
           rmse = sqrt((1/nrow(data))*sum(stats::resid(fit_generic)^2)),
-          deviance = stats::deviance(fit_generic)
+          deviance = stats::deviance(fit_generic),
+          AIC = stats::AIC(fit_generic)
         )
 
       res <- as.data.frame(t(stats::coef(fit_generic)))
@@ -277,7 +278,8 @@ fit_gaussian_2D <- function(data,
         data.frame(
           rss = sum(stats::resid(fit_generic_const)^2),
           rmse = sqrt((1/nrow(data))*sum(stats::resid(fit_generic_const)^2)),
-          deviance = stats::deviance(fit_generic_const)
+          deviance = stats::deviance(fit_generic_const),
+          AIC = stats::AIC(fit_generic_const)
         )
 
       fit_coefs <- stats::coef(fit_generic_const)
@@ -334,7 +336,8 @@ fit_gaussian_2D <- function(data,
         data.frame(
           rss = sum(stats::resid(result)^2),
           rmse = sqrt((1/nrow(data))*sum(stats::resid(result)^2)),
-          deviance = stats::deviance(result)
+          deviance = stats::deviance(result),
+          AIC = stats::AIC(result)
         )
 
       fit_coefs <- stats::coef(result)
@@ -374,7 +377,8 @@ fit_gaussian_2D <- function(data,
         data.frame(
           rss = sum(stats::resid(result)^2),
           rmse = sqrt((1/nrow(data))*sum(stats::resid(result)^2)),
-          deviance = stats::deviance(result)
+          deviance = stats::deviance(result),
+          AIC = stats::AIC(result)
         )
 
       fit_coefs <- stats::coef(result)
@@ -429,7 +433,8 @@ fit_gaussian_2D <- function(data,
       data.frame(
         rss = sum(stats::resid(fit_circ)^2),
         rmse = sqrt((1/nrow(data))*sum(stats::resid(fit_circ)^2)),
-        deviance = stats::deviance(fit_circ)
+        deviance = stats::deviance(fit_circ),
+        AIC = stats::AIC(fit_circ)
       )
 
     res <- as.data.frame(t(stats::coef(fit_circ)))
