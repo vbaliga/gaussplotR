@@ -30,6 +30,13 @@ models_list <-
     circular = gauss_fit_cir
   )
 
+models_list_un <-
+  list(
+    gauss_fit_ue,
+    gauss_fit_uel,
+    gauss_fit_cir
+  )
+
 test_that("compare_gaussian_fits() arrives at the correct answer", {
   expect_equal(compare_gaussian_fits(models_list)$preferred_model,
                "unconstrained_elliptical")
@@ -41,4 +48,14 @@ test_that("compare_gaussian_fits() arrives at the correct answer", {
   expect_equal(compare_gaussian_fits(models_list,
                                      comparison_method = "rss")$preferred_model,
                "unconstrained_elliptical")
+  expect_equal(compare_gaussian_fits(models_list_un)$preferred_model,
+               "model_1")
+  expect_equal(compare_gaussian_fits(models_list_un)$comparison_table[1,3],
+               156.2272, tolerance = 1e-2)
+  expect_equal(compare_gaussian_fits(models_list_un,
+                                     comparison_method = "AIC")$preferred_model,
+               "model_1")
+  expect_equal(compare_gaussian_fits(models_list_un,
+                                     comparison_method = "rss")$preferred_model,
+               "model_1")
 })
