@@ -1,5 +1,5 @@
 ## Part of the gaussplotR package
-## Last updated: 2020-11-29 VBB
+## Last updated: 2020-12-02 VBB
 
 ############################# predict_gaussian_2D ##############################
 
@@ -32,6 +32,31 @@ predict_gaussian_2D <- function(fit_object,
                                 X_values,
                                 Y_values,
                                 ...) {
+
+  #### Argument checks ####
+
+  ## fit_object
+  if (is.null(attr(fit_object, "gaussplotR"))) {
+    stop(
+"This does not seem to be an object output from fit_gaussian_2D().
+Please run fit_gaussian_2D() on your data prior to using this function."
+)
+  }
+  if (!attr(fit_object, "gaussplotR") == "gaussplotR_fit") {
+    stop(
+"This does not seem to be an object output from fit_gaussian_2D().
+Please run fit_gaussian_2D() on your data prior to using this function."
+)
+  }
+
+  ## x and y values
+  if (!is.numeric(X_values)) {
+    stop("'X_values' must be numeric")
+  }
+  if (!is.numeric(Y_values)) {
+    stop("'Y_values' must be numeric")
+  }
+
 
   ## extract the fitted parameters and make a simple object
   coefz <- fit_object$coefs

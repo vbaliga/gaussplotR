@@ -17,7 +17,8 @@ ggplot_gaussian_2D(
   axis.text = element_text(size = 6),
   axis.title = element_text(size = 7),
   axis.ticks = element_line(size = 0.3),
-  plot.margin = unit(c(0.1, 0.1, 0.1, 0.1), "cm")
+  plot.margin = unit(c(0.1, 0.1, 0.1, 0.1), "cm"),
+  ...
 )
 }
 \arguments{
@@ -48,10 +49,12 @@ to 1 scale?}
 \item{axis.ticks}{Arguments passed to axis.ticks}
 
 \item{plot.margin}{Arguments passed to plot.margin}
+
+\item{...}{Other arguments supplied to \code{ggplot2::theme()}}
 }
 \value{
 A ggplot object that uses metR::geom_contour_fill() to display the
-2D gaussian
+2D Gaussian
 }
 \description{
 Plot a 2D gaussian via ggplot

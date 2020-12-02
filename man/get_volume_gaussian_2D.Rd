@@ -7,12 +7,12 @@
 get_volume_gaussian_2D(X_sig, Y_sig)
 }
 \arguments{
-\item{X_sig}{numeric value of the x-axis spread (sigma)}
+\item{X_sig}{numeric value(s) of the x-axis spread (sigma)}
 
-\item{Y_sig}{numeric value of the y-axis spread (sigma)}
+\item{Y_sig}{numeric value(s) of the y-axis spread (sigma)}
 }
 \value{
-A numeric value indicating the computed volume
+Numeric value(s) indicating the computed volume(s)
 }
 \description{
 Compute volume under 2D gaussian
@@ -20,6 +20,11 @@ Compute volume under 2D gaussian
 \details{
 Volume under the 2D gaussian is computed as:
 \code{2 * pi * sqrt(abs(X_sig)) * sqrt(abs(Y_sig))}
+
+Numeric vectors can be supplied to \code{X_sig} and \code{Y_sig}. If vectors
+of length greater than 1 are given, the function computes volume for each
+sequential pair of \code{X_sig}, \code{Y_sig} values. The lengths of these
+supplied vectors must be identical.
 }
 \examples{
 library(gaussplotR)

@@ -69,42 +69,88 @@
 compare_gaussian_fits <- function(fit_objects_list,
                                   comparison_method = "rmse") {
 
+  ## Argument checks
+  if (!is.list(fit_objects_list)) {
+    stop(
+"fit_objects_list must be a list of outputs from fit_gaussian_2D()"
+)
+  }
+
+  if (is.null(attr(fit_objects_list[[1]], "gaussplotR"))) {
+    stop(
+"This list does not seem to contain object outputs from fit_gaussian_2D().
+Please run fit_gaussian_2D() on your data prior to using this function."
+)
+  }
+  if (!attr(fit_objects_list[[1]], "gaussplotR") == "gaussplotR_fit") {
+    stop(
+"This list does not seem to contain object outputs from fit_gaussian_2D().
+Please run fit_gaussian_2D() on your data prior to using this function."
+      )
+  }
+
+  ## comparison_method
+  if (!is.character(comparison_method)) {
+    stop(
+      "comparison_method must be one of: 'rmse', 'rss', 'AIC'"
+    )
+  }
+  comparison_method_choices <- c("rmse", "rss", "AIC")
+  if (!comparison_method %in% comparison_method_choices) {
+    stop(
+      "comparison_method must be one of: 'rmse', 'rss', 'AIC'"
+    )
+  }
+
   ## Allocate a matrix to fill
-  table_mat <- matrix(nrow = length(fit_objects_list),
+  table_mat <- matrix(nrow =
+                        length(fit_objects_list),
                       ncol = 4)
   ## Extract all the model_error_stats from each object in the list
   for (i in seq_along(fit_objects_list)) {
     for (j in 1:4) {
-      table_mat[i, j] <- fit_objects_list[[i]]$model_error_stats[1, j]
+      table_mat[i, j] <-
+        fit_objects_list[[i]]$model_error_stats[1, j]
     }
   }
 
   ## Convert to data.frame and label columns
-  table <- as.data.frame(table_mat)
-  colnames(table) <- colnames(fit_objects_list[[1]]$model_error_stats)
+  table <-
+    as.data.frame(table_mat)
+  colnames(table) <-
+    colnames(fit_objects_list[[1]]$model_error_stats)
 
-  ## Label rows with the names of the list if possible or model_n if not
+  ## Label rows with the names of the list if possible
+  ## or model_n if not
   if (is.null(names(fit_objects_list))) {
     rownames(table) <-
-      paste0("model_", seq_along(fit_objects_list))
+      paste0("model_",
+             seq_along(fit_objects_list))
   } else {
-    rownames(table) <- names(fit_objects_list)
+    rownames(table) <-
+      names(fit_objects_list)
   }
 
   ## Sort the table based on the method desired
   if (comparison_method == "rmse"){
-    table <- table[base::order(table$rmse),]
-    preferred_model <- rownames(table)[1]
+    table <-
+      table[base::order(table$rmse),]
+    preferred_model <-
+      rownames(table)[1]
   }
 
   if (comparison_method == "rss"){
-    table <- table[base::order(table$rmse),]
-    preferred_model <- rownames(table)[1]
+    table <-
+      table[base::order(table$rmse),]
+    preferred_model <-
+      rownames(table)[1]
   }
 
   if (comparison_method == "AIC"){
-    table <- table[base::order(table$rmse),]
-    preferred_model <- rownames(table)[1]
+    table <-
+      table[base::order(table$rmse),]
+    preferred_model <-
+      rownames(table)[1]
   }
 
   ## Export

@@ -45,6 +45,37 @@ autofit_gaussian_2D <- function(data,
                                 comparison_method = "rmse",
                                 maxiter = 1000) {
 
+  #### Argument checks ####
+
+  ## data names
+  if (!any(names(data) == "X_values")) {
+    stop("'X_values' column not found")
+  }
+  if (!any(names(data) == "Y_values")) {
+    stop("'Y_values' column not found")
+  }
+  if (!any(names(data) == "response")) {
+    stop("'response' column not found")
+  }
+
+  ## comparison_method
+  if (!is.character(comparison_method)) {
+    stop(
+      "comparison_method must be one of: 'rmse', 'rss', 'AIC'"
+    )
+  }
+  comparison_method_choices <- c("rmse", "rss", "AIC")
+  if (!comparison_method %in% comparison_method_choices) {
+    stop(
+      "comparison_method must be one of: 'rmse', 'rss', 'AIC'"
+    )
+  }
+
+  ## maxiter
+  if (!is.numeric(maxiter)) {
+    stop("maxiter must be a numeric")
+  }
+
   ## Fit each of the main types of models
   gauss_fit_ue <-
     fit_gaussian_2D(data,

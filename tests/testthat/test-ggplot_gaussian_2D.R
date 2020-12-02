@@ -11,7 +11,7 @@ test_that("ggplot_gaussian_2D() fails when nonsense is supplied", {
   expect_error(ggplot_gaussian_2D("steve"))
   expect_error(ggplot_gaussian_2D(c("a", "b", "c")))
   expect_error(ggplot_gaussian_2D())
-  expect_warning(expect_error(ggplot_gaussian_2D(samp_dat)))
+  expect_error(ggplot_gaussian_2D(samp_dat))
   expect_error(ggplot_gaussian_2D(samp_dat, maxiter = "a"))
 })
 

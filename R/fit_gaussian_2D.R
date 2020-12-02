@@ -166,43 +166,112 @@ fit_gaussian_2D <- function(data,
                             verbose = FALSE,
                             ...) {
 
+  #### Argument checks ####
+
+  ## data names
+  if (!any(names(data) == "X_values")) {
+    stop("'X_values' column not found")
+  }
+  if (!any(names(data) == "Y_values")) {
+    stop("'Y_values' column not found")
+  }
+  if (!any(names(data) == "response")) {
+    stop("'response' column not found")
+  }
+
+  ## method
+  if (!is.character(method)) {
+    stop("'method' must be one of: 'elliptical', 'elliptical_log', 'circular'")
+  }
+  method_choices <- c("elliptical", "elliptical_log", "circular")
+  if (!method %in% method_choices) {
+    stop("'method' must be one of: 'elliptical', 'elliptical_log', 'circular'")
+  }
+
+  ## orientation
+  if (is.character(orientation_strategy)) {
+    if (!orientation_strategy == "unconstrained") {
+      message(
+        "'orientation_strategy' must either be 'unconstrained' or a
+              numeric. Defaulting to 'unconstrained'"
+      )
+    }
+  }
+
+  ## user_init
+  if (!is.null(user_init)) {
+    if (!is.numeric(user_init)){
+      stop("'user_init' must contain numeric values only")
+    }
+  }
+
+  ## maxiter
+  if (!is.numeric(maxiter)) {
+    stop("'maxiter' must be a numeric")
+  }
+
+
   #### Guesstimate starting points for parameters ####
-  A_o_init <- 1
-  Q_init <- -0.5
-  theta_init <- pi
-  max_row <- which.max(data[,"response"])
-  Amp_init <- max(data[,"response"])
-  X_peak_init <- data[max_row,"X_values"]
-  Y_peak_init <- data[max_row,"Y_values"]
+  A_o_init <-
+    1
+  Q_init <-
+    -0.5
+  theta_init <-
+    pi
+  max_row <-
+    which.max(data[,"response"])
+  Amp_init <-
+    max(data[,"response"])
+  X_peak_init <-
+    data[max_row,"X_values"]
+  Y_peak_init <-
+    data[max_row,"Y_values"]
 
   ## find 66%
-  qtile_val <- stats::quantile(data[,"response"], 0.66)
-  upperdat <- data[which(data[,"response"] > qtile_val),]
-  ud_xrange <- range(upperdat$X_values)
-  ud_xr <- abs(ud_xrange[2] - ud_xrange[1])
-  ud_yrange <- range(upperdat$Y_values)
-  ud_yr <- abs(ud_yrange[2] - ud_yrange[1])
+  qtile_val <-
+    stats::quantile(data[,"response"], 0.66)
+  upperdat <-
+    data[which(data[,"response"] > qtile_val),]
+  ud_xrange <-
+    range(upperdat$X_values)
+  ud_xr <-
+    abs(ud_xrange[2] - ud_xrange[1])
+  ud_yrange <-
+    range(upperdat$Y_values)
+  ud_yr <-
+    abs(ud_yrange[2] - ud_yrange[1])
 
   ## Use these ranges to guesstimate initial spread values
-  X_sig_init <- ud_xr/2
-  Y_sig_init <- ud_yr/2
-  a_init <- X_sig_init/2
-  b_init <- Y_sig_init/2
+  X_sig_init <-
+    ud_xr/2
+  Y_sig_init <-
+    ud_yr/2
+  a_init <-
+    X_sig_init/2
+  b_init <-
+    Y_sig_init/2
 
   #### elliptical ####
   if (method == "elliptical"){
     ## overwrite with user-supplied parameters, if supplied ##
     if (!is.null(user_init)){
-      A_o_init    <- user_init[1]
-      Amp_init    <- user_init[2]
-      theta_init  <- user_init[3]
-      X_peak_init <- user_init[4]
-      Y_peak_init <- user_init[5]
-      a_init      <- user_init[6]
-      b_init      <- user_init[7]
+      A_o_init    <-
+        user_init[1]
+      Amp_init    <-
+        user_init[2]
+      theta_init  <-
+        user_init[3]
+      X_peak_init <-
+        user_init[4]
+      Y_peak_init <-
+        user_init[5]
+      a_init      <-
+        user_init[6]
+      b_init      <-
+        user_init[7]
     }
 
-    if (orientation_strategy == "unconstrained") {
+    if (!is.numeric(orientation_strategy)) {
       fit_generic <-
         stats::nls(
           response ~ A_o + Amp * exp(
@@ -231,8 +300,9 @@ fit_gaussian_2D <- function(data,
       ## create a data.frame of model error stats
       m_e_s <-
         data.frame(
-          rss = sum(stats::resid(fit_generic)^2),
-          rmse = sqrt((1/nrow(data))*sum(stats::resid(fit_generic)^2)),
+          rss = sum(stats::resid(fit_generic) ^ 2),
+          rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_generic) ^
+                                               2)),
           deviance = stats::deviance(fit_generic),
           AIC = stats::AIC(fit_generic)
         )
@@ -245,6 +315,7 @@ fit_gaussian_2D <- function(data,
           model_error_stats = m_e_s,
           fit_method = "elliptical_unconstr"
         )
+      attr(output, "gaussplotR") <- "gaussplotR_fit"
       return(output)
     }
 
@@ -270,21 +341,26 @@ fit_gaussian_2D <- function(data,
             ),
           data = data,
           trace = verbose,
-          control = list(maxiter = maxiter, ...)
+          control = list(maxiter = maxiter,
+                         ...
+                         )
         )
 
       ## create a data.frame of model error stats
       m_e_s <-
         data.frame(
-          rss = sum(stats::resid(fit_generic_const)^2),
-          rmse = sqrt((1/nrow(data))*sum(stats::resid(fit_generic_const)^2)),
+          rss = sum(stats::resid(fit_generic_const) ^ 2),
+          rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_generic_const) ^
+                                               2)),
           deviance = stats::deviance(fit_generic_const),
           AIC = stats::AIC(fit_generic_const)
         )
 
       fit_coefs <- stats::coef(fit_generic_const)
       coef_result <- c(
-        fit_coefs[c(1,2)], theta = orientation_strategy, fit_coefs[c(3:6)]
+        fit_coefs[c(1,2)],
+        theta = orientation_strategy,
+        fit_coefs[c(3:6)]
       )
       res <- as.data.frame(t(coef_result))
       output <-
@@ -294,6 +370,7 @@ fit_gaussian_2D <- function(data,
           model_error_stats = m_e_s,
           fit_method = "elliptical_constr"
         )
+      attr(output, "gaussplotR") <- "gaussplotR_fit"
       return(output)
     }
 
@@ -328,21 +405,26 @@ fit_gaussian_2D <- function(data,
             ),
           data = data,
           trace = verbose,
-          control = list(maxiter = maxiter, ...)
+          control = list(maxiter = maxiter,
+                         ...
+                         )
           )
 
       ## create a data.frame of model error stats
       m_e_s <-
         data.frame(
-          rss = sum(stats::resid(result)^2),
-          rmse = sqrt((1/nrow(data))*sum(stats::resid(result)^2)),
+          rss = sum(stats::resid(result) ^ 2),
+          rmse = sqrt((1 / nrow(data)) * sum(stats::resid(result) ^ 2)),
           deviance = stats::deviance(result),
           AIC = stats::AIC(result)
         )
 
       fit_coefs <- stats::coef(result)
       coef_result <-
-        c(Amp = Amp_init, fit_coefs)
+        c(
+          Amp = Amp_init,
+          fit_coefs
+          )
       res <- as.data.frame(t(coef_result))
       output <-
         list(
@@ -351,6 +433,7 @@ fit_gaussian_2D <- function(data,
           model_error_stats = m_e_s,
           fit_method = "elliptical_log_unconstr"
         )
+      attr(output, "gaussplotR") <- "gaussplotR_fit"
       return(output)
     }
 
@@ -369,14 +452,16 @@ fit_gaussian_2D <- function(data,
             ),
           data = data,
           trace = verbose,
-          control = list(maxiter = maxiter, ...)
+          control = list(maxiter = maxiter,
+                         ...
+                         )
           )
 
       ## create a data.frame of model error stats
       m_e_s <-
         data.frame(
-          rss = sum(stats::resid(result)^2),
-          rmse = sqrt((1/nrow(data))*sum(stats::resid(result)^2)),
+          rss = sum(stats::resid(result) ^ 2),
+          rmse = sqrt((1 / nrow(data)) * sum(stats::resid(result) ^ 2)),
           deviance = stats::deviance(result),
           AIC = stats::AIC(result)
         )
@@ -392,14 +477,15 @@ fit_gaussian_2D <- function(data,
           model_error_stats = m_e_s,
           fit_method = "elliptical_log_constr"
         )
+      attr(output, "gaussplotR") <- "gaussplotR_fit"
       return(output)
     }
   }
 
   #### circular ####
-  if (method == "circular"){
+  if (method == "circular") {
     ## overwrite with user-supplied parameters, if supplied ##
-    if (!is.null(user_init)){
+    if (!is.null(user_init)) {
       Amp_init    <- user_init[1]
       X_peak_init <- user_init[2]
       Y_peak_init <- user_init[3]
@@ -409,15 +495,13 @@ fit_gaussian_2D <- function(data,
 
     fit_circ <-
       stats::nls(
-        response ~ Amp * exp(
-          -(
-            (((X_values - X_peak)^2) / (2 * X_sig^2) +
-               ((Y_values - Y_peak)^2)/(2 * Y_sig^2))
-          )
-        )
+        response ~ Amp * exp(-((((X_values - X_peak) ^ 2) / (2 * X_sig ^ 2) +
+                                  ((Y_values - Y_peak) ^ 2) / (2 * Y_sig ^ 2)
+        )))
         ,
         start =
-          c(Amp    = Amp_init,
+          c(
+            Amp    = Amp_init,
             X_peak = X_peak_init,
             Y_peak = Y_peak_init,
             X_sig   = X_sig_init,
@@ -425,14 +509,16 @@ fit_gaussian_2D <- function(data,
           ),
         data = data,
         trace = verbose,
-        control = list(maxiter = maxiter, ...)
+        control = list(maxiter = maxiter,
+                       ...
+                       )
       )
 
     ## create a data.frame of model error stats
     m_e_s <-
       data.frame(
-        rss = sum(stats::resid(fit_circ)^2),
-        rmse = sqrt((1/nrow(data))*sum(stats::resid(fit_circ)^2)),
+        rss = sum(stats::resid(fit_circ) ^ 2),
+        rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_circ) ^ 2)),
         deviance = stats::deviance(fit_circ),
         AIC = stats::AIC(fit_circ)
       )
@@ -445,6 +531,7 @@ fit_gaussian_2D <- function(data,
         model_error_stats = m_e_s,
         fit_method = "circular"
       )
+    attr(output, "gaussplotR") <- "gaussplotR_fit"
     return(output)
   }
 }
