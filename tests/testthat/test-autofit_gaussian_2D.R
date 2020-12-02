@@ -1,0 +1,36 @@
+## Tests of autofit_gaussian_2D()
+
+data(gaussplot_sample_data)
+samp_dat <-
+  gaussplot_sample_data[,1:3]
+
+test_that("autofit_gaussian_2D() fails when nonsense is supplied", {
+  expect_error(autofit_gaussian_2D("steve"))
+  expect_error(autofit_gaussian_2D(c("a", "b", "c")))
+  expect_error(autofit_gaussian_2D())
+  expect_error(autofit_gaussian_2D(samp_dat[,1:2]))
+  expect_error(autofit_gaussian_2D(data.frame(rnorm(100))))
+})
+
+gauss_auto_rmse <-
+  autofit_gaussian_2D(samp_dat,
+                      comparison_method = "rmse")
+gauss_auto_rss <-
+  autofit_gaussian_2D(samp_dat,
+                      comparison_method = "rss")
+gauss_auto_aic <-
+  autofit_gaussian_2D(samp_dat,
+                      comparison_method = "AIC")
+
+
+test_that("autofit_gaussian_2D() arrives at the correct answer", {
+  expect_equal(gauss_auto_rmse$fit_method, "elliptical_unconstr")
+  expect_equal(gauss_auto_rss$fit_method, "elliptical_unconstr")
+  expect_equal(gauss_auto_aic$fit_method, "elliptical_unconstr")
+  expect_equal(gauss_auto_rmse$model_error_stats[1, 2],
+               2.083181, tolerance = 1e-3)
+  expect_equal(gauss_auto_rss$model_error_stats[1, 1],
+               156.2272, tolerance = 1e-3)
+  expect_equal(gauss_auto_aic$model_error_stats[1, 4],
+               171.0041, tolerance = 1e-3)
+})

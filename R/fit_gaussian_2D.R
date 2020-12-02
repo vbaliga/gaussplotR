@@ -85,8 +85,8 @@
 ##' \itemize{
 ##'  \item{"coefs"} {A data.frame of fitted model parameters.}
 ##'  \item{"model"} {The model object, fitted by \code{stats::nls()}.}
-##'  \item{"model_error_stats"} {A data.frame detailing the rss, rmse, and
-##'  deviance of the fitted model.}
+##'  \item{"model_error_stats"} {A data.frame detailing the rss, rmse, deviance,
+##'  and AIC of the fitted model.}
 ##'  \item{"fit_method"} {A character vector that indicates which method and
 ##'  orientation strategy was used by this function.}
 ##' }

@@ -184,6 +184,40 @@
 <span class="co">## Plot via ggplot2 and metR</span>
 <span class="fu"><a href="reference/ggplot_gaussian_2D.html">ggplot_gaussian_2D</a></span><span class="op">(</span><span class="va">gauss_data_cel</span><span class="op">)</span></pre></div>
 <p><img src="reference/figures/README-example-3.png" width="100%"></p>
+<p>Should you be interested in having <code>gaussplotR</code> try to automatically determine the best choice of <code>method</code> for <code><a href="reference/fit_gaussian_2D.html">fit_gaussian_2D()</a></code>, the <code><a href="reference/autofit_gaussian_2D.html">autofit_gaussian_2D()</a></code> function can come in handy. The default is to select the <code>method</code> that produces a fit with the lowest <code>rmse</code>, but other choices include <code>rss</code> and <code>AIC</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="co">## Use autofit_gaussian_2D() to automatically decide the best </span>
+<span class="co">## model to use</span>
+<span class="va">gauss_auto</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="reference/autofit_gaussian_2D.html">autofit_gaussian_2D</a></span><span class="op">(</span>
+    <span class="va">samp_dat</span>,
+    comparison_method <span class="op">=</span> <span class="st">"rmse"</span>
+    <span class="op">)</span>
+
+<span class="co">## The output has the same components as `fit_gaussian_2D()` </span>
+<span class="co">## but for the automatically-selected best-fitting method only:</span>
+<span class="va">gauss_auto</span>
+<span class="co">#&gt; $coefs</span>
+<span class="co">#&gt;         A_o      Amp    theta    X_peak   Y_peak         a         b</span>
+<span class="co">#&gt; 1 0.8272942 32.25132 3.581234 -2.638124 2.021262 0.9072492 0.9611345</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $model</span>
+<span class="co">#&gt; Nonlinear regression model</span>
+<span class="co">#&gt;   model: response ~ A_o + Amp * exp(-((((X_values - X_peak) * cos(theta) -     (Y_values - Y_peak) * sin(theta))/a)^2 + (((X_values - X_peak) *     sin(theta) - (Y_values - Y_peak) * cos(theta))/b)^2)/2)</span>
+<span class="co">#&gt;    data: data</span>
+<span class="co">#&gt;     A_o     Amp   theta  X_peak  Y_peak       a       b </span>
+<span class="co">#&gt;  0.8273 32.2513  3.5812 -2.6381  2.0213  0.9072  0.9611 </span>
+<span class="co">#&gt;  residual sum-of-squares: 156.2</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Number of iterations to convergence: 13 </span>
+<span class="co">#&gt; Achieved convergence tolerance: 3.935e-06</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $model_error_stats</span>
+<span class="co">#&gt;        rss     rmse deviance      AIC</span>
+<span class="co">#&gt; 1 156.2272 2.083181 156.2272 171.0041</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $fit_method</span>
+<span class="co">#&gt; [1] "elliptical_unconstr"</span></pre></div>
 </div>
 <div id="citation" class="section level2">
 <h2 class="hasAnchor">

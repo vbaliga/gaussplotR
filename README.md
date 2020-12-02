@@ -132,6 +132,47 @@ ggplot_gaussian_2D(gauss_data_cel)
 
 <img src="man/figures/README-example-3.png" width="100%" />
 
+Should you be interested in having `gaussplotR` try to automatically
+determine the best choice of `method` for `fit_gaussian_2D()`, the
+`autofit_gaussian_2D()` function can come in handy. The default is to
+select the `method` that produces a fit with the lowest `rmse`, but
+other choices include `rss` and `AIC`.
+
+``` r
+## Use autofit_gaussian_2D() to automatically decide the best 
+## model to use
+gauss_auto <-
+  autofit_gaussian_2D(
+    samp_dat,
+    comparison_method = "rmse"
+    )
+
+## The output has the same components as `fit_gaussian_2D()` 
+## but for the automatically-selected best-fitting method only:
+gauss_auto
+#> $coefs
+#>         A_o      Amp    theta    X_peak   Y_peak         a         b
+#> 1 0.8272942 32.25132 3.581234 -2.638124 2.021262 0.9072492 0.9611345
+#> 
+#> $model
+#> Nonlinear regression model
+#>   model: response ~ A_o + Amp * exp(-((((X_values - X_peak) * cos(theta) -     (Y_values - Y_peak) * sin(theta))/a)^2 + (((X_values - X_peak) *     sin(theta) - (Y_values - Y_peak) * cos(theta))/b)^2)/2)
+#>    data: data
+#>     A_o     Amp   theta  X_peak  Y_peak       a       b 
+#>  0.8273 32.2513  3.5812 -2.6381  2.0213  0.9072  0.9611 
+#>  residual sum-of-squares: 156.2
+#> 
+#> Number of iterations to convergence: 13 
+#> Achieved convergence tolerance: 3.935e-06
+#> 
+#> $model_error_stats
+#>        rss     rmse deviance      AIC
+#> 1 156.2272 2.083181 156.2272 171.0041
+#> 
+#> $fit_method
+#> [1] "elliptical_unconstr"
+```
+
 ## Citation
 
 Baliga, VB. 2020. gaussplotR: Fit, predict, and plot 2D gaussians in R.

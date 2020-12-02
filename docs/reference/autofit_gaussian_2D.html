@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • gaussplotR</title>
+<title>Automatically determine the best-fitting 2D Gaussian for a data set — autofit_gaussian_2D • gaussplotR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,8 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Automatically determine the best-fitting 2D Gaussian for a data set — autofit_gaussian_2D" />
+<meta property="og:description" content="Automatically determine the best-fitting 2D Gaussian for a data set" />
 <meta property="og:image" content="https://vbaliga.github.io/gaussplotR/logo.png" />
 
 
@@ -66,7 +67,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -125,78 +126,79 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Automatically determine the best-fitting 2D Gaussian for a data set</h1>
+    <small class="dont-index">Source: <a href='https://github.com/vbaliga/gaussplotR/blob/master/R/autofit_gaussian_2D.R'><code>R/autofit_gaussian_2D.R</code></a></small>
+    <div class="hidden name"><code>autofit_gaussian_2D.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Automatically determine the best-fitting 2D Gaussian for a data set</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>autofit_gaussian_2D</span><span class='op'>(</span><span class='va'>data</span>, comparison_method <span class='op'>=</span> <span class='st'>"rmse"</span>, maxiter <span class='op'>=</span> <span class='fl'>1000</span><span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="autofit_gaussian_2D.html">autofit_gaussian_2D()</a></code> </p>
-        </td>
-        <td><p>Automatically determine the best-fitting 2D Gaussian for a data set</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="compare_gaussian_fits.html">compare_gaussian_fits()</a></code> </p>
-        </td>
-        <td><p>Compare fitted 2D Gaussians and determine the best-fitting model</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="fit_gaussian_2D.html">fit_gaussian_2D()</a></code> </p>
-        </td>
-        <td><p>Determine the best-fit parameters of a 2D Gaussian fit to a data set</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gaussplot_sample_data.html">gaussplot_sample_data</a></code> </p>
-        </td>
-        <td><p>Sample data set</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_volume_gaussian_2D.html">get_volume_gaussian_2D()</a></code> </p>
-        </td>
-        <td><p>Compute volume under 2D gaussian</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ggplot_gaussian_2D.html">ggplot_gaussian_2D()</a></code> </p>
-        </td>
-        <td><p>Plot a 2D gaussian via ggplot</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="predict_gaussian_2D.html">predict_gaussian_2D()</a></code> </p>
-        </td>
-        <td><p>Predict values from a fitted 2D gaussian</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>A data.frame that contains the raw data (generally rectilinearly
+gridded data, but this is not a strict requirement). Columns must be named
+<code>"X_values"</code>, <code>"Y_values"</code> and <code>"response"</code>.</p></td>
+    </tr>
+    <tr>
+      <th>comparison_method</th>
+      <td><p>One of "rmse", "rss", or "AIC"; what metric should
+be used to determine the "best-fitting" Gaussian?</p></td>
+    </tr>
+    <tr>
+      <th>maxiter</th>
+      <td><p>Default 1000. A positive integer specifying the maximum number
+of iterations allowed. See <code><a href='https://rdrr.io/r/stats/nls.control.html'>stats::nls.control()</a></code> for more details.</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A list with the components:</p><ul>
+<li><p>"coefs" A data.frame of fitted model parameters.</p></li>
+<li><p>"model" The model object, fitted by <code><a href='https://rdrr.io/r/stats/nls.html'>stats::nls()</a></code>.</p></li>
+<li><p>"model_error_stats" A data.frame detailing the rss, rmse, deviance,
+and AIC of the fitted model.</p></li>
+<li><p>"fit_method" A character vector that indicates which method and
+orientation strategy was used by this function.</p></li>
+</ul>
+
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>This function runs <code><a href='fit_gaussian_2D.html'>fit_gaussian_2D()</a></code> three times: once for
+each of the "main" types of models: 1) elliptical, unconstrained; 2)
+elliptical, log; 3) circular. The function <code><a href='compare_gaussian_fits.html'>compare_gaussian_fits()</a></code> is
+then used to determine which of these three models is the best-fitting, using
+the <code>comparison_method</code> argument to make the decision.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Vikram B. Baliga</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/vbaliga/gaussplotR'>gaussplotR</a></span><span class='op'>)</span>
+
+  <span class='co'>## Load the sample data set</span>
+  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>gaussplot_sample_data</span><span class='op'>)</span>
+
+  <span class='co'>## The raw data we'd like to use are in columns 1:3</span>
+  <span class='va'>samp_dat</span> <span class='op'>&lt;-</span>
+    <span class='va'>gaussplot_sample_data</span><span class='op'>[</span>,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>]</span>
+
+  <span class='co'>## Automatically determine the best model to use</span>
+  <span class='va'>gauss_auto</span> <span class='op'>&lt;-</span>
+    <span class='fu'>autofit_gaussian_2D</span><span class='op'>(</span><span class='va'>samp_dat</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>

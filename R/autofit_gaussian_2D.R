@@ -1,7 +1,45 @@
 ## Part of the gaussplotR package
-## Last updated: 2020-11-30 VBB
+## Last updated: 2020-12-02 VBB
 
 ############################## autofit_gaussian_2D #############################
+
+#' Automatically determine the best-fitting 2D Gaussian for a data set
+#'
+#' @param data A data.frame that contains the raw data (generally rectilinearly
+#'   gridded data, but this is not a strict requirement). Columns must be named
+#'   \code{"X_values"}, \code{"Y_values"} and \code{"response"}.
+#' @param comparison_method One of "rmse", "rss", or "AIC"; what metric should
+#' be used to determine the "best-fitting" Gaussian?
+#' @param maxiter Default 1000. A positive integer specifying the maximum number
+#'   of iterations allowed. See \code{stats::nls.control()} for more details.
+#'
+#' @details This function runs \code{fit_gaussian_2D()} three times: once for
+#' each of the "main" types of models: 1) elliptical, unconstrained; 2)
+#' elliptical, log; 3) circular. The function \code{compare_gaussian_fits()} is
+#' then used to determine which of these three models is the best-fitting, using
+#' the \code{comparison_method} argument to make the decision.
+#'
+#' @inherit fit_gaussian_2D return
+#'
+#' @author Vikram B. Baliga
+#'
+#' @export
+#'
+#' @examples
+#' if (interactive()) {
+#'   library(gaussplotR)
+#'
+#'   ## Load the sample data set
+#'   data(gaussplot_sample_data)
+#'
+#'   ## The raw data we'd like to use are in columns 1:3
+#'   samp_dat <-
+#'     gaussplot_sample_data[,1:3]
+#'
+#'   ## Automatically determine the best model to use
+#'   gauss_auto <-
+#'     autofit_gaussian_2D(samp_dat)
+#' }
 
 autofit_gaussian_2D <- function(data,
                                 comparison_method = "rmse",
