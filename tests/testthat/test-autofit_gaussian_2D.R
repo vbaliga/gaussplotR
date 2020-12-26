@@ -24,9 +24,30 @@ gauss_auto_aic <-
 
 
 test_that("autofit_gaussian_2D() arrives at the correct answer", {
-  expect_equal(gauss_auto_rmse$fit_method, "elliptical_unconstr")
-  expect_equal(gauss_auto_rss$fit_method, "elliptical_unconstr")
-  expect_equal(gauss_auto_aic$fit_method, "elliptical_unconstr")
+  expect_equal(
+    gauss_auto_rmse$fit_method,
+    c(
+      method = "elliptical",
+      amplitude = "unconstrained",
+      orientation = "unconstrained"
+    )
+  )
+  expect_equal(
+    gauss_auto_rss$fit_method,
+    c(
+      method = "elliptical",
+      amplitude = "unconstrained",
+      orientation = "unconstrained"
+    )
+  )
+  expect_equal(
+    gauss_auto_aic$fit_method,
+    c(
+      method = "elliptical",
+      amplitude = "unconstrained",
+      orientation = "unconstrained"
+    )
+  )
   expect_equal(gauss_auto_rmse$model_error_stats[1, 2],
                2.083181, tolerance = 1e-3)
   expect_equal(gauss_auto_rss$model_error_stats[1, 1],

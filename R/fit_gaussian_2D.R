@@ -282,6 +282,7 @@ fit_gaussian_2D <- function(data,
 
   #### elliptical ####
   if (method == "elliptical") {
+
     ## overwrite with user-supplied parameters, if supplied ##
     if (!is.null(user_init)) {
       A_o_init    <-
@@ -302,6 +303,8 @@ fit_gaussian_2D <- function(data,
 
     #### _unconstrained orientation ####
     if (!is.numeric(constrain_orientation)) {
+
+      ## print initial params, if desired
       if (print_initial_params == TRUE) {
         params <-
           c(A_o_init,
@@ -323,8 +326,12 @@ fit_gaussian_2D <- function(data,
         print(params)
       }
 
+      ## deal with amplitude constraint choice
       if (constrain_amplitude == FALSE) {
+
         #### __unconstrained amplitude ####
+
+        ## fit the model
         fit_generic <-
           stats::nls(
             response ~ A_o + Amp * exp(
@@ -351,10 +358,39 @@ fit_gaussian_2D <- function(data,
                            ...)
           )
 
+        ## extract the coefficients
         res <- as.data.frame(t(stats::coef(fit_generic)))
 
+        ## create a data.frame of model error stats
+        m_e_s <-
+          data.frame(
+            rss = sum(stats::resid(fit_generic) ^ 2),
+            rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_generic) ^
+                                                 2)),
+            deviance = stats::deviance(fit_generic),
+            AIC = stats::AIC(fit_generic)
+          )
+
+        ## construct output and return
+        output <-
+          list(
+            coefs = res,
+            model = fit_generic,
+            model_error_stats = m_e_s,
+            fit_method =
+              c(method = "elliptical",
+                amplitude = "unconstrained",
+                orientation = "unconstrained"
+                )
+          )
+        attr(output, "gaussplotR") <- "gaussplotR_fit"
+        return(output)
+
       } else {
+
         #### __constrained amplitude ####
+
+        ## fit the model
         fit_generic <-
           stats::nls(
             response ~ A_o + Amp_init * exp(
@@ -379,40 +415,47 @@ fit_gaussian_2D <- function(data,
             control = list(maxiter = maxiter, ...)
           )
 
+        ## extract coefficients and paste together
         fit_coefs <- stats::coef(fit_generic)
-        coef_result <- c(
-          fit_coefs[1],
-          Amp = Amp_init,
-          fit_coefs[c(2:6)]
-        )
+        coef_result <-
+          c(fit_coefs[1],
+            Amp = Amp_init,
+            fit_coefs[c(2:6)])
         res <- as.data.frame(t(coef_result))
+
+        ## create a data.frame of model error stats
+        m_e_s <-
+          data.frame(
+            rss = sum(stats::resid(fit_generic) ^ 2),
+            rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_generic) ^
+                                                 2)),
+            deviance = stats::deviance(fit_generic),
+            AIC = stats::AIC(fit_generic)
+          )
+
+        ## construct output and return
+        output <-
+          list(
+            coefs = res,
+            model = fit_generic,
+            model_error_stats = m_e_s,
+            fit_method =
+              c(method = "elliptical",
+                amplitude = "constrained",
+                orientation = "unconstrained"
+              )
+          )
+        attr(output, "gaussplotR") <- "gaussplotR_fit"
+        return(output)
 
       }
 
-
-      ## create a data.frame of model error stats
-      m_e_s <-
-        data.frame(
-          rss = sum(stats::resid(fit_generic) ^ 2),
-          rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_generic) ^
-                                               2)),
-          deviance = stats::deviance(fit_generic),
-          AIC = stats::AIC(fit_generic)
-        )
-
-      output <-
-        list(
-          coefs = res,
-          model = fit_generic,
-          model_error_stats = m_e_s,
-          fit_method = "elliptical_unconstr"
-        )
-      attr(output, "gaussplotR") <- "gaussplotR_fit"
-      return(output)
     }
 
   #### _constrained orientation ####
   if (is.numeric(constrain_orientation)) {
+
+    ## print initial params, if desired
     if (print_initial_params == TRUE){
       params <-
         c(A_o_init,
@@ -433,8 +476,12 @@ fit_gaussian_2D <- function(data,
       message("Initial parameters:"); print(params)
     }
 
+    ## deal with amplitude constraint choice
     if (constrain_amplitude == FALSE) {
+
       #### __unconstrained amplitude ####
+
+      ## fit the model
       fit_generic_const <-
         stats::nls(
           response ~ A_o + Amp * exp(
@@ -461,6 +508,7 @@ fit_gaussian_2D <- function(data,
           )
         )
 
+      ## extract the coefficents and paste together
       fit_coefs <- stats::coef(fit_generic_const)
       coef_result <- c(
         fit_coefs[c(1,2)],
@@ -469,8 +517,36 @@ fit_gaussian_2D <- function(data,
       )
       res <- as.data.frame(t(coef_result))
 
+      ## create a data.frame of model error stats
+      m_e_s <-
+        data.frame(
+          rss = sum(stats::resid(fit_generic_const) ^ 2),
+          rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_generic_const) ^
+                                               2)),
+          deviance = stats::deviance(fit_generic_const),
+          AIC = stats::AIC(fit_generic_const)
+        )
+
+      ## construct the output and return
+      output <-
+        list(
+          coefs = res,
+          model = fit_generic_const,
+          model_error_stats = m_e_s,
+          fit_method =
+            c(method = "elliptical",
+              amplitude = "unconstrained",
+              orientation = "constrained"
+            )
+        )
+      attr(output, "gaussplotR") <- "gaussplotR_fit"
+      return(output)
+
     } else {
+
       #### __constrained amplitude ####
+
+      ## fit the model
       fit_generic_const <-
         stats::nls(
           response ~ A_o + Amp_init * exp(
@@ -496,6 +572,7 @@ fit_gaussian_2D <- function(data,
           )
         )
 
+      ## extract the coeffients and paste together
       fit_coefs <- stats::coef(fit_generic_const)
       coef_result <- c(
         fit_coefs[1],
@@ -504,34 +581,40 @@ fit_gaussian_2D <- function(data,
         fit_coefs[c(2:5)]
       )
       res <- as.data.frame(t(coef_result))
-    }
 
-    ## create a data.frame of model error stats
-    m_e_s <-
-      data.frame(
-        rss = sum(stats::resid(fit_generic_const) ^ 2),
-        rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_generic_const) ^
-                                             2)),
-        deviance = stats::deviance(fit_generic_const),
-        AIC = stats::AIC(fit_generic_const)
-      )
+      ## create a data.frame of model error stats
+      m_e_s <-
+        data.frame(
+          rss = sum(stats::resid(fit_generic_const) ^ 2),
+          rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_generic_const) ^
+                                               2)),
+          deviance = stats::deviance(fit_generic_const),
+          AIC = stats::AIC(fit_generic_const)
+        )
 
-    output <-
-      list(
-        coefs = res,
-        model = fit_generic_const,
-        model_error_stats = m_e_s,
-        fit_method = "elliptical_constr"
-      )
-    attr(output, "gaussplotR") <- "gaussplotR_fit"
-    return(output)
-    }
+      ## construct the output and return
+      output <-
+        list(
+          coefs = res,
+          model = fit_generic_const,
+          model_error_stats = m_e_s,
+          fit_method =
+            c(method = "elliptical",
+              amplitude = "constrained",
+              orientation = "constrained"
+            )
+        )
+      attr(output, "gaussplotR") <- "gaussplotR_fit"
+      return(output)
+      }
+
   }
-
+  }
 
 
   #### elliptical_log ####
   if (method == "elliptical_log"){
+
     ## overwrite with user-supplied parameters, if supplied ##
     if (!is.null(user_init)){
       Amp_init    <- user_init[1]
@@ -544,6 +627,8 @@ fit_gaussian_2D <- function(data,
 
     #### _unconstrained orientation ####
     if (constrain_orientation == "unconstrained") {
+
+      ## print initial params, if desired
       if (print_initial_params == TRUE){
         params <-
           c(Amp_init,
@@ -562,8 +647,12 @@ fit_gaussian_2D <- function(data,
         message("Initial parameters:"); print(params)
       }
 
+      ## deal with amplitude choice
       if (constrain_amplitude == FALSE) {
+
         #### __unconstrained amplitude ####
+
+        ## fit the model
         fit_el <-
           stats::nls(
             response ~  Amp * exp(-((X_values - X_peak) ^ 2) / (X_sig ^ 2)) *
@@ -585,11 +674,40 @@ fit_gaussian_2D <- function(data,
             )
           )
 
+        ## extract the coefficents
         fit_coefs <- stats::coef(fit_el)
         res <- as.data.frame(t(fit_coefs))
 
+        ## create a data.frame of model error stats
+        m_e_s <-
+          data.frame(
+            rss = sum(stats::resid(fit_el) ^ 2),
+            rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_el) ^
+                                                 2)),
+            deviance = stats::deviance(fit_el),
+            AIC = stats::AIC(fit_el)
+          )
+
+        ## construct the output and return
+        output <-
+          list(
+            coefs = res,
+            model = fit_el,
+            model_error_stats = m_e_s,
+            fit_method =
+              c(method = "elliptical_log",
+                amplitude = "unconstrained",
+                orientation = "unconstrained"
+              )
+          )
+        attr(output, "gaussplotR") <- "gaussplotR_fit"
+        return(output)
+
       } else {
+
         #### __constrained amplitude ####
+
+        ## fit the model
         fit_el <-
           stats::nls(
           response ~  Amp_init * exp(-((X_values - X_peak) ^ 2) / (X_sig ^ 2)) *
@@ -609,34 +727,45 @@ fit_gaussian_2D <- function(data,
                            ...
             )
           )
+
+        ## extract the coeffients and paste together
         fit_coefs <- stats::coef(fit_el)
         coef_result <-
           c(Amp = Amp_init, fit_coefs)
         res <- as.data.frame(t(coef_result))
+
+        ## create a data.frame of model error stats
+        m_e_s <-
+          data.frame(
+            rss = sum(stats::resid(fit_el) ^ 2),
+            rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_el) ^
+                                                 2)),
+            deviance = stats::deviance(fit_el),
+            AIC = stats::AIC(fit_el)
+          )
+
+        ## construct the output and return
+        output <-
+          list(
+            coefs = res,
+            model = fit_el,
+            model_error_stats = m_e_s,
+            fit_method =
+              c(method = "elliptical_log",
+                amplitude = "constrained",
+                orientation = "unconstrained"
+              )
+          )
+        attr(output, "gaussplotR") <- "gaussplotR_fit"
+        return(output)
+
       }
-
-      ## create a data.frame of model error stats
-      m_e_s <-
-        data.frame(
-          rss = sum(stats::resid(fit_el) ^ 2),
-          rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_el) ^ 2)),
-          deviance = stats::deviance(fit_el),
-          AIC = stats::AIC(fit_el)
-        )
-
-      output <-
-        list(
-          coefs = res,
-          model = fit_el,
-          model_error_stats = m_e_s,
-          fit_method = "elliptical_log_unconstr"
-        )
-      attr(output, "gaussplotR") <- "gaussplotR_fit"
-      return(output)
     }
 
     #### _constrained orientation ####
     if (is.numeric(constrain_orientation)) {
+
+      ## print initial params, if desired
       if (print_initial_params == TRUE){
         params <-
           c(Amp_init,
@@ -655,8 +784,12 @@ fit_gaussian_2D <- function(data,
         message("Initial parameters:"); print(params)
       }
 
+      ## deal with amplitude choice
       if (constrain_amplitude == FALSE) {
+
         #### __unconstrained amplitude ####
+
+        ## fit the model
         fit_el <-
           stats::nls(
         response ~  Amp * exp(-((X_values - X_peak) ^ 2) / (X_sig ^ 2)) *
@@ -677,13 +810,44 @@ fit_gaussian_2D <- function(data,
             )
           )
 
+        ## extract coefficients and paste together
         fit_coefs <- stats::coef(fit_el)
         coef_result <-
-          c(Q = constrain_orientation, fit_coefs)
+          c(fit_coefs[1],
+            Q = constrain_orientation,
+            fit_coefs[2:5])
         res <- as.data.frame(t(coef_result))
 
+        ## create a data.frame of model error stats
+        m_e_s <-
+          data.frame(
+            rss = sum(stats::resid(fit_el) ^ 2),
+            rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_el) ^
+                                                 2)),
+            deviance = stats::deviance(fit_el),
+            AIC = stats::AIC(fit_el)
+          )
+
+        ## construct the output and return
+        output <-
+          list(
+            coefs = res,
+            model = fit_el,
+            model_error_stats = m_e_s,
+            fit_method =
+              c(method = "elliptical_log",
+                amplitude = "unconstrained",
+                orientation = "constrained"
+              )
+          )
+        attr(output, "gaussplotR") <- "gaussplotR_fit"
+        return(output)
+
       } else {
+
         #### __constrained amplitude ####
+
+        ## fit the model
         fit_el <-
           stats::nls(
         response ~  Amp_init * exp(-((X_values - X_peak) ^ 2) / (X_sig ^ 2)) *
@@ -703,31 +867,39 @@ fit_gaussian_2D <- function(data,
             )
           )
 
+        ## extract coefficients and paste together
         fit_coefs <- stats::coef(fit_el)
         coef_result <-
           c(Amp = Amp_init, Q = constrain_orientation, fit_coefs)
         res <- as.data.frame(t(coef_result))
 
+        ## create a data.frame of model error stats
+        m_e_s <-
+          data.frame(
+            rss = sum(stats::resid(fit_el) ^ 2),
+            rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_el) ^
+                                                 2)),
+            deviance = stats::deviance(fit_el),
+            AIC = stats::AIC(fit_el)
+          )
+
+        # construct the output and return
+        output <-
+          list(
+            coefs = res,
+            model = fit_el,
+            model_error_stats = m_e_s,
+            fit_method =
+              c(method = "elliptical_log",
+                amplitude = "constrained",
+                orientation = "constrained"
+              )
+          )
+        attr(output, "gaussplotR") <- "gaussplotR_fit"
+        return(output)
+
       }
 
-      ## create a data.frame of model error stats
-      m_e_s <-
-        data.frame(
-          rss = sum(stats::resid(fit_el) ^ 2),
-          rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_el) ^ 2)),
-          deviance = stats::deviance(fit_el),
-          AIC = stats::AIC(fit_el)
-        )
-
-      output <-
-        list(
-          coefs = res,
-          model = fit_el,
-          model_error_stats = m_e_s,
-          fit_method = "elliptical_log_constr"
-        )
-      attr(output, "gaussplotR") <- "gaussplotR_fit"
-      return(output)
     }
   }
 
@@ -735,6 +907,7 @@ fit_gaussian_2D <- function(data,
 
   #### circular ####
   if (method == "circular") {
+
     ## overwrite with user-supplied parameters, if supplied ##
     if (!is.null(user_init)) {
       Amp_init    <- user_init[1]
@@ -744,6 +917,7 @@ fit_gaussian_2D <- function(data,
       Y_sig_init  <- user_init[5]
     }
 
+    ## print initial params, if desired
     if (print_initial_params == TRUE) {
       params <-
         c(Amp_init,
@@ -760,8 +934,12 @@ fit_gaussian_2D <- function(data,
       message("Initial parameters:"); print(params)
     }
 
+    ## deal with amplitude choice
     if (constrain_amplitude == FALSE) {
+
       #### __unconstrained amplitude ####
+
+      ## fit the model
       fit_circ <-
         stats::nls(
           response ~ Amp * exp(-((((X_values - X_peak) ^ 2
@@ -783,10 +961,39 @@ fit_gaussian_2D <- function(data,
                  ...)
         )
 
+      ## extract the coefficients
       res <- as.data.frame(t(stats::coef(fit_circ)))
 
+      ## create a data.frame of model error stats
+      m_e_s <-
+        data.frame(
+          rss = sum(stats::resid(fit_circ) ^ 2),
+          rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_circ) ^
+                                               2)),
+          deviance = stats::deviance(fit_circ),
+          AIC = stats::AIC(fit_circ)
+        )
+
+      ## construct the output and return
+      output <-
+        list(
+          coefs = res,
+          model = fit_circ,
+          model_error_stats = m_e_s,
+          fit_method =
+            c(method = "circular",
+              amplitude = "unconstrained",
+              orientation = NA
+            )
+        )
+      attr(output, "gaussplotR") <- "gaussplotR_fit"
+      return(output)
+
     } else {
+
       #### __constrained amplitude ####
+
+      ## fit the model
       fit_circ <-
         stats::nls(
           response ~ Amp_init * exp(-((((X_values - X_peak) ^ 2
@@ -806,31 +1013,40 @@ fit_gaussian_2D <- function(data,
             list(maxiter = maxiter,
                  ...)
         )
+
+      ## extract the coefficients and paste together
       fit_coefs <- stats::coef(fit_circ)
       coef_result <-
         c(Amp = Amp_init, fit_coefs)
       res <- as.data.frame(t(coef_result))
 
+      ## create a data.frame of model error stats
+      m_e_s <-
+        data.frame(
+          rss = sum(stats::resid(fit_circ) ^ 2),
+          rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_circ) ^
+                                               2)),
+          deviance = stats::deviance(fit_circ),
+          AIC = stats::AIC(fit_circ)
+        )
+
+      ## construct the output and return
+      output <-
+        list(
+          coefs = res,
+          model = fit_circ,
+          model_error_stats = m_e_s,
+          fit_method =
+            c(method = "circular",
+              amplitude = "constrained",
+              orientation = NA
+            )
+        )
+      attr(output, "gaussplotR") <- "gaussplotR_fit"
+      return(output)
+
     }
 
-    ## create a data.frame of model error stats
-    m_e_s <-
-      data.frame(
-        rss = sum(stats::resid(fit_circ) ^ 2),
-        rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_circ) ^ 2)),
-        deviance = stats::deviance(fit_circ),
-        AIC = stats::AIC(fit_circ)
-      )
-
-    output <-
-      list(
-        coefs = res,
-        model = fit_circ,
-        model_error_stats = m_e_s,
-        fit_method = "circular"
-      )
-    attr(output, "gaussplotR") <- "gaussplotR_fit"
-    return(output)
   }
 
 }

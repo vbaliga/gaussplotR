@@ -98,7 +98,7 @@ test_that("column names are correct", {
 test_that("predicted_values are what we expect", {
   expect_equal(gauss_data_ue$predicted_values[1],  4.946876, tolerance = 1e-5)
   expect_equal(gauss_data_ce$predicted_values[1],  1.509221, tolerance = 1e-5)
-  expect_equal(gauss_data_uel$predicted_values[1], 6.672255, tolerance = 1e-5)
-  expect_equal(gauss_data_cel$predicted_values[1], 0.643011, tolerance = 1e-5)
+  expect_equal(gauss_data_uel$predicted_values[1], 5.033768, tolerance = 1e-5)
+  expect_equal(gauss_data_cel$predicted_values[1], 0.9435862, tolerance = 1e-5)
   expect_equal(gauss_data_cir$predicted_values[1], 0.943607, tolerance = 1e-5)
 })

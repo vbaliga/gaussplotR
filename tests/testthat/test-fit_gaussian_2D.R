@@ -55,11 +55,46 @@ test_that("each output has four components", {
 })
 
 test_that("fit_methods are correctly stated", {
-  expect_equal(gauss_fit_ue$fit_method, "elliptical_unconstr")
-  expect_equal(gauss_fit_ce$fit_method, "elliptical_constr")
-  expect_equal(gauss_fit_uel$fit_method, "elliptical_log_unconstr")
-  expect_equal(gauss_fit_cel$fit_method, "elliptical_log_constr")
-  expect_equal(gauss_fit_cir$fit_method, "circular")
+  expect_equal(
+    gauss_fit_ue$fit_method,
+    c(
+      method = "elliptical",
+      amplitude = "constrained",
+      orientation = "unconstrained"
+    )
+  )
+  expect_equal(
+    gauss_fit_ce$fit_method,
+    c(
+      method = "elliptical",
+      amplitude = "constrained",
+      orientation = "constrained"
+    )
+  )
+  expect_equal(
+    gauss_fit_uel$fit_method,
+    c(
+      method = "elliptical_log",
+      amplitude = "constrained",
+      orientation = "unconstrained"
+    )
+  )
+  expect_equal(
+    gauss_fit_cel$fit_method,
+    c(
+      method = "elliptical_log",
+      amplitude = "constrained",
+      orientation = "constrained"
+    )
+  )
+  expect_equal(
+    gauss_fit_cir$fit_method,
+    c(
+      method = "circular",
+      amplitude = "constrained",
+      orientation = NA
+    )
+  )
 })
 
 test_that("Amplitudes are what we expect", {
@@ -117,11 +152,46 @@ test_that("each output has four components", {
 })
 
 test_that("fit_methods are correctly stated", {
-  expect_equal(gauss_fit_ue_ua$fit_method, "elliptical_unconstr")
-  expect_equal(gauss_fit_ce_ua$fit_method, "elliptical_constr")
-  expect_equal(gauss_fit_uel_ua$fit_method, "elliptical_log_unconstr")
-  expect_equal(gauss_fit_cel_ua$fit_method, "elliptical_log_constr")
-  expect_equal(gauss_fit_cir_ua$fit_method, "circular")
+  expect_equal(
+    gauss_fit_ue_ua$fit_method,
+    c(
+      method = "elliptical",
+      amplitude = "unconstrained",
+      orientation = "unconstrained"
+    )
+  )
+  expect_equal(
+    gauss_fit_ce_ua$fit_method,
+    c(
+      method = "elliptical",
+      amplitude = "unconstrained",
+      orientation = "constrained"
+    )
+  )
+  expect_equal(
+    gauss_fit_uel_ua$fit_method,
+    c(
+      method = "elliptical_log",
+      amplitude = "unconstrained",
+      orientation = "unconstrained"
+    )
+  )
+  expect_equal(
+    gauss_fit_cel_ua$fit_method,
+    c(
+      method = "elliptical_log",
+      amplitude = "unconstrained",
+      orientation = "constrained"
+    )
+  )
+  expect_equal(
+    gauss_fit_cir_ua$fit_method,
+    c(
+      method = "circular",
+      amplitude = "unconstrained",
+      orientation = NA
+    )
+  )
 })
 
 test_that("Amplitudes are what we expect", {
@@ -183,3 +253,4 @@ test_that("User-init RSSes are what we expect", {
                899.613,
                tolerance = 1e-5)
 })
+

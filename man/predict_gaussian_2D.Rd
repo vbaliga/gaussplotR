@@ -7,7 +7,8 @@
 predict_gaussian_2D(fit_object, X_values, Y_values, ...)
 }
 \arguments{
-\item{fit_object}{The output of \code{gaussplotR::fit_gaussian_2D()}.}
+\item{fit_object}{Either the output of \code{gaussplotR::fit_gaussian_2D()}
+or a list that contains coefficients and fit methods (see Details).}
 
 \item{X_values}{vector of numeric values for the x-axis}
 
@@ -23,13 +24,29 @@ along with the predicted values of the 2D gaussian
 \description{
 Predict values from a fitted 2D gaussian
 }
-\section{Warning}{
-
+\details{
 This function assumes Gaussian parameters have been fitted beforehand. No
-fitting of parameters is done within this function; they all must be
+fitting of parameters is done within this function; these can be
 supplied via the object created by \code{gaussplotR::fit_gaussian_2D()}.
-}
 
+If \code{fit_object} is not an object created by
+\code{gaussplotR::fit_gaussian_2D()}, \code{predict_gaussian_2D()} attempts
+to parse \code{fit_object} as a list of two items. The coeffients of the fit
+must be supplied as a one-row, named data.frame within
+\code{fit_object$coefs}, and details of the methods for fitting the Gaussian
+must be contained as a character vector in \code{fit_object$fit_method}. This
+character vector in \code{fit_object$fit_method} must be a named vector that
+provides information about the method, amplitude constraint choice, and
+orientation constraint choice, using the names \code{method},
+\code{amplitude}, and \code{orientation}. \code{method} must be one of:
+\code{"elliptical"}, \code{"elliptical_log"}, or \code{"circular"}.
+\code{amplitude} and \code{orientation} must each be either
+\code{"unconstrained"} or \code{"constrained"}. For example, \code{c(method =
+"elliptical", amplitude = "unconstrained", orientation = "unconstrained")}.
+One exception to this is when \code{method = "circular"}, in which case
+\code{orientation} must be \code{NA}, e.g.: \code{c(method = "circular",
+amplitude = "unconstrained", orientation = NA)}.
+}
 \examples{
 if (interactive()) {
   ## Load the sample data set
