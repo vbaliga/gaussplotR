@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gaussplotR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1.9000</span>
       </span>
     </div>
 
@@ -89,7 +89,7 @@
       <h1 data-toc-skip>Fitting 2D Gaussians to Data</h1>
                         <h4 class="author">Vikram B. Baliga</h4>
             
-            <h4 class="date">2020-12-02</h4>
+            <h4 class="date">2020-12-26</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/vbaliga/gaussplotR/blob/master/vignettes/fit_gaussian_2D.Rmd"><code>vignettes/fit_gaussian_2D.Rmd</code></a></small>
       <div class="hidden name"><code>fit_gaussian_2D.Rmd</code></div>
@@ -129,9 +129,9 @@
 <span class="op">)</span></pre></div>
 <p><img src="fit_gaussian_2D_files/figure-html/raw_data_contour-1.png" width="700"></p>
 </div>
-<div id="the-method-and-orientation_strategy-arguments" class="section level2">
+<div id="the-method-and-constrain_orientation-arguments" class="section level2">
 <h2 class="hasAnchor">
-<a href="#the-method-and-orientation_strategy-arguments" class="anchor"></a>The <code>method</code> and <code>orientation_strategy</code> arguments</h2>
+<a href="#the-method-and-constrain_orientation-arguments" class="anchor"></a>The <code>method</code> and <code>constrain_orientation</code> arguments</h2>
 <div id="method" class="section level3">
 <h3 class="hasAnchor">
 <a href="#method" class="anchor"></a><code>method</code>
@@ -140,14 +140,14 @@
 <p>The most generic method (and the default) is <code>method = "elliptical"</code>. This allows the fitted 2D Gaussian to take an ellipsoid shape. If you would like the best-fitting 2D Gaussian, this is most likely your best bet.</p>
 <p>A slightly-altered method to fit an ellipsoid Gaussian is available in <code>method = "elliptical_log"</code>. This method follows Priebe et al. 2003<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> and is geared towards use with log2-transformed data.</p>
 <p>A third option is <code>method = "circular"</code>. This produces a very simple 2D Gaussian that is constrained to have to have a roughly circular shape (i.e. spread in X- and Y- are roughly equal).</p>
-<p>An additional argument, <code>orientation_strategy</code> gives additional control over the orientation of the fitted Gaussian. By default, the <code>orientation_strategy</code> is <code>"unconstrained"</code>, meaning that the best-fit orientation is returned.</p>
+<p>An additional argument, <code>constrain_orientation</code> gives additional control over the orientation of the fitted Gaussian. By default, the <code>constrain_orientation</code> is <code>"unconstrained"</code>, meaning that the best-fit orientation is returned.</p>
 </div>
-<div id="orientation_strategy" class="section level3">
+<div id="constrain_orientation" class="section level3">
 <h3 class="hasAnchor">
-<a href="#orientation_strategy" class="anchor"></a><code>orientation_strategy</code>
+<a href="#constrain_orientation" class="anchor"></a><code>constrain_orientation</code>
 </h3>
-<p>Setting orientation_strategy to a numeric (e.g. <code>orientation_strategy = pi/2</code>) will force the orientation of the Gaussian to the specified value, but this is only available when using <code>method = "elliptical"</code> or <code>method = "elliptical_log"</code></p>
-<p>Note that supplying a numeric to <code>orientation_strategy</code> is handled differently by <code>method = "elliptical"</code> vs <code>method = "elliptical_log"</code>. With <code>method = "elliptical"</code>, a <code>theta</code> parameter dictates the rotation, in radians, from the x-axis in the clockwise direction. Thus, using <code>method = "elliptical", orientation_strategy = pi/2</code> will return parameters for an elliptical 2D Gaussian that is constrained to a 90-degree (pi/2) orientation. In contrast, the <code>method = "elliptical_log"</code> procedure uses a <code>Q</code> parameter to determine the orientation of the 2D Gaussian. Setting <code>method = "elliptical_log", orientation_strategy = 0</code> will result in a diagonally-oriented Gaussian, whereas setting <code>orientation_strategy = -1</code> will result in horizontal orientation. Again, see Priebe et al. 2003 for more details.</p>
+<p>Setting constrain_orientation to a numeric (e.g. <code>constrain_orientation = pi/2</code>) will force the orientation of the Gaussian to the specified value, but this is only available when using <code>method = "elliptical"</code> or <code>method = "elliptical_log"</code></p>
+<p>Note that supplying a numeric to <code>constrain_orientation</code> is handled differently by <code>method = "elliptical"</code> vs <code>method = "elliptical_log"</code>. With <code>method = "elliptical"</code>, a <code>theta</code> parameter dictates the rotation, in radians, from the x-axis in the clockwise direction. Thus, using <code>method = "elliptical", constrain_orientation = pi/2</code> will return parameters for an elliptical 2D Gaussian that is constrained to a 90-degree (pi/2) orientation. In contrast, the <code>method = "elliptical_log"</code> procedure uses a <code>Q</code> parameter to determine the orientation of the 2D Gaussian. Setting <code>method = "elliptical_log", constrain_orientation = 0</code> will result in a diagonally-oriented Gaussian, whereas setting <code>constrain_orientation = -1</code> will result in horizontal orientation. Again, see Priebe et al. 2003 for more details.</p>
 </div>
 </div>
 <div id="example-1-unconstrained-elliptical" class="section level2">
@@ -172,7 +172,7 @@
 <span class="co">#&gt;  residual sum-of-squares: 156.2</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Number of iterations to convergence: 13 </span>
-<span class="co">#&gt; Achieved convergence tolerance: 3.935e-06</span>
+<span class="co">#&gt; Achieved convergence tolerance: 3.931e-06</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $model_error_stats</span>
 <span class="co">#&gt;        rss     rmse deviance      AIC</span>
@@ -180,10 +180,16 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $fit_method</span>
 <span class="co">#&gt; [1] "elliptical_unconstr"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; attr(,"gaussplotR")</span>
+<span class="co">#&gt; [1] "gaussplotR_fit"</span>
 <span class="fu"><a href="https://rdrr.io/r/base/attributes.html">attributes</a></span><span class="op">(</span><span class="va">gauss_fit_ue</span><span class="op">)</span>
 <span class="co">#&gt; $names</span>
 <span class="co">#&gt; [1] "coefs"             "model"             "model_error_stats"</span>
-<span class="co">#&gt; [4] "fit_method"</span></pre></div>
+<span class="co">#&gt; [4] "fit_method"       </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $gaussplotR</span>
+<span class="co">#&gt; [1] "gaussplotR_fit"</span></pre></div>
 <p>Fitting an unconstrained ellipse returns an object (here: <code>gauss_fit_ue</code>) that is a <code>data.frame</code> with one column per fitted parameter. The fitted parameters are: <code>A_o</code> (a constant term), <code>Amp</code> (amplitude), <code>theta</code> (rotation, in radians, from the x-axis in the clockwise direction), <code>X_peak</code> (x-axis peak location), <code>Y_peak</code> (y-axis peak location), <code>a</code> (width of Gaussian along x-axis), and <code>b</code> (width of Gaussian along y-axis).</p>
 <p>Note that the attribute <code>fit_method</code> indicates that an <code>"elliptical_unconstr"</code> approach was used. This attribute is used by <code><a href="../reference/predict_gaussian_2D.html">predict_gaussian_2D()</a></code> to automatically determine what method (and therefore, identity of parameters) was used and then sample points from that fitted Gaussian.</p>
 <p>We can elect to sample more points from the fitted Gaussian by feeding in a grid of x- and y- values on which to predict (via <code><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid()</a></code>.</p>
@@ -209,12 +215,12 @@
 <div id="example-2-constrained-elliptical" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-2-constrained-elliptical" class="anchor"></a>Example 2: Constrained elliptical</h2>
-<p>As noted above, the <code>orientation_strategy</code> can be used to dictate the orientation. Please note that this will very likely result in a poorer fit, but may be useful for certain types of analyses.</p>
+<p>As noted above, the <code>constrain_orientation</code> can be used to dictate the orientation. Please note that this will very likely result in a poorer fit, but may be useful for certain types of analyses.</p>
 <p>Here we’ll force the Gaussian to be horizontally-oriented.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="va">gauss_fit_ce</span> <span class="op">&lt;-</span>
     <span class="fu"><a href="../reference/fit_gaussian_2D.html">fit_gaussian_2D</a></span><span class="op">(</span><span class="va">samp_dat</span>, 
-                    orientation_strategy <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
+                    constrain_orientation <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
 
 <span class="va">gauss_fit_ce</span>
 <span class="co">#&gt; $coefs</span>
@@ -223,21 +229,24 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $model</span>
 <span class="co">#&gt; Nonlinear regression model</span>
-<span class="co">#&gt;   model: response ~ A_o + Amp * exp(-((((X_values - X_peak) * cos(orientation_strategy) -     (Y_values - Y_peak) * sin(orientation_strategy))/a)^2 + (((X_values -     X_peak) * sin(orientation_strategy) - (Y_values - Y_peak) *     cos(orientation_strategy))/b)^2)/2)</span>
+<span class="co">#&gt;   model: response ~ A_o + Amp * exp(-((((X_values - X_peak) * cos(constrain_orientation) -     (Y_values - Y_peak) * sin(constrain_orientation))/a)^2 +     (((X_values - X_peak) * sin(constrain_orientation) - (Y_values -         Y_peak) * cos(constrain_orientation))/b)^2)/2)</span>
 <span class="co">#&gt;    data: data</span>
 <span class="co">#&gt;    A_o    Amp X_peak Y_peak      a      b </span>
 <span class="co">#&gt;  1.260 24.769 -2.526  1.950  1.199  1.327 </span>
 <span class="co">#&gt;  residual sum-of-squares: 885.8</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Number of iterations to convergence: 157 </span>
-<span class="co">#&gt; Achieved convergence tolerance: 9.808e-06</span>
+<span class="co">#&gt; Achieved convergence tolerance: 9.811e-06</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $model_error_stats</span>
 <span class="co">#&gt;       rss     rmse deviance      AIC</span>
 <span class="co">#&gt; 1 885.831 4.960486  885.831 231.4718</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $fit_method</span>
-<span class="co">#&gt; [1] "elliptical_constr"</span></pre></div>
+<span class="co">#&gt; [1] "elliptical_constr"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; attr(,"gaussplotR")</span>
+<span class="co">#&gt; [1] "gaussplotR_fit"</span></pre></div>
 <p>We’ll use the same grid of x- and y- points as above</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="co">## Predict the values using predict_gaussian_2D</span>
@@ -264,26 +273,29 @@
 
 <span class="va">gauss_fit_uel</span>
 <span class="co">#&gt; $coefs</span>
-<span class="co">#&gt;        Amp          Q    X_peak   Y_peak    X_sig   Y_sig</span>
-<span class="co">#&gt; 1 25.72529 -0.1383128 -2.600046 2.016566 2.385997 1.63209</span>
+<span class="co">#&gt;        Amp          Q    X_peak   Y_peak    X_sig    Y_sig</span>
+<span class="co">#&gt; 1 32.23457 -0.1942029 -2.634429 2.007712 2.108038 1.424922</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $model</span>
 <span class="co">#&gt; Nonlinear regression model</span>
-<span class="co">#&gt;   model: response ~ Amp_init * exp(-((X_values - X_peak)^2)/(X_sig^2)) *     exp(-(Y_values - ((Q + 1) * (X_values - X_peak) + Y_peak))^2/(Y_sig^2))</span>
+<span class="co">#&gt;   model: response ~ Amp * exp(-((X_values - X_peak)^2)/(X_sig^2)) * exp(-(Y_values -     ((Q + 1) * (X_values - X_peak) + Y_peak))^2/(Y_sig^2))</span>
 <span class="co">#&gt;    data: data</span>
-<span class="co">#&gt;       Q  X_peak  Y_peak   X_sig   Y_sig </span>
-<span class="co">#&gt; -0.1383 -2.6000  2.0166  2.3860  1.6321 </span>
-<span class="co">#&gt;  residual sum-of-squares: 214.4</span>
+<span class="co">#&gt;     Amp       Q  X_peak  Y_peak   X_sig   Y_sig </span>
+<span class="co">#&gt; 32.2346 -0.1942 -2.6344  2.0077  2.1080  1.4249 </span>
+<span class="co">#&gt;  residual sum-of-squares: 169.9</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Number of iterations to convergence: 13 </span>
-<span class="co">#&gt; Achieved convergence tolerance: 9.296e-06</span>
+<span class="co">#&gt; Achieved convergence tolerance: 5.192e-06</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $model_error_stats</span>
 <span class="co">#&gt;        rss     rmse deviance      AIC</span>
-<span class="co">#&gt; 1 214.3652 2.440203 214.3652 178.3934</span>
+<span class="co">#&gt; 1 169.8812 2.172308 169.8812 172.0205</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $fit_method</span>
 <span class="co">#&gt; [1] "elliptical_log_unconstr"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; attr(,"gaussplotR")</span>
+<span class="co">#&gt; [1] "gaussplotR_fit"</span>
 
 <span class="co">## Predict the values using predict_gaussian_2D</span>
 <span class="va">gauss_data_uel</span> <span class="op">&lt;-</span>
@@ -300,37 +312,40 @@
 <div id="example-4-constrained-elliptical_log" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-4-constrained-elliptical_log" class="anchor"></a>Example 4: Constrained elliptical_log</h2>
-<p>Similar to the above, but here the <code>orientation_strategy</code> can be used to dictate the value of the <code>Q</code> parameter used in Priebe et al. 2003. Setting <code>Q</code> to 0 will result in a diagonally-oriented Gaussian, whereas setting <code>Q</code> to -1 will result in horizontal orientation. <code>Q</code> is a continuous parameter, so values in between may be used as well, such as in this example:</p>
+<p>Similar to the above, but here the <code>constrain_orientation</code> can be used to dictate the value of the <code>Q</code> parameter used in Priebe et al. 2003. Setting <code>Q</code> to 0 will result in a diagonally-oriented Gaussian, whereas setting <code>Q</code> to -1 will result in horizontal orientation. <code>Q</code> is a continuous parameter, so values in between may be used as well, such as in this example:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="va">gauss_fit_cel</span> <span class="op">&lt;-</span>
     <span class="fu"><a href="../reference/fit_gaussian_2D.html">fit_gaussian_2D</a></span><span class="op">(</span>
       <span class="va">samp_dat</span>,
       method <span class="op">=</span> <span class="st">"elliptical_log"</span>,
-      orientation_strategy <span class="op">=</span> <span class="op">-</span><span class="fl">0.66</span>
+      constrain_orientation <span class="op">=</span> <span class="op">-</span><span class="fl">0.66</span>
     <span class="op">)</span>
 
 <span class="va">gauss_fit_cel</span>
 <span class="co">#&gt; $coefs</span>
-<span class="co">#&gt;        Amp     Q    X_peak   Y_peak    X_sig    Y_sig</span>
-<span class="co">#&gt; 1 25.72529 -0.66 -2.552716 2.034853 2.201506 1.678929</span>
+<span class="co">#&gt;       Q      Amp    X_peak   Y_peak    X_sig    Y_sig</span>
+<span class="co">#&gt; 1 -0.66 40.37259 -2.603592 2.055755 1.853229 1.245801</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $model</span>
 <span class="co">#&gt; Nonlinear regression model</span>
-<span class="co">#&gt;   model: response ~ Amp_init * exp(-((X_values - X_peak)^2)/(X_sig^2)) *     exp(-(Y_values - ((orientation_strategy + 1) * (X_values -         X_peak) + Y_peak))^2/(Y_sig^2))</span>
+<span class="co">#&gt;   model: response ~ Amp * exp(-((X_values - X_peak)^2)/(X_sig^2)) * exp(-(Y_values -     ((constrain_orientation + 1) * (X_values - X_peak) + Y_peak))^2/(Y_sig^2))</span>
 <span class="co">#&gt;    data: data</span>
-<span class="co">#&gt; X_peak Y_peak  X_sig  Y_sig </span>
-<span class="co">#&gt; -2.553  2.035  2.202  1.679 </span>
-<span class="co">#&gt;  residual sum-of-squares: 494.9</span>
+<span class="co">#&gt;    Amp X_peak Y_peak  X_sig  Y_sig </span>
+<span class="co">#&gt; 40.373 -2.604  2.056  1.853  1.246 </span>
+<span class="co">#&gt;  residual sum-of-squares: 406.1</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Number of iterations to convergence: 24 </span>
-<span class="co">#&gt; Achieved convergence tolerance: 9.608e-06</span>
+<span class="co">#&gt; Number of iterations to convergence: 14 </span>
+<span class="co">#&gt; Achieved convergence tolerance: 4.713e-06</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $model_error_stats</span>
 <span class="co">#&gt;        rss     rmse deviance      AIC</span>
-<span class="co">#&gt; 1 494.9221 3.707808 494.9221 206.5153</span>
+<span class="co">#&gt; 1 406.1011 3.358658 406.1011 201.3946</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $fit_method</span>
 <span class="co">#&gt; [1] "elliptical_log_constr"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; attr(,"gaussplotR")</span>
+<span class="co">#&gt; [1] "gaussplotR_fit"</span>
 
 <span class="co">## Predict the values using predict_gaussian_2D</span>
 <span class="va">gauss_data_cel</span> <span class="op">&lt;-</span>
@@ -343,7 +358,7 @@
 <span class="co">## Plot via ggplot2 and metR</span>
 <span class="fu"><a href="../reference/ggplot_gaussian_2D.html">ggplot_gaussian_2D</a></span><span class="op">(</span><span class="va">gauss_data_cel</span><span class="op">)</span></pre></div>
 <p><img src="fit_gaussian_2D_files/figure-html/cel-1.png" width="700"></p>
-<p>Again, setting the value of <code>Q</code> via <code>orientation_strategy</code> will very likely result in poorer-fitting Gaussians. See the analyses in Priebe et al. 2003 to get a sense of useful applications of this approach. Forcing Q = -0.66 in the above example isn’t all that useful, but goes to show that it can be done.</p>
+<p>Again, setting the value of <code>Q</code> via <code>constrain_orientation</code> will very likely result in poorer-fitting Gaussians. See the analyses in Priebe et al. 2003 to get a sense of useful applications of this approach. Forcing Q = -0.66 in the above example isn’t all that useful, but goes to show that it can be done.</p>
 </div>
 <div id="example-5-circular" class="section level2">
 <h2 class="hasAnchor">
@@ -377,6 +392,9 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $fit_method</span>
 <span class="co">#&gt; [1] "circular"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; attr(,"gaussplotR")</span>
+<span class="co">#&gt; [1] "gaussplotR_fit"</span>
 
 <span class="co">## Predict the values using predict_gaussian_2D</span>
 <span class="va">gauss_data_cir</span> <span class="op">&lt;-</span>

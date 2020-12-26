@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gaussplotR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1.9000</span>
       </span>
     </div>
 
@@ -173,11 +173,14 @@ orientation strategy was used by this function.</p></li>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function runs <code><a href='fit_gaussian_2D.html'>fit_gaussian_2D()</a></code> three times: once for
+    <p>This function runs <code><a href='fit_gaussian_2D.html'>fit_gaussian_2D()</a></code> six times: twice for
 each of the "main" types of models: 1) elliptical, unconstrained; 2)
-elliptical, log; 3) circular. The function <code><a href='compare_gaussian_fits.html'>compare_gaussian_fits()</a></code> is
-then used to determine which of these three models is the best-fitting, using
-the <code>comparison_method</code> argument to make the decision.</p>
+elliptical, log; 3) circular. For each of these main types, the parameter
+<code>constrain_amplitude</code> is first set to <code>FALSE</code> and a separate
+model in which it is set to <code>TRUE</code> is also run. The function
+<code><a href='compare_gaussian_fits.html'>compare_gaussian_fits()</a></code> is then used to determine which of these six
+models is the best-fitting, using the <code>comparison_method</code> argument to
+make the decision.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Vikram B. Baliga</p>

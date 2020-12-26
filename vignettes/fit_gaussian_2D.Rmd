@@ -61,7 +61,7 @@ lattice::levelplot(
 ```
 
 
-## The `method` and `orientation_strategy` arguments
+## The `method` and `constrain_orientation` arguments
 
 ### `method`
 
@@ -83,25 +83,25 @@ A third option is `method = "circular"`. This produces a very simple 2D Gaussian
 that is constrained to have to have a roughly circular shape (i.e. spread in X-
 and Y- are roughly equal).
 
-An additional argument, `orientation_strategy` gives additional control over the
-orientation of the fitted Gaussian.  By default, the `orientation_strategy` is
+An additional argument, `constrain_orientation` gives additional control over the
+orientation of the fitted Gaussian.  By default, the `constrain_orientation` is
 `"unconstrained"`, meaning that the best-fit orientation is returned. 
 
-### `orientation_strategy`
-Setting orientation_strategy to a numeric (e.g. `orientation_strategy = pi/2`)
+### `constrain_orientation`
+Setting constrain_orientation to a numeric (e.g. `constrain_orientation = pi/2`)
 will force the orientation of the Gaussian to the specified value, but this is
 only available when using `method = "elliptical"` or `method = "elliptical_log"`
 
-Note that supplying a numeric to `orientation_strategy ` is handled differently 
+Note that supplying a numeric to `constrain_orientation ` is handled differently 
 by `method = "elliptical"` vs `method = "elliptical_log"`. With 
 `method = "elliptical"`, a `theta` parameter dictates the rotation, in 
 radians, from the x-axis in the clockwise direction. Thus, using 
-`method = "elliptical", orientation_strategy = pi/2` will return parameters for
+`method = "elliptical", constrain_orientation = pi/2` will return parameters for
 an elliptical 2D Gaussian that is constrained to a 90-degree (pi/2) orientation. 
 In contrast, the `method = "elliptical_log"` procedure uses a `Q` parameter to 
 determine the orientation of the 2D Gaussian. 
-Setting `method = "elliptical_log", orientation_strategy = 0` will result 
-in a diagonally-oriented Gaussian, whereas setting `orientation_strategy = -1`
+Setting `method = "elliptical_log", constrain_orientation = 0` will result 
+in a diagonally-oriented Gaussian, whereas setting `constrain_orientation = -1`
 will result in horizontal orientation. Again, see Priebe et al. 2003 for more 
 details.
 
@@ -156,7 +156,7 @@ ggplot_gaussian_2D(gauss_data_ue)
 
 ## Example 2: Constrained elliptical
 
-As noted above, the `orientation_strategy` can be used to dictate the 
+As noted above, the `constrain_orientation` can be used to dictate the 
 orientation. Please note that this will very likely result in a poorer fit, but
 may be useful for certain types of analyses.
 
@@ -165,7 +165,7 @@ Here we'll force the Gaussian to be horizontally-oriented.
 ```{r c_e}
 gauss_fit_ce <-
     fit_gaussian_2D(samp_dat, 
-                    orientation_strategy = 0)
+                    constrain_orientation = 0)
 
 gauss_fit_ce
 ```
@@ -215,7 +215,7 @@ ggplot_gaussian_2D(gauss_data_uel)
 
 ## Example 4: Constrained elliptical_log
 
-Similar to the above, but here the `orientation_strategy` can be used to dictate
+Similar to the above, but here the `constrain_orientation` can be used to dictate
 the value of the `Q` parameter used in Priebe et al. 2003. Setting `Q` to 0 will
 result in a diagonally-oriented Gaussian, whereas setting `Q` to -1 will result
 in horizontal orientation. `Q` is a continuous parameter, so values in between
@@ -226,7 +226,7 @@ gauss_fit_cel <-
     fit_gaussian_2D(
       samp_dat,
       method = "elliptical_log",
-      orientation_strategy = -0.66
+      constrain_orientation = -0.66
     )
 
 gauss_fit_cel
@@ -243,7 +243,7 @@ gauss_data_cel <-
 ggplot_gaussian_2D(gauss_data_cel)
 ```
 
-Again, setting the value of `Q` via `orientation_strategy` will very likely 
+Again, setting the value of `Q` via `constrain_orientation` will very likely 
 result in poorer-fitting Gaussians. See the analyses in Priebe et al. 2003 to
 get a sense of useful applications of this approach. Forcing Q = -0.66 in 
 the above example isn't all that useful, but goes to show that it can be done.

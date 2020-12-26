@@ -1,5 +1,5 @@
 ## Part of the gaussplotR package
-## Last updated: 2020-12-02 VBB
+## Last updated: 2020-12-26 VBB
 
 ############################## autofit_gaussian_2D #############################
 
@@ -13,11 +13,14 @@
 #' @param maxiter Default 1000. A positive integer specifying the maximum number
 #'   of iterations allowed. See \code{stats::nls.control()} for more details.
 #'
-#' @details This function runs \code{fit_gaussian_2D()} three times: once for
-#' each of the "main" types of models: 1) elliptical, unconstrained; 2)
-#' elliptical, log; 3) circular. The function \code{compare_gaussian_fits()} is
-#' then used to determine which of these three models is the best-fitting, using
-#' the \code{comparison_method} argument to make the decision.
+#' @details This function runs \code{fit_gaussian_2D()} six times: twice for
+#'   each of the "main" types of models: 1) elliptical, unconstrained; 2)
+#'   elliptical, log; 3) circular. For each of these main types, the parameter
+#'   \code{constrain_amplitude} is first set to \code{FALSE} and a separate
+#'   model in which it is set to \code{TRUE} is also run. The function
+#'   \code{compare_gaussian_fits()} is then used to determine which of these six
+#'   models is the best-fitting, using the \code{comparison_method} argument to
+#'   make the decision.
 #'
 #' @inherit fit_gaussian_2D return
 #'
@@ -71,6 +74,13 @@ autofit_gaussian_2D <- function(data,
     )
   }
 
+  if (length(comparison_method) > 1) {
+    message(
+"More than 1 entry found for 'comparison_method'.
+Only the first will be used."
+)
+  }
+
   ## maxiter
   if (!is.numeric(maxiter)) {
     stop("maxiter must be a numeric")
@@ -78,37 +88,79 @@ autofit_gaussian_2D <- function(data,
 
   ## Fit each of the main types of models
   gauss_fit_ue <-
-    fit_gaussian_2D(data,
-                    method = "elliptical",
-                    orientation_strategy = "unconstrained",
-                    maxiter = maxiter)
+    fit_gaussian_2D(
+      data,
+      method = "elliptical",
+      constrain_orientation = "unconstrained",
+      maxiter = maxiter
+    )
+
+  gauss_fit_ue_ca <-
+    fit_gaussian_2D(
+      data,
+      method = "elliptical",
+      constrain_orientation = "unconstrained",
+      maxiter = maxiter
+    )
 
   gauss_fit_uel <-
-    fit_gaussian_2D(data,
-                    method = "elliptical_log",
-                    orientation_strategy = "unconstrained",
-                    maxiter = maxiter)
+    fit_gaussian_2D(
+      data,
+      method = "elliptical_log",
+      constrain_orientation = "unconstrained",
+      maxiter = maxiter
+    )
+
+  gauss_fit_uel_ca <-
+    fit_gaussian_2D(
+      data,
+      method = "elliptical_log",
+      constrain_orientation = "unconstrained",
+      maxiter = maxiter
+    )
 
   gauss_fit_cir <-
-    fit_gaussian_2D(data,
-                    method = "circular",
-                    maxiter = maxiter)
+    fit_gaussian_2D(
+      data,
+      method = "circular",
+      maxiter = maxiter
+    )
+
+  gauss_fit_cir_ca <-
+    fit_gaussian_2D(
+      data,
+      method = "circular",
+      maxiter = maxiter
+    )
+
 
   ## Make a list of all the model outputs
   fit_objects_list <-
     list(
       elliptical_unconstr = gauss_fit_ue,
+      elliptical_unconstr_ca = gauss_fit_ue_ca,
       elliptical_log_unconstr = gauss_fit_uel,
-      circular = gauss_fit_cir
+      elliptical_log_unconstr_ca = gauss_fit_uel_ca,
+      circular = gauss_fit_cir,
+      circular_ca = gauss_fit_cir_ca
       )
 
-  preferred <- compare_gaussian_fits(fit_objects_list,
-                                     comparison_method = comparison_method)
+  preferred <-
+    compare_gaussian_fits(
+      fit_objects_list,
+      comparison_method = comparison_method
+      )
 
-  if (preferred$preferred_model == "circular") {
+  if (preferred$preferred_model == "circular_ca") {
+    return(gauss_fit_cir_ca)
+  } else if (preferred$preferred_model == "circular") {
     return(gauss_fit_cir)
+  } else if (preferred$preferred_model == "elliptical_log_unconstr_ca") {
+    return(gauss_fit_uel_ca)
   } else if (preferred$preferred_model == "elliptical_log_unconstr") {
     return(gauss_fit_uel)
+  } else if (preferred$preferred_model == "elliptical_unconstr_ca") {
+    return(gauss_fit_ue_ca)
   } else {
     return(gauss_fit_ue)
   }

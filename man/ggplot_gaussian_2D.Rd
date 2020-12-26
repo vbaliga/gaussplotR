@@ -97,7 +97,7 @@ if (interactive()) {
     fit_gaussian_2D(
       samp_dat,
       method = "elliptical_log",
-      orientation_strategy = -1
+      constrain_orientation = -1
     )
 
   ## Generate a grid of x- and y- values on which to predict

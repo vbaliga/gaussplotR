@@ -15,11 +15,11 @@ test_that("compare_gaussian_fits() fails when nonsense is supplied", {
 gauss_fit_ue <-
   fit_gaussian_2D(samp_dat,
                   method = "elliptical",
-                  orientation_strategy = "unconstrained")
+                  constrain_orientation = "unconstrained")
 gauss_fit_uel <-
   fit_gaussian_2D(samp_dat,
                   method = "elliptical_log",
-                  orientation_strategy = "unconstrained")
+                  constrain_orientation = "unconstrained")
 gauss_fit_cir <-
   fit_gaussian_2D(samp_dat,
                   method = "circular")

@@ -15,22 +15,22 @@ test_that("predict_gaussian_2d() fails when nonsense is supplied", {
 gauss_fit_ue <-
   fit_gaussian_2D(samp_dat,
                   method = "elliptical",
-                  orientation_strategy = "unconstrained")
+                  constrain_orientation = "unconstrained")
 
 gauss_fit_ce <-
   fit_gaussian_2D(samp_dat,
                   method = "elliptical",
-                  orientation_strategy = 0)
+                  constrain_orientation = 0)
 
 gauss_fit_uel <-
   fit_gaussian_2D(samp_dat,
                   method = "elliptical_log",
-                  orientation_strategy = "unconstrained")
+                  constrain_orientation = "unconstrained")
 
 gauss_fit_cel <-
   fit_gaussian_2D(samp_dat,
                   method = "elliptical_log",
-                  orientation_strategy = -1)
+                  constrain_orientation = -1)
 
 gauss_fit_cir <-
   fit_gaussian_2D(samp_dat,

@@ -32,11 +32,14 @@ orientation strategy was used by this function.}
 Automatically determine the best-fitting 2D Gaussian for a data set
 }
 \details{
-This function runs \code{fit_gaussian_2D()} three times: once for
+This function runs \code{fit_gaussian_2D()} six times: twice for
 each of the "main" types of models: 1) elliptical, unconstrained; 2)
-elliptical, log; 3) circular. The function \code{compare_gaussian_fits()} is
-then used to determine which of these three models is the best-fitting, using
-the \code{comparison_method} argument to make the decision.
+elliptical, log; 3) circular. For each of these main types, the parameter
+\code{constrain_amplitude} is first set to \code{FALSE} and a separate
+model in which it is set to \code{TRUE} is also run. The function
+\code{compare_gaussian_fits()} is then used to determine which of these six
+models is the best-fitting, using the \code{comparison_method} argument to
+make the decision.
 }
 \examples{
 if (interactive()) {

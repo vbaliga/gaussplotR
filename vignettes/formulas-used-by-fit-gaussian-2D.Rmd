@@ -49,12 +49,12 @@ Therefore, all together:
 $$G(x,y) = A_o + A * e^{-((((x - x_0)cos(\theta) - (y - y_0)sin(\theta))/a)^{2}+ 
 (((x - x_0)sin(\theta) + (y - y_0)cos(\theta))/b)^{2})/2}$$
 
-Setting the `orientation_strategy` argument to a numeric will optionally
+Setting the `constrain_orientation` argument to a numeric will optionally
 constrain the value of $\theta$ to a user-specified value. If a numeric is
 supplied here, please note that the value will be interpreted as a value in
 radians. Constraining $\theta$ to a user-supplied value can lead to considerably
 poorer-fitting Gaussians and/or trouble with converging on a stable solution; in
-most cases `orientation_strategy` should remain its default: `"unconstrained"`.
+most cases `constrain_orientation` should remain its default: `"unconstrained"`.
 
 
 ## `method = "elliptical_log"`
@@ -81,12 +81,12 @@ y_0})))/\sigma_y^2}$$
 
 This formula is intended for use with log2-transformed data. 
 
-Setting the `orientation_strategy` argument to a numeric will optionally
+Setting the `constrain_orientation` argument to a numeric will optionally
 constrain the value of $Q$ to a user-specified value, which can be useful for
 certain kinds of analyses (see Priebe et al. 2003 for more). Keep in mind that 
 constraining $Q$ to a user-supplied value can lead to considerably
 poorer-fitting Gaussians and/or trouble with converging on a stable solution; in
-most cases `orientation_strategy` should remain its default: `"unconstrained"`.
+most cases `constrain_orientation` should remain its default: `"unconstrained"`.
 
 
 ## `method = "circular"`

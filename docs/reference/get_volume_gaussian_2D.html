@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gaussplotR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1.9000</span>
       </span>
     </div>
 
@@ -144,21 +144,25 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>X_sig</th>
-      <td><p>numeric value of the x-axis spread (sigma)</p></td>
+      <td><p>numeric value(s) of the x-axis spread (sigma)</p></td>
     </tr>
     <tr>
       <th>Y_sig</th>
-      <td><p>numeric value of the y-axis spread (sigma)</p></td>
+      <td><p>numeric value(s) of the y-axis spread (sigma)</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A numeric value indicating the computed volume</p>
+    <p>Numeric value(s) indicating the computed volume(s)</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Volume under the 2D gaussian is computed as:
 <code>2 * pi * sqrt(abs(X_sig)) * sqrt(abs(Y_sig))</code></p>
+<p>Numeric vectors can be supplied to <code>X_sig</code> and <code>Y_sig</code>. If vectors
+of length greater than 1 are given, the function computes volume for each
+sequential pair of <code>X_sig</code>, <code>Y_sig</code> values. The lengths of these
+supplied vectors must be identical.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Vikram B. Baliga</p>
