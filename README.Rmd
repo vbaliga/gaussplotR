@@ -55,7 +55,8 @@ interpolation of values is desired.
 
 Plotting can then be achieved via `ggplot_gaussian_2D()`, but note that the 
 `data.frame` created by `predict_gaussian_2D()` can be supplied to other 
-plotting frameworks such as `lattice::levelplot()`.
+plotting frameworks such as `lattice::levelplot()`. A 3D plot can also be 
+produced via `rgl_gaussian_2D()` (not shown here).
 
 ```{r example}
 library(gaussplotR)

@@ -48,7 +48,8 @@ relatively sparse and interpolation of values is desired.
 
 Plotting can then be achieved via `ggplot_gaussian_2D()`, but note that
 the `data.frame` created by `predict_gaussian_2D()` can be supplied to
-other plotting frameworks such as `lattice::levelplot()`.
+other plotting frameworks such as `lattice::levelplot()`. A 3D plot can
+also be produced via `rgl_gaussian_2D()` (not shown here).
 
 ``` r
 library(gaussplotR)
@@ -170,7 +171,8 @@ gauss_auto
 #> 1 156.2272 2.083181 156.2272 171.0041
 #> 
 #> $fit_method
-#> [1] "elliptical_unconstr"
+#>          method       amplitude     orientation 
+#>    "elliptical" "unconstrained" "unconstrained" 
 #> 
 #> attr(,"gaussplotR")
 #> [1] "gaussplotR_fit"

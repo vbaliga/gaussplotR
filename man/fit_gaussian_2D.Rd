@@ -157,6 +157,10 @@ if (interactive()) {
   library(ggplot2); library(metR)
   ggplot_gaussian_2D(gauss_data)
 
+  ## Produce a 3D plot via rgl
+  rgl_gaussian_2D(gauss_data)
+
+
   #### Example 2: Constrained elliptical_log ####
   ## This fits a constrained elliptical, as in Priebe et al. 2003
   gauss_fit <-
@@ -181,6 +185,9 @@ if (interactive()) {
 
   ## Plot via ggplot2 and metR
   ggplot_gaussian_2D(gauss_data)
+
+  ## Produce a 3D plot via rgl
+  rgl_gaussian_2D(gauss_data)
 }
 }
 \references{

@@ -31,7 +31,7 @@ supplied via the object created by \code{gaussplotR::fit_gaussian_2D()}.
 
 If \code{fit_object} is not an object created by
 \code{gaussplotR::fit_gaussian_2D()}, \code{predict_gaussian_2D()} attempts
-to parse \code{fit_object} as a list of two items. The coeffients of the fit
+to parse \code{fit_object} as a list of two items. The coefficients of the fit
 must be supplied as a one-row, named data.frame within
 \code{fit_object$coefs}, and details of the methods for fitting the Gaussian
 must be contained as a character vector in \code{fit_object$fit_method}. This
@@ -79,6 +79,10 @@ if (interactive()) {
   library(ggplot2); library(metR)
   ggplot_gaussian_2D(gauss_data)
 
+  ## Produce a 3D plot via rgl
+  rgl_gaussian_2D(gauss_data)
+
+
   #### Example 2: Constrained elliptical_log ####
   ## This fits a constrained elliptical, as in Priebe et al. 2003
   gauss_fit <-
@@ -103,6 +107,9 @@ if (interactive()) {
 
   ## Plot via ggplot2 and metR
   ggplot_gaussian_2D(gauss_data)
+
+  ## Produce a 3D plot via rgl
+  rgl_gaussian_2D(gauss_data)
 }
 }
 \author{

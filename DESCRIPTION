@@ -20,7 +20,9 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9000
 Imports: 
     ggplot2 (>= 3.3.0),
-    metR (>= 0.7.0)
+    metR (>= 0.7.0),
+    rgl,
+    viridisLite
 Suggests: 
     lattice,
     knitr,

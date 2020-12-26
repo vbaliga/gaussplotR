@@ -140,6 +140,10 @@
 #'   library(ggplot2); library(metR)
 #'   ggplot_gaussian_2D(gauss_data)
 #'
+#'   ## Produce a 3D plot via rgl
+#'   rgl_gaussian_2D(gauss_data)
+#'
+#'
 #'   #### Example 2: Constrained elliptical_log ####
 #'   ## This fits a constrained elliptical, as in Priebe et al. 2003
 #'   gauss_fit <-
@@ -164,6 +168,9 @@
 #'
 #'   ## Plot via ggplot2 and metR
 #'   ggplot_gaussian_2D(gauss_data)
+#'
+#'   ## Produce a 3D plot via rgl
+#'   rgl_gaussian_2D(gauss_data)
 #' }
 
 
@@ -572,7 +579,7 @@ fit_gaussian_2D <- function(data,
           )
         )
 
-      ## extract the coeffients and paste together
+      ## extract the coefficients and paste together
       fit_coefs <- stats::coef(fit_generic_const)
       coef_result <- c(
         fit_coefs[1],
@@ -728,7 +735,7 @@ fit_gaussian_2D <- function(data,
             )
           )
 
-        ## extract the coeffients and paste together
+        ## extract the coefficients and paste together
         fit_coefs <- stats::coef(fit_el)
         coef_result <-
           c(Amp = Amp_init, fit_coefs)

@@ -144,7 +144,8 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>fit_object</th>
-      <td><p>The output of <code><a href='fit_gaussian_2D.html'>gaussplotR::fit_gaussian_2D()</a></code>.</p></td>
+      <td><p>Either the output of <code><a href='fit_gaussian_2D.html'>gaussplotR::fit_gaussian_2D()</a></code>
+or a list that contains coefficients and fit methods (see Details).</p></td>
     </tr>
     <tr>
       <th>X_values</th>
@@ -165,13 +166,28 @@
     <p>A data.frame with the supplied <code>X_values</code> and <code>Y_values</code>
 along with the predicted values of the 2D gaussian
 (<code>predicted_values</code>)</p>
-    <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    
-
-<p>This function assumes Gaussian parameters have been fitted beforehand. No
-fitting of parameters is done within this function; they all must be
+    <p>This function assumes Gaussian parameters have been fitted beforehand. No
+fitting of parameters is done within this function; these can be
 supplied via the object created by <code><a href='fit_gaussian_2D.html'>gaussplotR::fit_gaussian_2D()</a></code>.</p>
+<p>If <code>fit_object</code> is not an object created by
+<code><a href='fit_gaussian_2D.html'>gaussplotR::fit_gaussian_2D()</a></code>, <code>predict_gaussian_2D()</code> attempts
+to parse <code>fit_object</code> as a list of two items. The coefficients of the fit
+must be supplied as a one-row, named data.frame within
+<code>fit_object$coefs</code>, and details of the methods for fitting the Gaussian
+must be contained as a character vector in <code>fit_object$fit_method</code>. This
+character vector in <code>fit_object$fit_method</code> must be a named vector that
+provides information about the method, amplitude constraint choice, and
+orientation constraint choice, using the names <code>method</code>,
+<code>amplitude</code>, and <code>orientation</code>. <code>method</code> must be one of:
+<code>"elliptical"</code>, <code>"elliptical_log"</code>, or <code>"circular"</code>.
+<code>amplitude</code> and <code>orientation</code> must each be either
+<code>"unconstrained"</code> or <code>"constrained"</code>. For example, <code><a href='https://rdrr.io/r/base/c.html'>c(method =
+"elliptical", amplitude = "unconstrained", orientation = "unconstrained")</a></code>.
+One exception to this is when <code>method = "circular"</code>, in which case
+<code>orientation</code> must be <code>NA</code>, e.g.: <code><a href='https://rdrr.io/r/base/c.html'>c(method = "circular",
+amplitude = "unconstrained", orientation = NA)</a></code>.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Vikram B. Baliga</p>
@@ -208,6 +224,10 @@ supplied via the object created by <code><a href='fit_gaussian_2D.html'>gaussplo
   <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>; <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/eliocamp/metR'>metR</a></span><span class='op'>)</span>
   <span class='fu'><a href='ggplot_gaussian_2D.html'>ggplot_gaussian_2D</a></span><span class='op'>(</span><span class='va'>gauss_data</span><span class='op'>)</span>
 
+  <span class='co'>## Produce a 3D plot via rgl</span>
+  <span class='fu'><a href='rgl_gaussian_2D.html'>rgl_gaussian_2D</a></span><span class='op'>(</span><span class='va'>gauss_data</span><span class='op'>)</span>
+
+
   <span class='co'>#### Example 2: Constrained elliptical_log ####</span>
   <span class='co'>## This fits a constrained elliptical, as in Priebe et al. 2003</span>
   <span class='va'>gauss_fit</span> <span class='op'>&lt;-</span>
@@ -232,6 +252,9 @@ supplied via the object created by <code><a href='fit_gaussian_2D.html'>gaussplo
 
   <span class='co'>## Plot via ggplot2 and metR</span>
   <span class='fu'><a href='ggplot_gaussian_2D.html'>ggplot_gaussian_2D</a></span><span class='op'>(</span><span class='va'>gauss_data</span><span class='op'>)</span>
+
+  <span class='co'>## Produce a 3D plot via rgl</span>
+  <span class='fu'><a href='rgl_gaussian_2D.html'>rgl_gaussian_2D</a></span><span class='op'>(</span><span class='va'>gauss_data</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div></pre>
   </div>
