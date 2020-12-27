@@ -1,5 +1,5 @@
 ## Part of the gaussplotR package
-## Last updated: 2020-12-02 VBB
+## Last updated: 2020-12-26 VBB
 
 ############################# compare_gaussian_fits ############################
 
@@ -18,7 +18,7 @@
 #'
 #' @return A list with the components:
 ##' \itemize{
-##'  \item{"preferred_ model"} {A character indicating the name of the preferred
+##'  \item{"preferred_model"} {A character indicating the name of the preferred
 ##'  model (or if a named list was not provided, a model number is given in
 ##'  the order of the original supplied list). }
 ##'  \item{"comparison_table"} {A data.frame detailing the rss, rmse, deviance,
