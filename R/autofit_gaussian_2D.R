@@ -12,17 +12,33 @@
 #' be used to determine the "best-fitting" Gaussian?
 #' @param maxiter Default 1000. A positive integer specifying the maximum number
 #'   of iterations allowed. See \code{stats::nls.control()} for more details.
+#' @param simplify TRUE or FALSE. If TRUE, return only the coefficients, model,
+#'   model_error_stats, and fit_method for the best-fitting model. If FALSE, a
+#'   model comparison table is also included in the returned list as
+#'   \code{$model_comparison}. This table is obtained via
+#'   \code{compare_gaussian_fits()}.
 #'
-#' @details This function runs \code{fit_gaussian_2D()} six times: twice for
+#' @details This function runs \code{fit_gaussian_2D()} three times: once for
 #'   each of the "main" types of models: 1) elliptical, unconstrained; 2)
-#'   elliptical, log; 3) circular. For each of these main types, the parameter
-#'   \code{constrain_amplitude} is first set to \code{FALSE} and a separate
-#'   model in which it is set to \code{TRUE} is also run. The function
-#'   \code{compare_gaussian_fits()} is then used to determine which of these six
-#'   models is the best-fitting, using the \code{comparison_method} argument to
-#'   make the decision.
+#'   elliptical, log; 3) circular. In all three cases, amplitudes and
+#'   orientations are unconstrained. The function \code{compare_gaussian_fits()}
+#'   is then used to determine which of these three models is the best-fitting,
+#'   using the \code{comparison_method} argument to make the decision.
 #'
-#' @inherit fit_gaussian_2D return
+#' @return
+#' If \code{simplify = TRUE}, a list with the components:
+##' \itemize{
+##'  \item{"coefs"} {A data.frame of fitted model parameters.}
+##'  \item{"model"} {The model object, fitted by \code{stats::nls()}.}
+##'  \item{"model_error_stats"} {A data.frame detailing the rss, rmse, deviance,
+##'  and AIC of the fitted model.}
+##'  \item{"fit_method"} {A character vector that indicates which method and
+##'  orientation strategy was used by this function.}
+##' }
+##'
+##' If \code{simplify = FALSE}, a model comparison table is also included
+##' in the returned list as \code{$model_comparison}. This table is obtained
+##' via \code{compare_gaussian_fits()}.
 #'
 #' @author Vikram B. Baliga
 #'
@@ -30,23 +46,24 @@
 #'
 #' @examples
 #' if (interactive()) {
-#'   library(gaussplotR)
-#'
-#'   ## Load the sample data set
-#'   data(gaussplot_sample_data)
-#'
-#'   ## The raw data we'd like to use are in columns 1:3
-#'   samp_dat <-
-#'     gaussplot_sample_data[,1:3]
-#'
-#'   ## Automatically determine the best model to use
-#'   gauss_auto <-
-#'     autofit_gaussian_2D(samp_dat)
+  # library(gaussplotR)
+  #
+  # ## Load the sample data set
+  # data(gaussplot_sample_data)
+  #
+  # ## The raw data we'd like to use are in columns 1:3
+  # samp_dat <-
+  #   gaussplot_sample_data[,1:3]
+  #
+  # ## Automatically determine the best model to use
+  # gauss_auto <-
+  #   autofit_gaussian_2D(samp_dat)
 #' }
 
 autofit_gaussian_2D <- function(data,
                                 comparison_method = "rmse",
-                                maxiter = 1000) {
+                                maxiter = 1000,
+                                simplify = TRUE) {
 
   #### Argument checks ####
 
@@ -64,13 +81,13 @@ autofit_gaussian_2D <- function(data,
   ## comparison_method
   if (!is.character(comparison_method)) {
     stop(
-      "comparison_method must be one of: 'rmse', 'rss', 'AIC'"
+      "'comparison_method' must be one of: 'rmse', 'rss', 'AIC'"
     )
   }
   comparison_method_choices <- c("rmse", "rss", "AIC")
   if (!comparison_method %in% comparison_method_choices) {
     stop(
-      "comparison_method must be one of: 'rmse', 'rss', 'AIC'"
+      "'comparison_method' must be one of: 'rmse', 'rss', 'AIC'"
     )
   }
 
@@ -83,7 +100,12 @@ Only the first will be used."
 
   ## maxiter
   if (!is.numeric(maxiter)) {
-    stop("maxiter must be a numeric")
+    stop("'maxiter' must be a numeric")
+  }
+
+  ## simplify
+  if (!is.logical(simplify)) {
+    stop("'simplify' must be TRUE or FALSE")
   }
 
   ## Fit each of the main types of models
@@ -92,14 +114,7 @@ Only the first will be used."
       data,
       method = "elliptical",
       constrain_orientation = "unconstrained",
-      maxiter = maxiter
-    )
-
-  gauss_fit_ue_ca <-
-    fit_gaussian_2D(
-      data,
-      method = "elliptical",
-      constrain_orientation = "unconstrained",
+      constrain_amplitude = FALSE,
       maxiter = maxiter
     )
 
@@ -108,14 +123,7 @@ Only the first will be used."
       data,
       method = "elliptical_log",
       constrain_orientation = "unconstrained",
-      maxiter = maxiter
-    )
-
-  gauss_fit_uel_ca <-
-    fit_gaussian_2D(
-      data,
-      method = "elliptical_log",
-      constrain_orientation = "unconstrained",
+      constrain_amplitude = FALSE,
       maxiter = maxiter
     )
 
@@ -123,13 +131,7 @@ Only the first will be used."
     fit_gaussian_2D(
       data,
       method = "circular",
-      maxiter = maxiter
-    )
-
-  gauss_fit_cir_ca <-
-    fit_gaussian_2D(
-      data,
-      method = "circular",
+      constrain_amplitude = FALSE,
       maxiter = maxiter
     )
 
@@ -138,11 +140,8 @@ Only the first will be used."
   fit_objects_list <-
     list(
       elliptical_unconstr = gauss_fit_ue,
-      elliptical_unconstr_ca = gauss_fit_ue_ca,
       elliptical_log_unconstr = gauss_fit_uel,
-      elliptical_log_unconstr_ca = gauss_fit_uel_ca,
-      circular = gauss_fit_cir,
-      circular_ca = gauss_fit_cir_ca
+      circular = gauss_fit_cir
       )
 
   preferred <-
@@ -151,18 +150,37 @@ Only the first will be used."
       comparison_method = comparison_method
       )
 
-  if (preferred$preferred_model == "circular_ca") {
-    return(gauss_fit_cir_ca)
-  } else if (preferred$preferred_model == "circular") {
-    return(gauss_fit_cir)
-  } else if (preferred$preferred_model == "elliptical_log_unconstr_ca") {
-    return(gauss_fit_uel_ca)
-  } else if (preferred$preferred_model == "elliptical_log_unconstr") {
-    return(gauss_fit_uel)
-  } else if (preferred$preferred_model == "elliptical_unconstr_ca") {
-    return(gauss_fit_ue_ca)
+  if (simplify == TRUE) {
+    if (preferred$preferred_model == "circular") {
+      return(gauss_fit_cir)
+    } else if (preferred$preferred_model == "elliptical_log_unconstr") {
+      return(gauss_fit_uel)
+    } else {
+      return(gauss_fit_ue)
+    }
   } else {
-    return(gauss_fit_ue)
+    if (preferred$preferred_model == "circular") {
+      output <-
+        list(
+          model_comparison = preferred,
+          gaussplotR_fit = gauss_fit_cir
+        )
+      return(output)
+    } else if (preferred$preferred_model == "elliptical_log_unconstr") {
+      output <-
+        list(
+          model_comparison = preferred,
+          gaussplotR_fit = gauss_fit_uel
+        )
+      return(output)
+    } else {
+      output <-
+        list(
+          model_comparison = preferred,
+          gaussplotR_fit = gauss_fit_ue
+        )
+      return(output)
+    }
   }
 
 }

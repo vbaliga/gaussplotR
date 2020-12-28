@@ -67,7 +67,8 @@
 
 
 compare_gaussian_fits <- function(fit_objects_list,
-                                  comparison_method = "rmse") {
+                                  comparison_method = "rmse"
+                                  ) {
 
   ## Argument checks
   if (!is.list(fit_objects_list)) {

@@ -4,7 +4,12 @@
 \alias{autofit_gaussian_2D}
 \title{Automatically determine the best-fitting 2D Gaussian for a data set}
 \usage{
-autofit_gaussian_2D(data, comparison_method = "rmse", maxiter = 1000)
+autofit_gaussian_2D(
+  data,
+  comparison_method = "rmse",
+  maxiter = 1000,
+  simplify = TRUE
+)
 }
 \arguments{
 \item{data}{A data.frame that contains the raw data (generally rectilinearly
@@ -16,9 +21,15 @@ be used to determine the "best-fitting" Gaussian?}
 
 \item{maxiter}{Default 1000. A positive integer specifying the maximum number
 of iterations allowed. See \code{stats::nls.control()} for more details.}
+
+\item{simplify}{TRUE or FALSE. If TRUE, return only the coefficients, model,
+model_error_stats, and fit_method for the best-fitting model. If FALSE, a
+model comparison table is also included in the returned list as
+\code{$model_comparison}. This table is obtained via
+\code{compare_gaussian_fits()}.}
 }
 \value{
-A list with the components:
+If \code{simplify = TRUE}, a list with the components:
 \itemize{
 \item{"coefs"} {A data.frame of fitted model parameters.}
 \item{"model"} {The model object, fitted by \code{stats::nls()}.}
@@ -27,34 +38,24 @@ and AIC of the fitted model.}
 \item{"fit_method"} {A character vector that indicates which method and
 orientation strategy was used by this function.}
 }
+
+If \code{simplify = FALSE}, a model comparison table is also included
+in the returned list as \code{$model_comparison}. This table is obtained
+via \code{compare_gaussian_fits()}.
 }
 \description{
 Automatically determine the best-fitting 2D Gaussian for a data set
 }
 \details{
-This function runs \code{fit_gaussian_2D()} six times: twice for
+This function runs \code{fit_gaussian_2D()} three times: once for
 each of the "main" types of models: 1) elliptical, unconstrained; 2)
-elliptical, log; 3) circular. For each of these main types, the parameter
-\code{constrain_amplitude} is first set to \code{FALSE} and a separate
-model in which it is set to \code{TRUE} is also run. The function
-\code{compare_gaussian_fits()} is then used to determine which of these six
-models is the best-fitting, using the \code{comparison_method} argument to
-make the decision.
+elliptical, log; 3) circular. In all three cases, amplitudes and
+orientations are unconstrained. The function \code{compare_gaussian_fits()}
+is then used to determine which of these three models is the best-fitting,
+using the \code{comparison_method} argument to make the decision.
 }
 \examples{
 if (interactive()) {
-  library(gaussplotR)
-
-  ## Load the sample data set
-  data(gaussplot_sample_data)
-
-  ## The raw data we'd like to use are in columns 1:3
-  samp_dat <-
-    gaussplot_sample_data[,1:3]
-
-  ## Automatically determine the best model to use
-  gauss_auto <-
-    autofit_gaussian_2D(samp_dat)
 }
 }
 \author{

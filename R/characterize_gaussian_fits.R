@@ -1,5 +1,5 @@
 ## Part of the gaussplotR package
-## Last updated: 2020-12-26 VBB
+## Last updated: 2020-12-27 VBB
 
 ########################### characterize_gaussian_fits #########################
 
@@ -63,9 +63,12 @@
 ##'  with the independent (Q = -1) prediction.}
 ##'  \item{"R_diag"} {A numeric, partial correlation of the response variable
 ##'  with the diagonally-oriented (Q = 0) prediction.}
-##'  \item{"ZF_indp"} {A numeric}
-##'  \item{"ZF_diag"} {A numeric}
-##'  \item{"Z_diff"} {A numeric}
+##'  \item{"ZF_indp"} {A numeric, the Fisher Z-transform of the R_indp
+##'  coefficient. See Winship et al. 2006 for details.}
+##'  \item{"ZF_diag"} {A numeric, the Fisher Z-transform of the R_diag
+##'  coefficient. See Winship et al. 2006 for details.}
+##'  \item{"Z_diff"} {A numeric, the Z-difference between ZF_indp and ZF_diag.
+##'  See Winship et al. 2006 for details.}
 ##'
 ##' }
 #'
@@ -78,6 +81,10 @@
 #' Priebe NJ, Cassanello CR, Lisberger SG. The neural representation of speed in
 #' macaque area MT/V5. J Neurosci. 2003 Jul 2;23(13):5650-61. doi:
 #' 10.1523/JNEUROSCI.23-13-05650.2003.
+#'
+#' Winship IR, Crowder N, Wylie DRW. Quantitative reassessment of speed tuning
+#' in the accessory optic system and pretectum of pigeons. J Neurophysiol. 2006
+#' 95(1):546-551. doi: 10.1152/jn.00921.2005
 #'
 #' @author Vikram B. Baliga
 #'
