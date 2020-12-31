@@ -1,3 +1,15 @@
+# gaussplotR 0.2.2
+* Newest functions enhance the automation of comparing among various Gaussian 
+fit models.  
+* The `autofit_gaussian_2D()` function can be used to find the best-fitting 
+model for a given data set.  
+* The `compare_gaussian_fits()` function compares models via criteria such as 
+rmse or rss.  
+* A `characterize_gaussian_fits()` analyzes the orientation and partial 
+correlations of Gaussian data. Features include computation of partial 
+correlations between response variables and independent and diagonally-tuned 
+predictions, along with Z-difference scoring.  
+
 # gaussplotR 0.2.0
 
 * Added a `fit_gaussian_2D()` function to apply any of several available methods
