@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot a 2D gaussian via ggplot — ggplot_gaussian_2D • gaussplotR</title>
+<title>Plot a 2D Gaussian via ggplot — ggplot_gaussian_2D • gaussplotR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Plot a 2D gaussian via ggplot — ggplot_gaussian_2D" />
-<meta property="og:description" content="Plot a 2D gaussian via ggplot" />
+<meta property="og:title" content="Plot a 2D Gaussian via ggplot — ggplot_gaussian_2D" />
+<meta property="og:description" content="Plot a 2D Gaussian via ggplot" />
 <meta property="og:image" content="https://vbaliga.github.io/gaussplotR/logo.png" />
 
 
@@ -80,13 +80,19 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gaussplotR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -128,31 +134,31 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot a 2D gaussian via ggplot</h1>
+    <h1>Plot a 2D Gaussian via ggplot</h1>
     <small class="dont-index">Source: <a href='https://github.com/vbaliga/gaussplotR/blob/master/R/ggplot_gaussian_2D.R'><code>R/ggplot_gaussian_2D.R</code></a></small>
     <div class="hidden name"><code>ggplot_gaussian_2D.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Plot a 2D gaussian via ggplot</p>
+    <p>Plot a 2D Gaussian via ggplot</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ggplot_gaussian_2D</span><span class='op'>(</span>
-  <span class='va'>gauss_data</span>,
-  normalize <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  contour_thickness <span class='op'>=</span> <span class='fl'>0.04</span>,
-  contour_color <span class='op'>=</span> <span class='st'>"black"</span>,
-  bins <span class='op'>=</span> <span class='fl'>15</span>,
-  viridis_dir <span class='op'>=</span> <span class='fl'>1</span>,
-  viridis_opt <span class='op'>=</span> <span class='st'>"B"</span>,
-  x_lab <span class='op'>=</span> <span class='st'>"X values"</span>,
-  y_lab <span class='op'>=</span> <span class='st'>"Y values"</span>,
-  axis.text <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span>,
-  axis.title <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>7</span><span class='op'>)</span>,
-  axis.ticks <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_line</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>0.3</span><span class='op'>)</span>,
-  plot.margin <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.1</span>, <span class='fl'>0.1</span>, <span class='fl'>0.1</span>, <span class='fl'>0.1</span><span class='op'>)</span>, <span class='st'>"cm"</span><span class='op'>)</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/gaussplotR/man/ggplot_gaussian_2D.html'>ggplot_gaussian_2D</a></span>(
+  <span class='kw'>gauss_data</span>,
+  normalize = <span class='fl'>TRUE</span>,
+  contour_thickness = <span class='fl'>0.04</span>,
+  contour_color = <span class='st'>"black"</span>,
+  bins = <span class='fl'>15</span>,
+  viridis_dir = <span class='fl'>1</span>,
+  viridis_opt = <span class='st'>"B"</span>,
+  x_lab = <span class='st'>"X values"</span>,
+  y_lab = <span class='st'>"Y values"</span>,
+  axis.text = <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span>(size = <span class='fl'>6</span>),
+  axis.title = <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span>(size = <span class='fl'>7</span>),
+  axis.ticks = <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_line</a></span>(size = <span class='fl'>0.3</span>),
+  plot.margin = <span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.1</span>, <span class='fl'>0.1</span>, <span class='fl'>0.1</span>, <span class='fl'>0.1</span>), <span class='st'>"cm"</span>),
+  <span class='kw'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -160,7 +166,7 @@
     <tr>
       <th>gauss_data</th>
       <td><p>Data.frame with X_values, Y_values, and predicted_values,
-e.g. exported from <code><a href='predict_gaussian_2D.html'>predict_gaussian_2D()</a></code></p></td>
+e.g. exported from <code><a href='https://rdrr.io/pkg/gaussplotR/man/predict_gaussian_2D.html'>predict_gaussian_2D()</a></code></p></td>
     </tr>
     <tr>
       <th>normalize</th>
@@ -226,70 +232,69 @@ to 1 scale?</p></td>
     <p>Vikram B. Baliga</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
   <span class='co'>## Load the sample data set</span>
-  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>gaussplot_sample_data</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>gaussplot_sample_data</span>)
 
   <span class='co'>## The raw data we'd like to use are in columns 1:3</span>
-  <span class='va'>samp_dat</span> <span class='op'>&lt;-</span>
-    <span class='va'>gaussplot_sample_data</span><span class='op'>[</span>,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>]</span>
+  <span class='kw'>samp_dat</span> <span class='op'>&lt;-</span>
+    <span class='kw'>gaussplot_sample_data</span>[,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>]
 
 
   <span class='co'>#### Example 1: Unconstrained elliptical ####</span>
   <span class='co'>## This fits an unconstrained elliptical by default</span>
-  <span class='va'>gauss_fit</span> <span class='op'>&lt;-</span>
-    <span class='fu'><a href='fit_gaussian_2D.html'>fit_gaussian_2D</a></span><span class='op'>(</span><span class='va'>samp_dat</span><span class='op'>)</span>
+  <span class='kw'>gauss_fit</span> <span class='op'>&lt;-</span>
+    <span class='fu'><a href='https://rdrr.io/pkg/gaussplotR/man/fit_gaussian_2D.html'>fit_gaussian_2D</a></span>(<span class='kw'>samp_dat</span>)
 
   <span class='co'>## Generate a grid of x- and y- values on which to predict</span>
-  <span class='va'>grid</span> <span class='op'>&lt;-</span>
-    <span class='fu'><a href='https://rdrr.io/r/base/expand.grid.html'>expand.grid</a></span><span class='op'>(</span>X_values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span>from <span class='op'>=</span> <span class='op'>-</span><span class='fl'>5</span>, to <span class='op'>=</span> <span class='fl'>0</span>, by <span class='op'>=</span> <span class='fl'>0.1</span><span class='op'>)</span>,
-                Y_values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span>from <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span>, to <span class='op'>=</span> <span class='fl'>4</span>, by <span class='op'>=</span> <span class='fl'>0.1</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='kw'>grid</span> <span class='op'>&lt;-</span>
+    <span class='fu'><a href='https://rdrr.io/r/base/expand.grid.html'>expand.grid</a></span>(X_values = <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(from = <span class='op'>-</span><span class='fl'>5</span>, to = <span class='fl'>0</span>, by = <span class='fl'>0.1</span>),
+                Y_values = <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(from = <span class='op'>-</span><span class='fl'>1</span>, to = <span class='fl'>4</span>, by = <span class='fl'>0.1</span>))
 
   <span class='co'>## Predict the values using predict_gaussian_2D</span>
-  <span class='va'>gauss_data</span> <span class='op'>&lt;-</span>
-    <span class='fu'><a href='predict_gaussian_2D.html'>predict_gaussian_2D</a></span><span class='op'>(</span>
-      fit_object <span class='op'>=</span> <span class='va'>gauss_fit</span>,
-      X_values <span class='op'>=</span> <span class='va'>grid</span><span class='op'>$</span><span class='va'>X_values</span>,
-      Y_values <span class='op'>=</span> <span class='va'>grid</span><span class='op'>$</span><span class='va'>Y_values</span>,
-    <span class='op'>)</span>
+  <span class='kw'>gauss_data</span> <span class='op'>&lt;-</span>
+    <span class='fu'><a href='https://rdrr.io/pkg/gaussplotR/man/predict_gaussian_2D.html'>predict_gaussian_2D</a></span>(
+      fit_object = <span class='kw'>gauss_fit</span>,
+      X_values = <span class='kw'>grid</span><span class='op'>$</span><span class='kw'>X_values</span>,
+      Y_values = <span class='kw'>grid</span><span class='op'>$</span><span class='kw'>Y_values</span>,
+    )
 
   <span class='co'>## Plot via ggplot2 and metR</span>
-  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>; <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/eliocamp/metR'>metR</a></span><span class='op'>)</span>
-  <span class='fu'>ggplot_gaussian_2D</span><span class='op'>(</span><span class='va'>gauss_data</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>); <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/eliocamp/metR'>metR</a></span>)
+  <span class='fu'><a href='https://rdrr.io/pkg/gaussplotR/man/ggplot_gaussian_2D.html'>ggplot_gaussian_2D</a></span>(<span class='kw'>gauss_data</span>)
 
   <span class='co'>## Produce a 3D plot via rgl</span>
-  <span class='fu'><a href='rgl_gaussian_2D.html'>rgl_gaussian_2D</a></span><span class='op'>(</span><span class='va'>gauss_data</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/gaussplotR/man/rgl_gaussian_2D.html'>rgl_gaussian_2D</a></span>(<span class='kw'>gauss_data</span>)
 
 
   <span class='co'>#### Example 2: Constrained elliptical_log ####</span>
   <span class='co'>## This fits a constrained elliptical, as in Priebe et al. 2003</span>
-  <span class='va'>gauss_fit</span> <span class='op'>&lt;-</span>
-    <span class='fu'><a href='fit_gaussian_2D.html'>fit_gaussian_2D</a></span><span class='op'>(</span>
-      <span class='va'>samp_dat</span>,
-      method <span class='op'>=</span> <span class='st'>"elliptical_log"</span>,
-      constrain_orientation <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span>
-    <span class='op'>)</span>
+  <span class='kw'>gauss_fit</span> <span class='op'>&lt;-</span>
+    <span class='fu'><a href='https://rdrr.io/pkg/gaussplotR/man/fit_gaussian_2D.html'>fit_gaussian_2D</a></span>(
+      <span class='kw'>samp_dat</span>,
+      method = <span class='st'>"elliptical_log"</span>,
+      constrain_orientation = <span class='op'>-</span><span class='fl'>1</span>
+    )
 
   <span class='co'>## Generate a grid of x- and y- values on which to predict</span>
-  <span class='va'>grid</span> <span class='op'>&lt;-</span>
-    <span class='fu'><a href='https://rdrr.io/r/base/expand.grid.html'>expand.grid</a></span><span class='op'>(</span>X_values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span>from <span class='op'>=</span> <span class='op'>-</span><span class='fl'>5</span>, to <span class='op'>=</span> <span class='fl'>0</span>, by <span class='op'>=</span> <span class='fl'>0.1</span><span class='op'>)</span>,
-                Y_values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span>from <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span>, to <span class='op'>=</span> <span class='fl'>4</span>, by <span class='op'>=</span> <span class='fl'>0.1</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='kw'>grid</span> <span class='op'>&lt;-</span>
+    <span class='fu'><a href='https://rdrr.io/r/base/expand.grid.html'>expand.grid</a></span>(X_values = <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(from = <span class='op'>-</span><span class='fl'>5</span>, to = <span class='fl'>0</span>, by = <span class='fl'>0.1</span>),
+                Y_values = <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(from = <span class='op'>-</span><span class='fl'>1</span>, to = <span class='fl'>4</span>, by = <span class='fl'>0.1</span>))
 
   <span class='co'>## Predict the values using predict_gaussian_2D</span>
-  <span class='va'>gauss_data</span> <span class='op'>&lt;-</span>
-    <span class='fu'><a href='predict_gaussian_2D.html'>predict_gaussian_2D</a></span><span class='op'>(</span>
-      fit_object <span class='op'>=</span> <span class='va'>gauss_fit</span>,
-      X_values <span class='op'>=</span> <span class='va'>grid</span><span class='op'>$</span><span class='va'>X_values</span>,
-      Y_values <span class='op'>=</span> <span class='va'>grid</span><span class='op'>$</span><span class='va'>Y_values</span>,
-    <span class='op'>)</span>
+  <span class='kw'>gauss_data</span> <span class='op'>&lt;-</span>
+    <span class='fu'><a href='https://rdrr.io/pkg/gaussplotR/man/predict_gaussian_2D.html'>predict_gaussian_2D</a></span>(
+      fit_object = <span class='kw'>gauss_fit</span>,
+      X_values = <span class='kw'>grid</span><span class='op'>$</span><span class='kw'>X_values</span>,
+      Y_values = <span class='kw'>grid</span><span class='op'>$</span><span class='kw'>Y_values</span>,
+    )
 
   <span class='co'>## Plot via ggplot2 and metR</span>
-  <span class='fu'>ggplot_gaussian_2D</span><span class='op'>(</span><span class='va'>gauss_data</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/gaussplotR/man/ggplot_gaussian_2D.html'>ggplot_gaussian_2D</a></span>(<span class='kw'>gauss_data</span>)
 
   <span class='co'>## Produce a 3D plot via rgl</span>
-  <span class='fu'><a href='rgl_gaussian_2D.html'>rgl_gaussian_2D</a></span><span class='op'>(</span><span class='va'>gauss_data</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+  <span class='fu'><a href='https://rdrr.io/pkg/gaussplotR/man/rgl_gaussian_2D.html'>rgl_gaussian_2D</a></span>(<span class='kw'>gauss_data</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -305,7 +310,7 @@ to 1 scale?</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>
