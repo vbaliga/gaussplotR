@@ -61,7 +61,7 @@ test_that("compare_gaussian_fits() arrives at the correct answer", {
 })
 
 gauss_fit_ue_bad <- gauss_fit_ue
-attr(gauss_fit_ue_bad, "gaussplotR") <- NULL
+attr(gauss_fit_ue_bad, "gaussplotR") <- "no"
 
 bad_list1 <-
   list(
