@@ -3,7 +3,7 @@
 
 ############################# ggplot_gaussian_2D ###############################
 
-#' Plot a 2D gaussian via ggplot
+#' Plot a 2D Gaussian via ggplot
 #'
 #' @param gauss_data Data.frame with X_values, Y_values, and predicted_values,
 #'   e.g. exported from \code{predict_gaussian_2D()}

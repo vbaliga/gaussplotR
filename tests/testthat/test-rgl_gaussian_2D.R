@@ -1,6 +1,6 @@
 ## Tests of rgl_gaussian_2D()
 
-library(rgl)
+#library(rgl)
 library(viridisLite)
 
 data(gaussplot_sample_data)

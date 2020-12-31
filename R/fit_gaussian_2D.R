@@ -3,7 +3,7 @@
 
 ############################# fit_gaussian_2D ##############################
 
-#' Determine the best-fit parameters of a 2D Gaussian fit to a data set
+#' Determine the best-fit parameters for a specific 2D Gaussian model
 #'
 #' @param data A data.frame that contains the raw data (generally rectilinearly
 #'   gridded data, but this is not a strict requirement). Columns must be named
