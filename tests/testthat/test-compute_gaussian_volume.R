@@ -10,6 +10,7 @@ test_that("get_volume_gaussian_2D() fails when nonsense is supplied", {
   expect_error(get_volume_gaussian_2D())
   expect_error(get_volume_gaussian_2D(5, "a"))
   expect_error(get_volume_gaussian_2D("a", "5"))
+  expect_error(get_volume_gaussian_2D(X_sig = c(1:3), Y_sig = 5))
   expect_error(get_volume_gaussian_2D(samp_dat))
   expect_error(get_volume_gaussian_2D(samp_dat, maxiter = "a"))
 })
@@ -25,3 +26,4 @@ vol_ue <-
 test_that("get_volume_gaussian_2D() computes the expected value", {
   expect_equal(vol_ue, 9.239037, tolerance = 1e-5)
 })
+

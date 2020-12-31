@@ -59,3 +59,19 @@ test_that("compare_gaussian_fits() arrives at the correct answer", {
                                      comparison_method = "rss")$preferred_model,
                "model_1")
 })
+
+gauss_fit_ue_bad <- gauss_fit_ue
+attr(gauss_fit_ue_bad, "gaussplotR") <- NULL
+
+bad_list1 <-
+  list(
+    gauss_fit_ue_bad,
+    gauss_fit_uel,
+    gauss_fit_cir
+  )
+
+test_that("compare_gaussian_fits() fails when bad fit objects are given", {
+  expect_error(compare_gaussian_fits(bad_list1))
+  expect_error(compare_gaussian_fits(models_list, comparison_method = 2))
+  expect_error(compare_gaussian_fits(models_list, comparison_method = "2"))
+})

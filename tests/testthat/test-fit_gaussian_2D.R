@@ -4,10 +4,17 @@ data(gaussplot_sample_data)
 samp_dat <-
   gaussplot_sample_data[,1:3]
 
+bad_data1 <- cbind(samp_dat[,c(1,3)], yvalz = rnorm(nrow(samp_dat)))
+bad_data2 <- cbind(samp_dat[,c(1,2)], Z_values = rnorm(nrow(samp_dat)))
+
 test_that("fit_gaussian_2D() fails when nonsense is supplied", {
   expect_error(fit_gaussian_2D("steve"))
   expect_error(fit_gaussian_2D(c("a", "b", "c")))
   expect_error(fit_gaussian_2D())
+  expect_error(fit_gaussian_2D(bad_data1))
+  expect_error(fit_gaussian_2D(bad_data2))
+  expect_error(fit_gaussian_2D(samp_dat, method = "steve"))
+  expect_error(fit_gaussian_2D(samp_dat, method = 4))
   expect_error(fit_gaussian_2D(data.frame(rnorm(100))))
 })
 
@@ -15,36 +22,54 @@ test_that("fit_gaussian_2D() fails when maxiter is invalid", {
   expect_error(fit_gaussian_2D(samp_dat, maxiter = "a"))
 })
 
+test_that("fit_gaussian_2D() sends message about constrain_orientation", {
+  expect_message(fit_gaussian_2D(samp_dat,
+                               constrain_orientation = "a"))
+})
+
+test_that("fit_gaussian_2D() fails when user_init is invalid", {
+  expect_error(fit_gaussian_2D(samp_dat, user_init = "a"))
+})
+
+test_that("fit_gaussian_2D() fails when verbose is invalid", {
+  expect_error(fit_gaussian_2D(samp_dat, verbose = "a"))
+})
+
 
 gauss_fit_ue <-
   fit_gaussian_2D(samp_dat,
                   method = "elliptical",
                   constrain_amplitude = TRUE,
-                  constrain_orientation = "unconstrained")
+                  constrain_orientation = "unconstrained",
+                  print_initial_params = TRUE)
 
 gauss_fit_ce <-
   fit_gaussian_2D(samp_dat,
                   method = "elliptical",
                   constrain_amplitude = TRUE,
-                  constrain_orientation = 0)
+                  constrain_orientation = 0,
+                  print_initial_params = TRUE)
 
 gauss_fit_uel <-
   fit_gaussian_2D(samp_dat,
                   method = "elliptical_log",
                   constrain_amplitude = TRUE,
-                  constrain_orientation = "unconstrained")
+                  constrain_orientation = "unconstrained",
+                  print_initial_params = TRUE)
 
 gauss_fit_cel <-
   fit_gaussian_2D(samp_dat,
                   method = "elliptical_log",
                   constrain_amplitude = TRUE,
-                  constrain_orientation = -1)
+                  constrain_orientation = -1,
+                  print_initial_params = TRUE)
 
 gauss_fit_cir <-
   fit_gaussian_2D(samp_dat,
                   constrain_amplitude = TRUE,
                   user_init = c(25.72529, -2.5, 1.7, 1.3, 1.6),
-                  method = "circular")
+                  method = "circular",
+                  print_initial_params = TRUE)
 
 test_that("each output has four components", {
   expect_equal(length(gauss_fit_ue), 4)

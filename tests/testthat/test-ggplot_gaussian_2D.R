@@ -7,11 +7,16 @@ data(gaussplot_sample_data)
 samp_dat <-
   gaussplot_sample_data[,1:3]
 
+bad_data1 <- cbind(samp_dat[,c(1,3)], yvalz = rnorm(nrow(samp_dat)))
+bad_data2 <- cbind(samp_dat[,c(1,2)], Z_values = rnorm(nrow(samp_dat)))
+
 test_that("ggplot_gaussian_2D() fails when nonsense is supplied", {
   expect_error(ggplot_gaussian_2D("steve"))
   expect_error(ggplot_gaussian_2D(c("a", "b", "c")))
   expect_error(ggplot_gaussian_2D())
   expect_error(ggplot_gaussian_2D(samp_dat))
+  expect_error(ggplot_gaussian_2D(bad_data1))
+  expect_error(ggplot_gaussian_2D(bad_data2))
   expect_error(ggplot_gaussian_2D(samp_dat, maxiter = "a"))
 })
 
@@ -57,3 +62,16 @@ gauss_data <-
 pdf(file = NULL)
 ggplot_gaussian_2D(gauss_data)
 dev.off()
+
+test_that("ggplot_gaussian_2D() fails when bad args are supplied", {
+  expect_error(ggplot_gaussian_2D(gauss_data,
+                                  contour_thickness = "steve"))
+  expect_error(ggplot_gaussian_2D(gauss_data,
+                                  bins = "steve"))
+  expect_error(ggplot_gaussian_2D(gauss_data,
+                                  viridis_dir = "increasing"))
+  expect_error(ggplot_gaussian_2D(gauss_data,
+                                  viridis_dir = "1"))
+  expect_error(ggplot_gaussian_2D(gauss_data,
+                                  viridis_dir = 10))
+})
