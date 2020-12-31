@@ -2,7 +2,7 @@
 % Please edit documentation in R/fit_gaussian_2D.R
 \name{fit_gaussian_2D}
 \alias{fit_gaussian_2D}
-\title{Determine the best-fit parameters of a 2D Gaussian fit to a data set}
+\title{Determine the best-fit parameters for a specific 2D Gaussian model}
 \usage{
 fit_gaussian_2D(
   data,
@@ -63,7 +63,7 @@ orientation strategy was used by this function.}
 }
 }
 \description{
-Determine the best-fit parameters of a 2D Gaussian fit to a data set
+Determine the best-fit parameters for a specific 2D Gaussian model
 }
 \details{
 \code{stats::nls()} is used to fit parameters for a 2D Gaussian to
