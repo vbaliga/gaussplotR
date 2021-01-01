@@ -84,7 +84,7 @@ scoring." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gaussplotR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
       </span>
     </div>
 
@@ -107,10 +107,13 @@ scoring." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/fit_gaussian_2D.html">Fitting 2D Gaussians to Data</a>
+      <a href="../articles/fit_gaussian_2D.html">Fitting 2D Gaussians to data</a>
     </li>
     <li>
       <a href="../articles/formulas-used-by-fit-gaussian-2D.html">Formulas used by fit_gaussian_2D</a>
+    </li>
+    <li>
+      <a href="../articles/troubleshooting-model-fits.html">Troubleshooting model fits</a>
     </li>
   </ul>
 </li>
@@ -224,7 +227,7 @@ by <code><a href='https://rdrr.io/pkg/gaussplotR/man/fit_gaussian_2D.html'>fit_g
 three models must have been run using <code>method = "elliptical_log"</code>. The
 models must be: 1) one in which orientation is unconstrained, 2) one in which
 orientation is constrained to Q = 0 (i.e. a diagonally-oriented Gaussian),
-and 3) one in which orientation is contrained to Q = -1 (i.e. a
+and 3) one in which orientation is constrained to Q = -1 (i.e. a
 horizontally-oriented Gaussian). See this function's Examples for guidance.</p>
 <p>Should raw data be provided instead of the fit_objects_list, the
 <code><a href='https://rdrr.io/pkg/gaussplotR/man/characterize_gaussian_fits.html'>characterize_gaussian_fits()</a></code> runs <code><a href='https://rdrr.io/pkg/gaussplotR/man/fit_gaussian_2D.html'>fit_gaussian_2D()</a></code> internally.

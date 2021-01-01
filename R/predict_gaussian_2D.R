@@ -18,8 +18,8 @@
 #'
 #' If \code{fit_object} is not an object created by
 #' \code{gaussplotR::fit_gaussian_2D()}, \code{predict_gaussian_2D()} attempts
-#' to parse \code{fit_object} as a list of two items. The coefficients of the fit
-#' must be supplied as a one-row, named data.frame within
+#' to parse \code{fit_object} as a list of two items. The coefficients of the
+#' fit must be supplied as a one-row, named data.frame within
 #' \code{fit_object$coefs}, and details of the methods for fitting the Gaussian
 #' must be contained as a character vector in \code{fit_object$fit_method}. This
 #' character vector in \code{fit_object$fit_method} must be a named vector that
@@ -266,7 +266,7 @@ following column names: ", expected_names2
       c("Amp ", "X_peak ", "Y_peak ", "X_sig ", "Y_sig ")
     if (!identical(obj_coef_names, expected_names)) {
       stop(
-        "The names of coefficients do not match expectations and/or coefficients are
+"The names of coefficients do not match expectations and/or coefficients are
 provided in the wrong order. $coef should contain a data.frame with the
 following column names: ", expected_names2
       )

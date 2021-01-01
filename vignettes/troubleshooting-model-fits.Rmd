@@ -1,0 +1,187 @@
+---
+title: "Troubleshooting model fits"
+author: "Vikram B. Baliga"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Troubleshooting model fits}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Automatically finding good initial values for parameters in a nonlinear model
+(i.e. `stats::nls()`) is an art. Given that each of the formulas represented by
+the `model` argument of `fit_gaussian_2D()` contains 5 to 7 parameters,
+`stats::nls()` will often encounter singular gradients or step size errors. 
+
+Code within `fit_gaussian_2D()` will first scan the supplied dataset to
+guesstimate sensible initial parameters, which hopefully sidesteps these issues.
+But there is no guarantee this strategy will always work.
+
+This vignette will offer some guidance on what to do when `stats::nls()` fails
+to converge, including the use of optional parameters in `fit_gaussian_2D()`
+that are meant to help you address these issues.
+
+Let's start by loading `gaussplotR` and getting some sample data loaded up:
+```{r setup}
+library(gaussplotR)
+
+## Load the sample data set
+data(gaussplot_sample_data)
+
+## The raw data we'd like to use are in columns 1:3
+samp_dat <-
+  gaussplot_sample_data[,1:3]
+```
+
+## Singular gradients
+One common problem is that of singular gradients. I will intentionally
+comment out the next block of code because running it will produce the singular
+gradient error, and generating errors in an R Markdown file will prevent its
+rendering. Please un-comment the example below to see.
+
+```{r singular_gradient}
+## Un-comment this example if you'd like to see a singular gradient error
+# gauss_fit_cir <-
+#   fit_gaussian_2D(samp_dat,
+#                   constrain_amplitude = TRUE,
+#                   method = "circular")
+```
+The output from the above example should be:  
+```{r error_msg_1}
+#> Error in stats::nls(response ~ Amp_init * exp(-((((X_values - X_peak)^2)/(2 *  : 
+#>   singular gradient
+#> Called from: stats::nls(response ~ Amp_init * exp(-((((X_values - X_peak)^2)/(2 * 
+#>     X_sig^2) + ((Y_values - Y_peak)^2)/(2 * Y_sig^2)))), start = c(X_peak = #> _peak_init, >
+#>     Y_peak = Y_peak_init, X_sig = X_sig_init, Y_sig = Y_sig_init), 
+#>     data = data, trace = verbose, control = list(maxiter = maxiter, 
+#>         ...))
+#> Error during wrapup: unimplemented type (29) in 'eval'
+#> 
+#> Error: no more error handlers available (recursive errors?); invoking 'abort' restart
+#> Error during wrapup: INTEGER() can only be applied to a 'integer', not a 'unknown type #> #29'
+#> Error: no more error handlers available (recursive errors?); invoking 'abort' restart
+```
+
+
+There are a couple tools in `gaussplotR` that can help you address this problem.
+
+A good first step is to enable the optional argument `print_initial_params` in
+`fit_gaussian_2D()` by setting it to `TRUE`. Again, please un-comment this next
+block, since it will still produce an error:
+
+```{r singular_gradient_print_params}
+## Un-comment this example if you'd like to see a singular gradient error
+# gauss_fit_cir <-
+#   fit_gaussian_2D(samp_dat,
+#                   constrain_amplitude = TRUE,
+#                   method = "circular",
+#                   print_initial_params = TRUE)
+```
+
+Though this block of code will not work, you will at least see something helpful
+at the beginning of the error message:
+```{r error_msg_2}
+#> Initial parameters:
+#>       Amp    X_peak    Y_peak     X_sig     Y_sig 
+#> 25.725293 -2.000000  3.000000  2.482892  2.500000 
+#> Error in stats::nls(response ~ Amp_init * exp(-((((X_values - X_peak)^2)/(2 *  : 
+#>   singular gradient
+#> Called from: stats::nls(response ~ Amp_init * exp(-((((X_values - X_peak)^2)/(2 * 
+#>     X_sig^2) + ((Y_values - Y_peak)^2)/(2 * Y_sig^2)))), start = c(X_peak = #> _peak_init, >
+#>     Y_peak = Y_peak_init, X_sig = X_sig_init, Y_sig = Y_sig_init), 
+#>     data = data, trace = verbose, control = list(maxiter = maxiter, 
+#>         ...))
+#> Error during wrapup: unimplemented type (29) in 'eval'
+#> 
+#> Error: no more error handlers available (recursive errors?); invoking 'abort' restart
+#> Error during wrapup: INTEGER() can only be applied to a 'integer', not a 'unknown type #> #29'
+#> Error: no more error handlers available (recursive errors?); invoking 'abort' restart
+```
+
+Those first three lines indicate the initial values that were used. Often,
+singular gradients will arise when initial values for parameters were poorly
+chosen (sorry!). 
+
+What you can do is supply your own set of initial values. To do this, use the 
+optional argument `user_init` within `fit_gaussian_2D()`. You will need to 
+supply a numeric vector that is of the same length as the number of parameters
+for your chosen model. The values you supply must be provided in the same order
+they appear in the Initial parameters message. They do not need to be named; 
+values alone will suffice. 
+
+This next example will work. I'll keep `print_initial_params` on too, since
+it can be nice to see:
+```{r no_singular_user_init}
+## This should run with no errors
+gauss_fit_cir_user <-
+  fit_gaussian_2D(samp_dat,
+                  constrain_amplitude = TRUE,
+                  method = "circular",
+                  user_init = c(25.72529, -2.5, 1.7, 1.3, 1.6),
+                  print_initial_params = TRUE)
+gauss_fit_cir_user
+```
+
+Note that although we are constraining the amplitude, the value of `Amp` must
+still be provided (here it is `25.72529`). 
+
+It may take some trial and error to find a set of `user_init` values that gets
+your model to converge. It often makes sense to think about what values are
+feasible for each parameter. For example, it should be relatively straightfoward
+to think of ranges of possible values for `X_peak` and `Y_peak`. I often find
+that finding good initial values for the "spread" parameters (such as `X_sig`
+and `Y_sig`) is the tough nut to crack, so I recommend tweaking those parameters
+first.
+
+## Additional control arguments to `nls()`
+The `fit_gaussian_2D()` function also allows you to pass additional control 
+arguments to `stats::nls.control()` via the `...` argument. 
+
+To put this in more technical terms, arguments supplied to `...` are handled as:  
+`stats::nls(control = list(maxiter, ...))`
+
+Therefore, if you are interested in changing e.g. `minFactor` to `1/2048`:  
+`fit_gaussian_2D(data, model, minFactor = 1/2048)`
+
+See the Help file for `stats::nls.control()` for further guidance on what these
+control arguments are.
+
+Please also note that that tweaking `maxiter` should not be handled via `...`
+but rather by the `maxiter` argument to `fit_gaussian_2D()`.
+
+
+## Use parameter constraints with caution
+
+Our scapegoat here is setting `constrain_amplitude = TRUE`. Often, when
+constraining parameters in a nonlinear model, you'll find yourself in a scenario
+where the QR decomposition of the gradient matrix is not of full column rank.
+
+Constraining parameters (amplitude or orientation) will lead to poorer-fitting
+Gaussians anyway, so these features should only be used if you have an *a
+priori* reason to do so (see examples in Priebe et al. 2003^[Priebe NJ,
+Cassanello CR, Lisberger SG. The neural representation of speed in macaque area
+MT/V5. J Neurosci. 2003 Jul 2;23(13):5650-61. doi:
+10.1523/JNEUROSCI.23-13-05650.2003.])
+
+Turning off the `constrain_amplitude` constraint alleviates the problem in this
+particular case:
+
+```{r no_singular}
+## This should run with no errors
+gauss_fit_cir <-
+  fit_gaussian_2D(samp_dat,
+                  method = "circular")
+gauss_fit_cir
+```
+
+Hope this helps!
+
+🐢

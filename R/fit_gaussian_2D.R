@@ -29,7 +29,7 @@
 #'   parameters supplied to \code{stats::nls()} be printed to the console? Set
 #'   to FALSE by default to avoid confusion with the fitted parameters attained
 #'   after using \code{stats::nls()}.
-#' @param ... Additional arguments passed to \code{stats::nls()}
+#' @param ... Additional arguments passed to \code{stats::nls.control()}
 #'
 #' @details \code{stats::nls()} is used to fit parameters for a 2D Gaussian to
 #'   the supplied data. Each method uses (slightly) different sets of

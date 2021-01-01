@@ -184,7 +184,7 @@ gauss_auto
 ## Citation
 
 Baliga, VB. 2020. gaussplotR: Fit, predict, and plot 2D gaussians in R.
-R package version 0.2.2. <https://cran.r-project.org/package=gaussplotR>
+R package version 0.2.3. <https://cran.r-project.org/package=gaussplotR>
 
 ## License
 

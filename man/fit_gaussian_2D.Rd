@@ -49,7 +49,7 @@ parameters supplied to \code{stats::nls()} be printed to the console? Set
 to FALSE by default to avoid confusion with the fitted parameters attained
 after using \code{stats::nls()}.}
 
-\item{...}{Additional arguments passed to \code{stats::nls()}}
+\item{...}{Additional arguments passed to \code{stats::nls.control()}}
 }
 \value{
 A list with the components:

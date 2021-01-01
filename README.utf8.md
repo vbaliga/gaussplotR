@@ -4,15 +4,7 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r opts, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%",
-  dpi = 300
-)
-```
+
 
 # gaussplotR <img src='man/figures/logo.png' align="right" height="138.5" />
 
@@ -31,13 +23,15 @@ predict values from such functions, and produce plots of predicted data.
 
 You can install `gaussplotR` from CRAN via:
 
-``` {r install_cran, eval = FALSE}
+
+```r
 install.packages("gaussplotR")
 ```
 
 Or to get the latest (developmental) version through github, use:
   
-``` {r install_github, eval = FALSE}
+
+```r
 devtools::install_github("vbaliga/gaussplotR")
 ```
 
@@ -60,7 +54,8 @@ Plotting can then be achieved via `ggplot_gaussian_2D()`, but note that the
 plotting frameworks such as `lattice::levelplot()`. A 3D plot can also be 
 produced via `rgl_gaussian_2D()` (not shown here).
 
-```{r example}
+
+```r
 library(gaussplotR)
 
 ## Load the sample data set
@@ -92,6 +87,11 @@ gauss_data_ue <-
 ## Plot via ggplot2 and metR
 library(ggplot2); library(metR)
 ggplot_gaussian_2D(gauss_data_ue)
+```
+
+<img src="man/figures/README-example-1.png" width="100%" />
+
+```r
 
 ## And another example plot via lattice::levelplot()
 library(lattice)
@@ -103,6 +103,11 @@ lattice::levelplot(
     )(100),
   asp = 1
 )
+```
+
+<img src="man/figures/README-example-2.png" width="100%" />
+
+```r
 
 #### Example 2: Constrained elliptical_log ####
 ## This fits a constrained elliptical, as in Priebe et al. 2003
@@ -128,8 +133,9 @@ gauss_data_cel <-
 
 ## Plot via ggplot2 and metR
 ggplot_gaussian_2D(gauss_data_cel)
-
 ```
+
+<img src="man/figures/README-example-3.png" width="100%" />
 
 Should you be interested in having `gaussplotR` try to automatically determine
 the best choice of `method` for `fit_gaussian_2D()`, the `autofit_gaussian_2D()`
@@ -137,7 +143,8 @@ function can come in handy. The default is to select the `method` that
 produces a fit with the lowest `rmse`, but other choices include `rss` and 
 `AIC`.
 
-```{r autofit}
+
+```r
 ## Use autofit_gaussian_2D() to automatically decide the best 
 ## model to use
 gauss_auto <-
@@ -150,7 +157,31 @@ gauss_auto <-
 ## The output has the same components as `fit_gaussian_2D()` 
 ## but for the automatically-selected best-fitting method only:
 gauss_auto
-
+#> $coefs
+#>         A_o      Amp    theta    X_peak   Y_peak         a         b
+#> 1 0.8272942 32.25132 3.581234 -2.638124 2.021262 0.9072492 0.9611345
+#> 
+#> $model
+#> Nonlinear regression model
+#>   model: response ~ A_o + Amp * exp(-((((X_values - X_peak) * cos(theta) -     (Y_values - Y_peak) * sin(theta))/a)^2 + (((X_values - X_peak) *     sin(theta) - (Y_values - Y_peak) * cos(theta))/b)^2)/2)
+#>    data: data
+#>     A_o     Amp   theta  X_peak  Y_peak       a       b 
+#>  0.8273 32.2513  3.5812 -2.6381  2.0213  0.9072  0.9611 
+#>  residual sum-of-squares: 156.2
+#> 
+#> Number of iterations to convergence: 13 
+#> Achieved convergence tolerance: 3.935e-06
+#> 
+#> $model_error_stats
+#>        rss     rmse deviance      AIC
+#> 1 156.2272 2.083181 156.2272 171.0041
+#> 
+#> $fit_method
+#>          method       amplitude     orientation 
+#>    "elliptical" "unconstrained" "unconstrained" 
+#> 
+#> attr(,"gaussplotR")
+#> [1] "gaussplotR_fit"
 ```
 
 
