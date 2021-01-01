@@ -73,7 +73,7 @@ by \code{fit_gaussian_2D()}. This list must contain exactly three models. All
 three models must have been run using \code{method = "elliptical_log"}. The
 models must be: 1) one in which orientation is unconstrained, 2) one in which
 orientation is constrained to Q = 0 (i.e. a diagonally-oriented Gaussian),
-and 3) one in which orientation is contrained to Q = -1 (i.e. a
+and 3) one in which orientation is constrained to Q = -1 (i.e. a
 horizontally-oriented Gaussian). See this function's Examples for guidance.
 
 Should raw data be provided instead of the fit_objects_list, the
