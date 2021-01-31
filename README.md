@@ -45,7 +45,7 @@ formula choice and arrive at the best-fitting parameters.
 
 The `predict_gaussian_2D()` function can then be used to predict values
 from the Gaussian over a supplied grid of X- and Y-values (generated
-here via `expand.grid`). This is useful if the original data is
+here via `expand.grid()`). This is useful if the original data is
 relatively sparse and interpolation of values is desired.
 
 Plotting can then be achieved via `ggplot_gaussian_2D()`, but note that
@@ -167,7 +167,7 @@ gauss_auto
 #>  residual sum-of-squares: 156.2
 #> 
 #> Number of iterations to convergence: 13 
-#> Achieved convergence tolerance: 3.935e-06
+#> Achieved convergence tolerance: 3.931e-06
 #> 
 #> $model_error_stats
 #>        rss     rmse deviance      AIC

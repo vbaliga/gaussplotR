@@ -87,12 +87,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -146,12 +140,12 @@
     <p>Automatically determine the best-fitting 2D Gaussian for a data set</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/gaussplotR/man/autofit_gaussian_2D.html'>autofit_gaussian_2D</a></span>(
-  <span class='kw'>data</span>,
-  comparison_method = <span class='st'>"rmse"</span>,
-  maxiter = <span class='fl'>1000</span>,
-  simplify = <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>autofit_gaussian_2D</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  comparison_method <span class='op'>=</span> <span class='st'>"rmse"</span>,
+  maxiter <span class='op'>=</span> <span class='fl'>1000</span>,
+  simplify <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -178,7 +172,7 @@ of iterations allowed. See <code><a href='https://rdrr.io/r/stats/nls.control.ht
 model_error_stats, and fit_method for the best-fitting model. If FALSE, a
 model comparison table is also included in the returned list as
 <code>$model_comparison</code>. This table is obtained via
-<code><a href='https://rdrr.io/pkg/gaussplotR/man/compare_gaussian_fits.html'>compare_gaussian_fits()</a></code>.</p></td>
+<code><a href='compare_gaussian_fits.html'>compare_gaussian_fits()</a></code>.</p></td>
     </tr>
     </table>
 
@@ -195,13 +189,13 @@ orientation strategy was used by this function.</p></li>
 
 <p>If <code>simplify = FALSE</code>, a model comparison table is also included
 in the returned list as <code>$model_comparison</code>. This table is obtained
-via <code><a href='https://rdrr.io/pkg/gaussplotR/man/compare_gaussian_fits.html'>compare_gaussian_fits()</a></code>.</p>
+via <code><a href='compare_gaussian_fits.html'>compare_gaussian_fits()</a></code>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function runs <code><a href='https://rdrr.io/pkg/gaussplotR/man/fit_gaussian_2D.html'>fit_gaussian_2D()</a></code> three times: once for
+    <p>This function runs <code><a href='fit_gaussian_2D.html'>fit_gaussian_2D()</a></code> three times: once for
 each of the "main" types of models: 1) elliptical, unconstrained; 2)
 elliptical, log; 3) circular. In all three cases, amplitudes and
-orientations are unconstrained. The function <code><a href='https://rdrr.io/pkg/gaussplotR/man/compare_gaussian_fits.html'>compare_gaussian_fits()</a></code>
+orientations are unconstrained. The function <code><a href='compare_gaussian_fits.html'>compare_gaussian_fits()</a></code>
 is then used to determine which of these three models is the best-fitting,
 using the <code>comparison_method</code> argument to make the decision.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
@@ -209,8 +203,9 @@ using the <code>comparison_method</code> argument to make the decision.</p>
     <p>Vikram B. Baliga</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
-}</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -226,7 +221,7 @@ using the <code>comparison_method</code> argument to make the decision.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

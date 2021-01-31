@@ -31,8 +31,8 @@ supplied via the object created by \code{gaussplotR::fit_gaussian_2D()}.
 
 If \code{fit_object} is not an object created by
 \code{gaussplotR::fit_gaussian_2D()}, \code{predict_gaussian_2D()} attempts
-to parse \code{fit_object} as a list of two items. The coefficients of the fit
-must be supplied as a one-row, named data.frame within
+to parse \code{fit_object} as a list of two items. The coefficients of the
+fit must be supplied as a one-row, named data.frame within
 \code{fit_object$coefs}, and details of the methods for fitting the Gaussian
 must be contained as a character vector in \code{fit_object$fit_method}. This
 character vector in \code{fit_object$fit_method} must be a named vector that

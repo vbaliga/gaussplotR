@@ -135,7 +135,7 @@ still be provided (here it is `25.72529`).
 
 It may take some trial and error to find a set of `user_init` values that gets
 your model to converge. It often makes sense to think about what values are
-feasible for each parameter. For example, it should be relatively straightfoward
+feasible for each parameter. For example, it should be relatively straightforward
 to think of ranges of possible values for `X_peak` and `Y_peak`. I often find
 that finding good initial values for the "spread" parameters (such as `X_sig`
 and `Y_sig`) is the tough nut to crack, so I recommend tweaking those parameters
