@@ -11,8 +11,7 @@ authors:
     orcid: 0000-0002-9367-8974
     affiliation: 1
 affiliations:
- - name: Department of Zoology, University of British Columbia, 
- Vancouver, British Colombia, Canada V6T 1Z4
+ - name: Department of Zoology, University of British Columbia, Vancouver, British Colombia, Canada V6T 1Z4
    index: 1
 date: 31 January 2021
 bibliography: paper.bib
