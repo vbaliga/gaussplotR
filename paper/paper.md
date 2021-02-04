@@ -13,7 +13,7 @@ authors:
 affiliations:
  - name: Department of Zoology, University of British Columbia, Vancouver, British Colombia, Canada V6T 1Z4
    index: 1
-date: 31 January 2021
+date: 03 February 2021
 bibliography: paper.bib
 
 ---
@@ -25,11 +25,26 @@ data, characterize fitted models, predict new data from fitted models, and
 provide visualizations of fitted 2D Gaussian surfaces. Such tools enable
 researchers to fit models to data that characterize a response (i.e. the height
 of the Gaussian) for a given set of bivariate inputs (i.e. a set of "X" and "Y"
-variables). In principle, tools within `gaussplotR` have broad applicability to
-a variety of scientific disciplines.
+variables). 
+
+
+# Statement of Need
+
+In principle, tools within `gaussplotR` have broad applicability to
+a variety of scientific disciplines. It is not uncommon for researchers to 
+desire to fit a 2D Gaussian to bivariate input data. For example, 
+`@Priebe2003` characterize motion-sensitive neurons by fitting elliptical 2D 
+Gaussian functions to neurons' response rates to varied visual stimuli. At the
+time of writing, we know of no other packages in the `R` ecosystem that 
+automatically handle the fitting of 2D Gaussians to supplied data. Further,
+`gaussplotR` allows for the characterization of various properties of the
+fitted Gaussian, along with plotting functions (as the name of the package 
+implies). These capabilities are futher detailed in the next section, along
+with supplied vignettes in the package.
 
 
 # Overview and getting started
+
 A series of vignettes that provides detailed guidance are available on
 [gaussplotR's GitHub page](https://vbaliga.github.io/gaussplotR/).
 
