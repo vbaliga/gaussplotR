@@ -25,12 +25,12 @@ print.gaussplotR_fit <- function(x, ...) {
 # Summary method
 #' @method summary gaussplotR_fit
 #' @export
-summary.gaussplotR_fit <- function(x, ...) {
-  NextMethod()
+summary.gaussplotR_fit <- function(object, ...) {
+  #NextMethod()
   message("Model coefficients")
-  print(round(x$coefs, 2), row.names = FALSE)
+  print(round(object$coefs, 2), row.names = FALSE)
   message("Model error stats")
-  print(round(x$model_error_stats, 2), row.names = FALSE)
+  print(round(object$model_error_stats, 2), row.names = FALSE)
   message("Fitting methods")
-  print(x$fit_method)
+  print(object$fit_method)
 }
