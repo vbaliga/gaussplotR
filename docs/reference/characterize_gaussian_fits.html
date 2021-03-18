@@ -84,13 +84,19 @@ scoring." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gaussplotR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -148,19 +154,19 @@ independent and diagonally-tuned predictions, along with Z-difference
 scoring.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>characterize_gaussian_fits</span><span class='op'>(</span>
-  fit_objects_list <span class='op'>=</span> <span class='cn'>NULL</span>,
-  data <span class='op'>=</span> <span class='cn'>NULL</span>,
-  constrain_amplitude <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/gaussplotR/man/characterize_gaussian_fits.html'>characterize_gaussian_fits</a></span>(
+  fit_objects_list = <span class='kw'>NULL</span>,
+  data = <span class='kw'>NULL</span>,
+  constrain_amplitude = <span class='fl'>FALSE</span>,
+  <span class='kw'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>fit_objects_list</th>
-      <td><p>A list of outputs from <code><a href='fit_gaussian_2D.html'>fit_gaussian_2D()</a></code>. See
+      <td><p>A list of outputs from <code><a href='https://rdrr.io/pkg/gaussplotR/man/fit_gaussian_2D.html'>fit_gaussian_2D()</a></code>. See
 Details for more. This is the preferred input object for this function.</p></td>
     </tr>
     <tr>
@@ -168,19 +174,19 @@ Details for more. This is the preferred input object for this function.</p></td>
       <td><p>A data.frame that contains the raw data (generally rectilinearly
 gridded data, but this is not a strict requirement). Columns must be named
 <code>"X_values"</code>, <code>"Y_values"</code> and <code>"response"</code>. See
-<code><a href='fit_gaussian_2D.html'>fit_gaussian_2D()</a></code> for details.</p></td>
+<code><a href='https://rdrr.io/pkg/gaussplotR/man/fit_gaussian_2D.html'>fit_gaussian_2D()</a></code> for details.</p></td>
     </tr>
     <tr>
       <th>constrain_amplitude</th>
       <td><p>Default FALSE; should the amplitude of the
 Gaussian be set to the maximum value of the <code>"response"</code> variable
 (<code>TRUE</code>), or should the amplitude fitted by <code><a href='https://rdrr.io/r/stats/nls.html'>stats::nls()</a></code>
-(<code>FALSE</code>)? See <code><a href='fit_gaussian_2D.html'>fit_gaussian_2D()</a></code> for details.</p></td>
+(<code>FALSE</code>)? See <code><a href='https://rdrr.io/pkg/gaussplotR/man/fit_gaussian_2D.html'>fit_gaussian_2D()</a></code> for details.</p></td>
     </tr>
     <tr>
       <th>...</th>
       <td><p>Additional arguments that can be passed to
-<code><a href='fit_gaussian_2D.html'>fit_gaussian_2D()</a></code> if data are supplied.</p></td>
+<code><a href='https://rdrr.io/pkg/gaussplotR/man/fit_gaussian_2D.html'>fit_gaussian_2D()</a></code> if data are supplied.</p></td>
     </tr>
     </table>
 
@@ -188,7 +194,7 @@ Gaussian be set to the maximum value of the <code>"response"</code> variable
 
     <p>A list with the following:</p><ul>
 <li><p>"model_comparison" A model comparison output (i.e. what is produced
-by <code><a href='compare_gaussian_fits.html'>compare_gaussian_fits()</a></code>), which indicates the relative preference
+by <code><a href='https://rdrr.io/pkg/gaussplotR/man/compare_gaussian_fits.html'>compare_gaussian_fits()</a></code>), which indicates the relative preference
 of each of the three models.</p></li>
 <li><p>"Q_table" A data.frame that provides information on the value of Q
 from the best-fitting model, along with the 5-95% confidence intervals of
@@ -214,20 +220,20 @@ See Winship et al. 2006 for details.</p></li>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>This function accepts either a list of objects output from
-<code><a href='fit_gaussian_2D.html'>fit_gaussian_2D()</a></code> (preferred) or a data.frame that contains the raw
+<code><a href='https://rdrr.io/pkg/gaussplotR/man/fit_gaussian_2D.html'>fit_gaussian_2D()</a></code> (preferred) or a data.frame that contains the raw
 data.</p>
 <p>The supplied fit_objects_list must be a list that contains objects returned
-by <code><a href='fit_gaussian_2D.html'>fit_gaussian_2D()</a></code>. This list must contain exactly three models. All
+by <code><a href='https://rdrr.io/pkg/gaussplotR/man/fit_gaussian_2D.html'>fit_gaussian_2D()</a></code>. This list must contain exactly three models. All
 three models must have been run using <code>method = "elliptical_log"</code>. The
 models must be: 1) one in which orientation is unconstrained, 2) one in which
 orientation is constrained to Q = 0 (i.e. a diagonally-oriented Gaussian),
 and 3) one in which orientation is constrained to Q = -1 (i.e. a
 horizontally-oriented Gaussian). See this function's Examples for guidance.</p>
 <p>Should raw data be provided instead of the fit_objects_list, the
-<code>characterize_gaussian_fits()</code> runs <code><a href='fit_gaussian_2D.html'>fit_gaussian_2D()</a></code> internally.
+<code><a href='https://rdrr.io/pkg/gaussplotR/man/characterize_gaussian_fits.html'>characterize_gaussian_fits()</a></code> runs <code><a href='https://rdrr.io/pkg/gaussplotR/man/fit_gaussian_2D.html'>fit_gaussian_2D()</a></code> internally.
 This is generally not recommended, as difficulties in fitting models via
 <code><a href='https://rdrr.io/r/stats/nls.html'>stats::nls()</a></code> are more easily troubleshot by the optional arguments in
-<code><a href='fit_gaussian_2D.html'>fit_gaussian_2D()</a></code>. Nevertheless, supplying raw data instead of a list
+<code><a href='https://rdrr.io/pkg/gaussplotR/man/fit_gaussian_2D.html'>fit_gaussian_2D()</a></code>. Nevertheless, supplying raw data instead of a list
 of fitted models is feasible, though your mileage may vary.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -244,64 +250,63 @@ in the accessory optic system and pretectum of pigeons. J Neurophysiol. 2006
     <p>Vikram B. Baliga</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/vbaliga/gaussplotR'>gaussplotR</a></span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+  <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/vbaliga/gaussplotR'>gaussplotR</a></span>)
 
   <span class='co'>## Load the sample data set</span>
-  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>gaussplot_sample_data</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>gaussplot_sample_data</span>)
 
   <span class='co'>## The raw data we'd like to use are in columns 1:3</span>
-  <span class='va'>samp_dat</span> <span class='op'>&lt;-</span>
-    <span class='va'>gaussplot_sample_data</span><span class='op'>[</span>,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>]</span>
+  <span class='kw'>samp_dat</span> <span class='op'>&lt;-</span>
+    <span class='kw'>gaussplot_sample_data</span>[,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>]
 
   <span class='co'>## Fit the three required models</span>
-  <span class='va'>gauss_fit_uncn</span> <span class='op'>&lt;-</span>
-    <span class='fu'><a href='fit_gaussian_2D.html'>fit_gaussian_2D</a></span><span class='op'>(</span>
-      <span class='va'>samp_dat</span>,
-      method <span class='op'>=</span> <span class='st'>"elliptical_log"</span>,
-      constrain_amplitude <span class='op'>=</span> <span class='cn'>FALSE</span>,
-      constrain_orientation <span class='op'>=</span> <span class='st'>"unconstrained"</span>
-    <span class='op'>)</span>
+  <span class='kw'>gauss_fit_uncn</span> <span class='op'>&lt;-</span>
+    <span class='fu'><a href='https://rdrr.io/pkg/gaussplotR/man/fit_gaussian_2D.html'>fit_gaussian_2D</a></span>(
+      <span class='kw'>samp_dat</span>,
+      method = <span class='st'>"elliptical_log"</span>,
+      constrain_amplitude = <span class='fl'>FALSE</span>,
+      constrain_orientation = <span class='st'>"unconstrained"</span>
+    )
 
-  <span class='va'>gauss_fit_diag</span> <span class='op'>&lt;-</span>
-    <span class='fu'><a href='fit_gaussian_2D.html'>fit_gaussian_2D</a></span><span class='op'>(</span>
-      <span class='va'>samp_dat</span>,
-      method <span class='op'>=</span> <span class='st'>"elliptical_log"</span>,
-      constrain_amplitude <span class='op'>=</span> <span class='cn'>FALSE</span>,
-      constrain_orientation <span class='op'>=</span> <span class='fl'>0</span>
-    <span class='op'>)</span>
+  <span class='kw'>gauss_fit_diag</span> <span class='op'>&lt;-</span>
+    <span class='fu'><a href='https://rdrr.io/pkg/gaussplotR/man/fit_gaussian_2D.html'>fit_gaussian_2D</a></span>(
+      <span class='kw'>samp_dat</span>,
+      method = <span class='st'>"elliptical_log"</span>,
+      constrain_amplitude = <span class='fl'>FALSE</span>,
+      constrain_orientation = <span class='fl'>0</span>
+    )
 
-  <span class='va'>gauss_fit_indp</span> <span class='op'>&lt;-</span>
-    <span class='fu'><a href='fit_gaussian_2D.html'>fit_gaussian_2D</a></span><span class='op'>(</span>
-      <span class='va'>samp_dat</span>,
-      method <span class='op'>=</span> <span class='st'>"elliptical_log"</span>,
-      constrain_amplitude <span class='op'>=</span> <span class='cn'>FALSE</span>,
-      constrain_orientation <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span>
-    <span class='op'>)</span>
+  <span class='kw'>gauss_fit_indp</span> <span class='op'>&lt;-</span>
+    <span class='fu'><a href='https://rdrr.io/pkg/gaussplotR/man/fit_gaussian_2D.html'>fit_gaussian_2D</a></span>(
+      <span class='kw'>samp_dat</span>,
+      method = <span class='st'>"elliptical_log"</span>,
+      constrain_amplitude = <span class='fl'>FALSE</span>,
+      constrain_orientation = <span class='op'>-</span><span class='fl'>1</span>
+    )
 
   <span class='co'>## Combine the outputs into a list</span>
-  <span class='va'>models_list</span> <span class='op'>&lt;-</span>
-    <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
-      <span class='va'>gauss_fit_uncn</span>,
-      <span class='va'>gauss_fit_diag</span>,
-      <span class='va'>gauss_fit_indp</span>
-    <span class='op'>)</span>
+  <span class='kw'>models_list</span> <span class='op'>&lt;-</span>
+    <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
+      <span class='kw'>gauss_fit_uncn</span>,
+      <span class='kw'>gauss_fit_diag</span>,
+      <span class='kw'>gauss_fit_indp</span>
+    )
 
   <span class='co'>## Now characterize</span>
-  <span class='va'>out</span> <span class='op'>&lt;-</span>
-    <span class='fu'>characterize_gaussian_fits</span><span class='op'>(</span><span class='va'>models_list</span><span class='op'>)</span>
-  <span class='va'>out</span>
+  <span class='kw'>out</span> <span class='op'>&lt;-</span>
+    <span class='fu'><a href='https://rdrr.io/pkg/gaussplotR/man/characterize_gaussian_fits.html'>characterize_gaussian_fits</a></span>(<span class='kw'>models_list</span>)
+  <span class='kw'>out</span>
 
   <span class='co'>## Alternatively, the raw data itself can be supplied.</span>
   <span class='co'>## This is less preferred, as fitting of models may fail</span>
   <span class='co'>## internally.</span>
-  <span class='va'>out2</span> <span class='op'>&lt;-</span>
-    <span class='fu'>characterize_gaussian_fits</span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>samp_dat</span><span class='op'>)</span>
+  <span class='kw'>out2</span> <span class='op'>&lt;-</span>
+    <span class='fu'><a href='https://rdrr.io/pkg/gaussplotR/man/characterize_gaussian_fits.html'>characterize_gaussian_fits</a></span>(data = <span class='kw'>samp_dat</span>)
 
   <span class='co'>## This produces the same output, assuming models are fit without error</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span><span class='op'>(</span><span class='va'>out</span>, <span class='va'>out2</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+  <span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='kw'>out</span>, <span class='kw'>out2</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -317,7 +322,7 @@ in the accessory optic system and pretectum of pigeons. J Neurophysiol. 2006
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

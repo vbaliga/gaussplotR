@@ -1,11 +1,8 @@
-pandoc: 2.3.1
-pkgdown: 1.6.1.9000
-pkgdown_sha: e1e46f2e13c7efdb17bc4eae40bc3779c2b0b517
-articles:
-  fit_gaussian_2D: fit_gaussian_2D.html
-  formulas-used-by-fit-gaussian-2D: formulas-used-by-fit-gaussian-2D.html
-  troubleshooting-model-fits: troubleshooting-model-fits.html
-last_built: 2021-02-13T00:46Z
+pandoc: 2.7.2
+pkgdown: 1.5.1.9000
+pkgdown_sha: caf7cc74e008e8d0d6e53eeda93cd3cad3545bf2
+articles: []
+last_built: 2021-03-18T22:06Z
 urls:
   reference: https://vbaliga.github.io/gaussplotR//reference
   article: https://vbaliga.github.io/gaussplotR//articles

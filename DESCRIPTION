@@ -1,7 +1,7 @@
 Package: gaussplotR
 Type: Package
 Title: Fit, Predict and Plot 2D Gaussians
-Version: 0.2.3
+Version: 0.2.3.9000
 Authors@R: 
     person(given = "Vikram B.",
                  family = "Baliga", 
@@ -29,7 +29,7 @@ Suggests:
     rmarkdown,
     testthat
 Depends: 
-    R (>= 4.0.0)
+    R (>= 3.3.0)
 URL: https://github.com/vbaliga/gaussplotR
 BugReports: https://github.com/vbaliga/gaussplotR/issues
 VignetteBuilder: knitr

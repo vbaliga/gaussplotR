@@ -38,12 +38,18 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gaussplotR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+<li>
+  <a href="../index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -92,7 +98,7 @@
       <h1 data-toc-skip>Troubleshooting model fits</h1>
                         <h4 class="author">Vikram B. Baliga</h4>
             
-            <h4 class="date">2021-02-12</h4>
+            <h4 class="date">2021-03-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/vbaliga/gaussplotR/blob/master/vignettes/troubleshooting-model-fits.Rmd"><code>vignettes/troubleshooting-model-fits.Rmd</code></a></small>
       <div class="hidden name"><code>troubleshooting-model-fits.Rmd</code></div>
@@ -101,19 +107,20 @@
 
     
     
-<p>Automatically finding good initial values for parameters in a nonlinear model (i.e. <code><a href="https://rdrr.io/r/stats/nls.html">stats::nls()</a></code>) is an art. Given that each of the formulas represented by the <code>model</code> argument of <code><a href="../reference/fit_gaussian_2D.html">fit_gaussian_2D()</a></code> contains 5 to 7 parameters, <code><a href="https://rdrr.io/r/stats/nls.html">stats::nls()</a></code> will often encounter singular gradients or step size errors.</p>
+<p>Automatically finding good initial values for parameters in a nonlinear model (i.e. <code><a href="https://rdrr.io/r/stats/nls.html">stats::nls()</a></code>) is an art. Given that each of the formulas represented by the <code>model</code> argument of <code><a href="../reference/fit_gaussian_2D.html">fit_gaussian_2D()</a></code> contains 5 to 7 parameters, <code><a href="https://rdrr.io/r/stats/nls.html">stats::nls()</a></code> will often encounter singular gradients or step size errors.</p>
 <p>Code within <code><a href="../reference/fit_gaussian_2D.html">fit_gaussian_2D()</a></code> will first scan the supplied dataset to guesstimate sensible initial parameters, which hopefully sidesteps these issues. But there is no guarantee this strategy will always work.</p>
 <p>This vignette will offer some guidance on what to do when <code><a href="https://rdrr.io/r/stats/nls.html">stats::nls()</a></code> fails to converge, including the use of optional parameters in <code><a href="../reference/fit_gaussian_2D.html">fit_gaussian_2D()</a></code> that are meant to help you address these issues.</p>
 <p>Let’s start by loading <code>gaussplotR</code> and getting some sample data loaded up:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/vbaliga/gaussplotR">gaussplotR</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/vbaliga/gaussplotR">gaussplotR</a></span>)
 
 <span class="co">## Load the sample data set</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">gaussplot_sample_data</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">gaussplot_sample_data</span>)
 
 <span class="co">## The raw data we'd like to use are in columns 1:3</span>
-<span class="va">samp_dat</span> <span class="op">&lt;-</span>
-  <span class="va">gaussplot_sample_data</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></pre></div>
+<span class="kw">samp_dat</span> <span class="op">&lt;-</span>
+  <span class="kw">gaussplot_sample_data</span>[,<span class="fl">1</span><span class="op">:</span><span class="fl">3</span>]
+</pre></div>
 <div id="singular-gradients" class="section level2">
 <h2 class="hasAnchor">
 <a href="#singular-gradients" class="anchor"></a>Singular gradients</h2>
@@ -123,7 +130,8 @@
 <span class="co"># gauss_fit_cir &lt;-</span>
 <span class="co">#   fit_gaussian_2D(samp_dat,</span>
 <span class="co">#                   constrain_amplitude = TRUE,</span>
-<span class="co">#                   method = "circular")</span></pre></div>
+<span class="co">#                   method = "circular")</span>
+</pre></div>
 <p>The output from the above example should be:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="co">#&gt; Error in stats::nls(response ~ Amp_init * exp(-((((X_values - X_peak)^2)/(2 *  : </span>
@@ -137,7 +145,8 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Error: no more error handlers available (recursive errors?); invoking 'abort' restart</span>
 <span class="co">#&gt; Error during wrapup: INTEGER() can only be applied to a 'integer', not a 'unknown type #&gt; #29'</span>
-<span class="co">#&gt; Error: no more error handlers available (recursive errors?); invoking 'abort' restart</span></pre></div>
+<span class="co">#&gt; Error: no more error handlers available (recursive errors?); invoking 'abort' restart</span>
+</pre></div>
 <p>There are a couple tools in <code>gaussplotR</code> that can help you address this problem.</p>
 <p>A good first step is to enable the optional argument <code>print_initial_params</code> in <code><a href="../reference/fit_gaussian_2D.html">fit_gaussian_2D()</a></code> by setting it to <code>TRUE</code>. Again, please un-comment this next block, since it will still produce an error:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
@@ -146,7 +155,8 @@
 <span class="co">#   fit_gaussian_2D(samp_dat,</span>
 <span class="co">#                   constrain_amplitude = TRUE,</span>
 <span class="co">#                   method = "circular",</span>
-<span class="co">#                   print_initial_params = TRUE)</span></pre></div>
+<span class="co">#                   print_initial_params = TRUE)</span>
+</pre></div>
 <p>Though this block of code will not work, you will at least see something helpful at the beginning of the error message:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="co">#&gt; Initial parameters:</span>
@@ -163,47 +173,33 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Error: no more error handlers available (recursive errors?); invoking 'abort' restart</span>
 <span class="co">#&gt; Error during wrapup: INTEGER() can only be applied to a 'integer', not a 'unknown type #&gt; #29'</span>
-<span class="co">#&gt; Error: no more error handlers available (recursive errors?); invoking 'abort' restart</span></pre></div>
+<span class="co">#&gt; Error: no more error handlers available (recursive errors?); invoking 'abort' restart</span>
+</pre></div>
 <p>Those first three lines indicate the initial values that were used. Often, singular gradients will arise when initial values for parameters were poorly chosen (sorry!).</p>
 <p>What you can do is supply your own set of initial values. To do this, use the optional argument <code>user_init</code> within <code><a href="../reference/fit_gaussian_2D.html">fit_gaussian_2D()</a></code>. You will need to supply a numeric vector that is of the same length as the number of parameters for your chosen model. The values you supply must be provided in the same order they appear in the Initial parameters message. They do not need to be named; values alone will suffice.</p>
 <p>This next example will work. I’ll keep <code>print_initial_params</code> on too, since it can be nice to see:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="co">## This should run with no errors</span>
-<span class="va">gauss_fit_cir_user</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="../reference/fit_gaussian_2D.html">fit_gaussian_2D</a></span><span class="op">(</span><span class="va">samp_dat</span>,
-                  constrain_amplitude <span class="op">=</span> <span class="cn">TRUE</span>,
-                  method <span class="op">=</span> <span class="st">"circular"</span>,
-                  user_init <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">25.72529</span>, <span class="op">-</span><span class="fl">2.5</span>, <span class="fl">1.7</span>, <span class="fl">1.3</span>, <span class="fl">1.6</span><span class="op">)</span>,
-                  print_initial_params <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="kw">gauss_fit_cir_user</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/fit_gaussian_2D.html">fit_gaussian_2D</a></span>(<span class="kw">samp_dat</span>,
+                  constrain_amplitude = <span class="fl">TRUE</span>,
+                  method = <span class="st">"circular"</span>,
+                  user_init = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">25.72529</span>, <span class="op">-</span><span class="fl">2.5</span>, <span class="fl">1.7</span>, <span class="fl">1.3</span>, <span class="fl">1.6</span>),
+                  print_initial_params = <span class="fl">TRUE</span>)
 <span class="co">#&gt; Initial parameters:</span>
 <span class="co">#&gt;      Amp   X_peak   Y_peak    X_sig    Y_sig </span>
 <span class="co">#&gt; 25.72529 -2.50000  1.70000  1.30000  1.60000</span>
-<span class="va">gauss_fit_cir_user</span>
-<span class="co">#&gt; $coefs</span>
-<span class="co">#&gt;        Amp    X_peak   Y_peak    X_sig    Y_sig</span>
-<span class="co">#&gt; 1 25.72529 -2.549886 1.858539 1.268501 1.496817</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $model</span>
-<span class="co">#&gt; Nonlinear regression model</span>
-<span class="co">#&gt;   model: response ~ Amp_init * exp(-((((X_values - X_peak)^2)/(2 * X_sig^2) +     ((Y_values - Y_peak)^2)/(2 * Y_sig^2))))</span>
-<span class="co">#&gt;    data: data</span>
-<span class="co">#&gt; X_peak Y_peak  X_sig  Y_sig </span>
-<span class="co">#&gt; -2.550  1.859  1.269  1.497 </span>
-<span class="co">#&gt;  residual sum-of-squares: 906.9</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Number of iterations to convergence: 20 </span>
-<span class="co">#&gt; Achieved convergence tolerance: 8.047e-06</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $model_error_stats</span>
-<span class="co">#&gt;        rss    rmse deviance      AIC</span>
-<span class="co">#&gt; 1 906.8782 5.01907 906.8782 228.3172</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $fit_method</span>
+<span class="kw">gauss_fit_cir_user</span>
+<span class="co">#&gt; Model coefficients</span>
+<span class="co">#&gt;    Amp X_peak Y_peak X_sig Y_sig</span>
+<span class="co">#&gt;  25.73  -2.55   1.86  1.27   1.5</span>
+<span class="co">#&gt; Model error stats</span>
+<span class="co">#&gt;     rss rmse deviance    AIC</span>
+<span class="co">#&gt;  906.88 5.02   906.88 228.32</span>
+<span class="co">#&gt; Fitting methods</span>
 <span class="co">#&gt;        method     amplitude   orientation </span>
-<span class="co">#&gt;    "circular" "constrained"            NA </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; attr(,"gaussplotR")</span>
-<span class="co">#&gt; [1] "gaussplotR_fit"</span></pre></div>
+<span class="co">#&gt;    "circular" "constrained"            NA</span>
+</pre></div>
 <p>Note that although we are constraining the amplitude, the value of <code>Amp</code> must still be provided (here it is <code>25.72529</code>).</p>
 <p>It may take some trial and error to find a set of <code>user_init</code> values that gets your model to converge. It often makes sense to think about what values are feasible for each parameter. For example, it should be relatively straightforward to think of ranges of possible values for <code>X_peak</code> and <code>Y_peak</code>. I often find that finding good initial values for the “spread” parameters (such as <code>X_sig</code> and <code>Y_sig</code>) is the tough nut to crack, so I recommend tweaking those parameters first.</p>
 </div>
@@ -213,7 +209,7 @@
 </h2>
 <p>The <code><a href="../reference/fit_gaussian_2D.html">fit_gaussian_2D()</a></code> function also allows you to pass additional control arguments to <code><a href="https://rdrr.io/r/stats/nls.control.html">stats::nls.control()</a></code> via the <code>...</code> argument.</p>
 <p>To put this in more technical terms, arguments supplied to <code>...</code> are handled as:<br><code><a href="https://rdrr.io/r/stats/nls.html">stats::nls(control = list(maxiter, ...))</a></code></p>
-<p>Therefore, if you are interested in changing e.g. <code>minFactor</code> to <code>1/2048</code>:<br><code><a href="../reference/fit_gaussian_2D.html">fit_gaussian_2D(data, model, minFactor = 1/2048)</a></code></p>
+<p>Therefore, if you are interested in changing e.g. <code>minFactor</code> to <code>1/2048</code>:<br><code><a href="../reference/fit_gaussian_2D.html">fit_gaussian_2D(data, model, minFactor = 1/2048)</a></code></p>
 <p>See the Help file for <code><a href="https://rdrr.io/r/stats/nls.control.html">stats::nls.control()</a></code> for further guidance on what these control arguments are.</p>
 <p>Please also note that that tweaking <code>maxiter</code> should not be handled via <code>...</code> but rather by the <code>maxiter</code> argument to <code><a href="../reference/fit_gaussian_2D.html">fit_gaussian_2D()</a></code>.</p>
 </div>
@@ -225,35 +221,20 @@
 <p>Turning off the <code>constrain_amplitude</code> constraint alleviates the problem in this particular case:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="co">## This should run with no errors</span>
-<span class="va">gauss_fit_cir</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="../reference/fit_gaussian_2D.html">fit_gaussian_2D</a></span><span class="op">(</span><span class="va">samp_dat</span>,
-                  method <span class="op">=</span> <span class="st">"circular"</span><span class="op">)</span>
-<span class="va">gauss_fit_cir</span>
-<span class="co">#&gt; $coefs</span>
-<span class="co">#&gt;        Amp    X_peak   Y_peak    X_sig    Y_sig</span>
-<span class="co">#&gt; 1 23.18005 -2.546643 1.811152 1.316288 1.642641</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $model</span>
-<span class="co">#&gt; Nonlinear regression model</span>
-<span class="co">#&gt;   model: response ~ Amp * exp(-((((X_values - X_peak)^2)/(2 * X_sig^2) +     ((Y_values - Y_peak)^2)/(2 * Y_sig^2))))</span>
-<span class="co">#&gt;    data: data</span>
-<span class="co">#&gt;    Amp X_peak Y_peak  X_sig  Y_sig </span>
-<span class="co">#&gt; 23.180 -2.547  1.811  1.316  1.643 </span>
-<span class="co">#&gt;  residual sum-of-squares: 899.6</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Number of iterations to convergence: 22 </span>
-<span class="co">#&gt; Achieved convergence tolerance: 9.054e-06</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $model_error_stats</span>
-<span class="co">#&gt;       rss     rmse deviance      AIC</span>
-<span class="co">#&gt; 1 899.613 4.998925  899.613 230.0276</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $fit_method</span>
+<span class="kw">gauss_fit_cir</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/fit_gaussian_2D.html">fit_gaussian_2D</a></span>(<span class="kw">samp_dat</span>,
+                  method = <span class="st">"circular"</span>)
+<span class="kw">gauss_fit_cir</span>
+<span class="co">#&gt; Model coefficients</span>
+<span class="co">#&gt;    Amp X_peak Y_peak X_sig Y_sig</span>
+<span class="co">#&gt;  23.18  -2.55   1.81  1.32  1.64</span>
+<span class="co">#&gt; Model error stats</span>
+<span class="co">#&gt;     rss rmse deviance    AIC</span>
+<span class="co">#&gt;  899.61    5   899.61 230.03</span>
+<span class="co">#&gt; Fitting methods</span>
 <span class="co">#&gt;          method       amplitude     orientation </span>
-<span class="co">#&gt;      "circular" "unconstrained"              NA </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; attr(,"gaussplotR")</span>
-<span class="co">#&gt; [1] "gaussplotR_fit"</span></pre></div>
+<span class="co">#&gt;      "circular" "unconstrained"              NA</span>
+</pre></div>
 <p>Hope this helps!</p>
 <p>🐢</p>
 </div>
@@ -280,7 +261,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

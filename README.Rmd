@@ -149,7 +149,7 @@ gauss_auto <-
 
 ## The output has the same components as `fit_gaussian_2D()` 
 ## but for the automatically-selected best-fitting method only:
-gauss_auto
+summary(gauss_auto)
 
 ```
 

@@ -391,6 +391,7 @@ fit_gaussian_2D <- function(data,
                 )
           )
         attr(output, "gaussplotR") <- "gaussplotR_fit"
+        class(output) <- c(class(output), "gaussplotR_fit")
         return(output)
 
       } else {
@@ -453,6 +454,7 @@ fit_gaussian_2D <- function(data,
               )
           )
         attr(output, "gaussplotR") <- "gaussplotR_fit"
+        class(output) <- c(class(output), "gaussplotR_fit")
         return(output)
 
       }
@@ -547,6 +549,7 @@ fit_gaussian_2D <- function(data,
             )
         )
       attr(output, "gaussplotR") <- "gaussplotR_fit"
+      class(output) <- c(class(output), "gaussplotR_fit")
       return(output)
 
     } else {
@@ -612,6 +615,7 @@ fit_gaussian_2D <- function(data,
             )
         )
       attr(output, "gaussplotR") <- "gaussplotR_fit"
+      class(output) <- c(class(output), "gaussplotR_fit")
       return(output)
       }
 
@@ -708,6 +712,7 @@ fit_gaussian_2D <- function(data,
               )
           )
         attr(output, "gaussplotR") <- "gaussplotR_fit"
+        class(output) <- c(class(output), "gaussplotR_fit")
         return(output)
 
       } else {
@@ -764,6 +769,7 @@ fit_gaussian_2D <- function(data,
               )
           )
         attr(output, "gaussplotR") <- "gaussplotR_fit"
+        class(output) <- c(class(output), "gaussplotR_fit")
         return(output)
 
       }
@@ -848,6 +854,7 @@ fit_gaussian_2D <- function(data,
               )
           )
         attr(output, "gaussplotR") <- "gaussplotR_fit"
+        class(output) <- c(class(output), "gaussplotR_fit")
         return(output)
 
       } else {
@@ -903,6 +910,7 @@ fit_gaussian_2D <- function(data,
               )
           )
         attr(output, "gaussplotR") <- "gaussplotR_fit"
+        class(output) <- c(class(output), "gaussplotR_fit")
         return(output)
 
       }
@@ -994,6 +1002,7 @@ fit_gaussian_2D <- function(data,
             )
         )
       attr(output, "gaussplotR") <- "gaussplotR_fit"
+      class(output) <- c(class(output), "gaussplotR_fit")
       return(output)
 
     } else {
@@ -1050,6 +1059,7 @@ fit_gaussian_2D <- function(data,
             )
         )
       attr(output, "gaussplotR") <- "gaussplotR_fit"
+      class(output) <- c(class(output), "gaussplotR_fit")
       return(output)
 
     }

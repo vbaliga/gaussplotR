@@ -124,8 +124,9 @@ from the x-axis in the clockwise direction), `X_peak` (x-axis peak location),
 `Y_peak` (y-axis peak location), `a` (width of Gaussian along x-axis), and `b`
 (width of Gaussian along y-axis).
 
-Note that the attribute `fit_method` indicates that an `"elliptical_unconstr"`
-approach was used. This attribute is used by `predict_gaussian_2D()` to 
+Note that the `data.frame` in `gauss_fit_ue$fit_method` indicates the 
+fitting method and whether amplitude and/or orientatinon were constrained.
+This `data.frame` is used by `predict_gaussian_2D()` to 
 automatically determine what method (and therefore, identity of parameters) was 
 used and then sample points from that fitted Gaussian. 
 
