@@ -6,15 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Compute volume under 2D-Gaussian — get_volume_gaussian_2D • gaussplotR</title>
+<title>CONTRIBUTING • gaussplotR</title>
 
 <!-- favicons -->
-<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -25,8 +25,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
 <!-- bootstrap-toc -->
-<link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script>
+<link rel="stylesheet" href="bootstrap-toc.css">
+<script src="bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
@@ -40,14 +40,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script>
+<link href="pkgdown.css" rel="stylesheet">
+<script src="pkgdown.js"></script>
 
 
 
 
-<meta property="og:title" content="Compute volume under 2D-Gaussian — get_volume_gaussian_2D" />
-<meta property="og:description" content="Compute volume under 2D-Gaussian" />
+<meta property="og:title" content="CONTRIBUTING" />
 <meta property="og:image" content="https://vbaliga.github.io/gaussplotR/logo.png" />
 
 
@@ -67,7 +66,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-title-body">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -79,7 +78,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">gaussplotR</a>
+        <a class="navbar-link" href="index.html">gaussplotR</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3.9000</span>
       </span>
     </div>
@@ -87,13 +86,13 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
+  <a href="index.html">
     <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -103,18 +102,18 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/fit_gaussian_2D.html">Fitting 2D Gaussians to data</a>
+      <a href="articles/fit_gaussian_2D.html">Fitting 2D Gaussians to data</a>
     </li>
     <li>
-      <a href="../articles/formulas-used-by-fit-gaussian-2D.html">Formulas used by fit_gaussian_2D</a>
+      <a href="articles/formulas-used-by-fit-gaussian-2D.html">Formulas used by fit_gaussian_2D</a>
     </li>
     <li>
-      <a href="../articles/troubleshooting-model-fits.html">Troubleshooting model fits</a>
+      <a href="articles/troubleshooting-model-fits.html">Troubleshooting model fits</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">Changelog</a>
+  <a href="news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -135,58 +134,67 @@
       </header>
 
 <div class="row">
-  <div class="col-md-9 contents">
+  <div class="contents col-md-9">
     <div class="page-header">
-    <h1>Compute volume under 2D-Gaussian</h1>
-    <small class="dont-index">Source: <a href='https://github.com/vbaliga/gaussplotR/blob/master/R/get_volume_gaussian_2D.R'><code>R/get_volume_gaussian_2D.R</code></a></small>
-    <div class="hidden name"><code>get_volume_gaussian_2D.Rd</code></div>
+      <h1>CONTRIBUTING</h1>
     </div>
 
-    <div class="ref-description">
-    <p>Compute volume under 2D-Gaussian</p>
-    </div>
+<div id="contributing" class="section level1">
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/gaussplotR/man/get_volume_gaussian_2D.html'>get_volume_gaussian_2D</a></span>(<span class='kw'>X_sig</span>, <span class='kw'>Y_sig</span>)</pre>
+<div id="fixing-typos" class="section level3">
+<h3 class="hasAnchor">
+<a href="#fixing-typos" class="anchor"></a>Fixing typos</h3>
+<p>Small typos or grammatical errors in documentation may be edited directly using the GitHub web interface, so long as the changes are made in the <em>source</em> file.</p>
+<ul>
+<li>YES: you edit a roxygen comment in a <code>.R</code> file below <code>R/</code>.</li>
+<li>NO: you edit an <code>.Rd</code> file below <code>man/</code>.</li>
+</ul>
+</div>
+<div id="prerequisites" class="section level3">
+<h3 class="hasAnchor">
+<a href="#prerequisites" class="anchor"></a>Prerequisites</h3>
+<p>Before you make a substantial pull request, you should always file an issue and make sure someone from the team agrees that it’s a problem. If you’ve found a bug, create an associated issue and illustrate the bug with a minimal <a href="https://www.tidyverse.org/help/#reprex">reprex</a>.</p>
+</div>
+<div id="pull-request-process" class="section level3">
+<h3 class="hasAnchor">
+<a href="#pull-request-process" class="anchor"></a>Pull request process</h3>
+<ul>
+<li>We recommend that you create a Git branch for each pull request (PR).<br>
+</li>
+<li>Look at the GitHub Actions build status before and after making changes. The <code>README</code> should contain badges for any continuous integration services used by the package.<br>
+</li>
+<li>We recommend the tidyverse <a href="http://style.tidyverse.org">style guide</a>. You can use the <a href="https://CRAN.R-project.org/package=styler">styler</a> package to apply these styles, but please don’t restyle code that has nothing to do with your PR.<br>
+</li>
+<li>We use <a href="https://cran.r-project.org/package=roxygen2">roxygen2</a>.<br>
+</li>
+<li>We use <a href="https://cran.r-project.org/package=testthat">testthat</a>. Contributions with test cases included are easier to accept.<br>
+</li>
+<li>For user-facing changes, add a bullet to the top of <code>NEWS.md</code> below the current development version header describing the changes made followed by your GitHub username, and links to relevant issue(s)/PR(s).</li>
+</ul>
+</div>
+<div id="prefer-to-email" class="section level3">
+<h3 class="hasAnchor">
+<a href="#prefer-to-email" class="anchor"></a>Prefer to Email?</h3>
+<p>Email the person listed as maintainer in the <code>DESCRIPTION</code> file of this repo.</p>
+<p>Though note that private discussions over email don’t help others - of course email is totally warranted if it’s a sensitive problem of any kind.</p>
+</div>
+<div id="thanks-for-contributing" class="section level3">
+<h3 class="hasAnchor">
+<a href="#thanks-for-contributing" class="anchor"></a>Thanks for contributing!</h3>
+<p>This contributing guide is adapted from the tidyverse contributing guide available at <a href="https://raw.githubusercontent.com/r-lib/usethis/master/inst/templates/tidy-contributing.md" class="uri">https://raw.githubusercontent.com/r-lib/usethis/master/inst/templates/tidy-contributing.md</a> and the ropensci contributing guide available at <a href="https://raw.githubusercontent.com/ropensci/dotgithubfiles/blob/master/dotgithub/CONTRIBUTING.md" class="uri">https://raw.githubusercontent.com/ropensci/dotgithubfiles/blob/master/dotgithub/CONTRIBUTING.md</a></p>
+</div>
+</div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>X_sig</th>
-      <td><p>numeric value(s) of the x-axis spread (sigma)</p></td>
-    </tr>
-    <tr>
-      <th>Y_sig</th>
-      <td><p>numeric value(s) of the y-axis spread (sigma)</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>Numeric value(s) indicating the computed volume(s)</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Volume under the 2D-Gaussian is computed as:
-<code>2 * pi * sqrt(abs(X_sig)) * sqrt(abs(Y_sig))</code></p>
-<p>Numeric vectors can be supplied to <code>X_sig</code> and <code>Y_sig</code>. If vectors
-of length greater than 1 are given, the function computes volume for each
-sequential pair of <code>X_sig</code>, <code>Y_sig</code> values. The lengths of these
-supplied vectors must be identical.</p>
-    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
-
-    <p>Vikram B. Baliga</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/vbaliga/gaussplotR'>gaussplotR</a></span>)
-
-<span class='fu'><a href='https://rdrr.io/pkg/gaussplotR/man/get_volume_gaussian_2D.html'>get_volume_gaussian_2D</a></span>(<span class='fl'>5</span>, <span class='fl'>3</span>) <span class='co'>#24.33467</span></div><div class='output co'>#&gt; [1] 24.33467</div></pre>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
+
 </div>
+
 
 
       <footer>

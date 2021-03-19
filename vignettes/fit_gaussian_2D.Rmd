@@ -1,10 +1,10 @@
 ---
-title: "Fitting 2D Gaussians to Data"
+title: "Fitting 2D-Gaussians to Data"
 author: "Vikram B. Baliga"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Fitting 2D Gaussians to Data}
+  %\VignetteIndexEntry{Fitting 2D-Gaussians to Data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteDepends{ggplot2}
   %\VignetteDepends{metR}
@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 
 ## Overview
 
-The function `fit_gaussian_2D()` can be used fit 2D Gaussians to data, and has
+The function `fit_gaussian_2D()` can be used fit 2D-Gaussians to data, and has
 several methods for how the fitting is implemented. This vignette will run you
 through what these methods mean with worked examples.
 
@@ -69,8 +69,8 @@ lattice::levelplot(
 argument: 1) `"elliptical"`, 2) `"elliptical_log"`, or 3) `"circular"`. 
 
 The most generic method (and the default) is `method = "elliptical"`. This
-allows the fitted 2D Gaussian to take an ellipsoid shape. If you would like the
-best-fitting 2D Gaussian, this is most likely your best bet.
+allows the fitted 2D-Gaussian to take an ellipsoid shape. If you would like the
+best-fitting 2D-Gaussian, this is most likely your best bet.
 
 A slightly-altered method to fit an ellipsoid Gaussian is available in 
 `method = "elliptical_log"`. This method follows Priebe et al. 2003^[Priebe NJ, 
@@ -79,7 +79,7 @@ MT/V5. J Neurosci. 2003 Jul 2;23(13):5650-61. doi:
 10.1523/JNEUROSCI.23-13-05650.2003.] and is geared towards use with 
 log2-transformed data.
 
-A third option is `method = "circular"`. This produces a very simple 2D Gaussian
+A third option is `method = "circular"`. This produces a very simple 2D-Gaussian
 that is constrained to have to have a roughly circular shape (i.e. spread in X-
 and Y- are roughly equal).
 
@@ -97,9 +97,9 @@ by `method = "elliptical"` vs `method = "elliptical_log"`. With
 `method = "elliptical"`, a `theta` parameter dictates the rotation, in 
 radians, from the x-axis in the clockwise direction. Thus, using 
 `method = "elliptical", constrain_orientation = pi/2` will return parameters for
-an elliptical 2D Gaussian that is constrained to a 90-degree (pi/2) orientation. 
+an elliptical 2D-Gaussian that is constrained to a 90-degree (pi/2) orientation. 
 In contrast, the `method = "elliptical_log"` procedure uses a `Q` parameter to 
-determine the orientation of the 2D Gaussian. 
+determine the orientation of the 2D-Gaussian. 
 Setting `method = "elliptical_log", constrain_orientation = 0` will result 
 in a diagonally-oriented Gaussian, whereas setting `constrain_orientation = -1`
 will result in horizontal orientation. Again, see Priebe et al. 2003 for more 

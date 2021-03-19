@@ -119,7 +119,7 @@
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
-<p>The function <code><a href="reference/fit_gaussian_2D.html">fit_gaussian_2D()</a></code> is the workhorse of <code>gaussplotR</code>. It uses <code><a href="https://rdrr.io/r/stats/nls.html">stats::nls()</a></code> to find the best-fitting parameters of a 2D Gaussian fit to supplied data based on one of three formula choices. The function <code><a href="reference/autofit_gaussian_2D.html">autofit_gaussian_2D()</a></code> can be used to automatically figure out the best formula choice and arrive at the best-fitting parameters.</p>
+<p>The function <code><a href="reference/fit_gaussian_2D.html">fit_gaussian_2D()</a></code> is the workhorse of <code>gaussplotR</code>. It uses <code><a href="https://rdrr.io/r/stats/nls.html">stats::nls()</a></code> to find the best-fitting parameters of a 2D-Gaussian fit to supplied data based on one of three formula choices. The function <code><a href="reference/autofit_gaussian_2D.html">autofit_gaussian_2D()</a></code> can be used to automatically figure out the best formula choice and arrive at the best-fitting parameters.</p>
 <p>The <code><a href="reference/predict_gaussian_2D.html">predict_gaussian_2D()</a></code> function can then be used to predict values from the Gaussian over a supplied grid of X- and Y-values (generated here via <code><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid()</a></code>). This is useful if the original data is relatively sparse and interpolation of values is desired.</p>
 <p>Plotting can then be achieved via <code><a href="reference/ggplot_gaussian_2D.html">ggplot_gaussian_2D()</a></code>, but note that the <code>data.frame</code> created by <code><a href="reference/predict_gaussian_2D.html">predict_gaussian_2D()</a></code> can be supplied to other plotting frameworks such as <code><a href="https://rdrr.io/pkg/lattice/man/levelplot.html">lattice::levelplot()</a></code>. A 3D plot can also be produced via <code><a href="reference/rgl_gaussian_2D.html">rgl_gaussian_2D()</a></code> (not shown here).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
@@ -223,10 +223,16 @@
 <span class="co">#&gt;    "elliptical" "unconstrained" "unconstrained"</span>
 </pre></div>
 </div>
+<div id="contributing-andor-raising-issues" class="section level2">
+<h2 class="hasAnchor">
+<a href="#contributing-andor-raising-issues" class="anchor"></a>Contributing and/or raising Issues</h2>
+<p>Feedback on bugs, improvements, and/or feature requests are all welcome. Please see the Issues templates on GitHub to make a bug fix request or feature request.</p>
+<p>To contribute code via a pull request, please consult the Contributing Guide first.</p>
+</div>
 <div id="citation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#citation" class="anchor"></a>Citation</h2>
-<p>Baliga, VB. 2020. gaussplotR: Fit, predict, and plot 2D gaussians in R. R package version 0.2.3. <a href="https://cran.r-project.org/package=gaussplotR" class="uri">https://cran.r-project.org/package=gaussplotR</a></p>
+<p>Baliga, VB. 2020. gaussplotR: Fit, predict, and plot 2D-Gaussians in R. R package version 0.2.3. <a href="https://cran.r-project.org/package=gaussplotR" class="uri">https://cran.r-project.org/package=gaussplotR</a></p>
 </div>
 <div id="license" class="section level2">
 <h2 class="hasAnchor">
@@ -254,6 +260,12 @@
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
 <li><small><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></small></li>
+</ul>
+</div>
+<div class="community">
+<h2>Community</h2>
+<ul class="list-unstyled">
+<li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 </ul>
 </div>
 <div class="developers">

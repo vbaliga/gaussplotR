@@ -2,7 +2,7 @@
 % Please edit documentation in R/characterize_gaussian_fits.R
 \name{characterize_gaussian_fits}
 \alias{characterize_gaussian_fits}
-\title{Characterize the orientation of fitted 2D Gaussians}
+\title{Characterize the orientation of fitted 2D-Gaussians}
 \usage{
 characterize_gaussian_fits(
   fit_objects_list = NULL,

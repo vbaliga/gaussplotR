@@ -3,7 +3,7 @@
 
 ########################### characterize_gaussian_fits #########################
 
-#' Characterize the orientation of fitted 2D Gaussians
+#' Characterize the orientation of fitted 2D-Gaussians
 #'
 #' The orientation and partial correlations of Gaussian data are analyzed
 #' according to Levitt et al. 1994 and Priebe et al. 2003. Features include

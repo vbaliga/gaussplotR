@@ -3,7 +3,7 @@
 
 ############################# ggplot_gaussian_2D ###############################
 
-#' Plot a 2D Gaussian via ggplot
+#' Plot a 2D-Gaussian via ggplot
 #'
 #' @param gauss_data Data.frame with X_values, Y_values, and predicted_values,
 #'   e.g. exported from \code{predict_gaussian_2D()}
@@ -23,7 +23,7 @@
 #' @param ... Other arguments supplied to \code{ggplot2::theme()}
 #'
 #' @return A ggplot object that uses metR::geom_contour_fill() to display the
-#' 2D Gaussian
+#' 2D-Gaussian
 #'
 #' @author Vikram B. Baliga
 #'

@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 ## Overview
 
-This document will provide specific details of 2D Gaussian equations used by
+This document will provide specific details of 2D-Gaussian equations used by
 the different `method` options within `gaussplotR::fit_gaussian_2D()`.
 
 ## `method = "elliptical"`
@@ -26,7 +26,7 @@ equation to gridded data.
 
 $$G(x,y) = A_o + A * e^{-U/2}$$
 
-where G is the value of the 2D Gaussian at each ${(x,y)}$ point, $A_o$ is a 
+where G is the value of the 2D-Gaussian at each ${(x,y)}$ point, $A_o$ is a 
 constant term, and $A$ is the amplitude (i.e. scale factor).
 
 The elliptical function, $U$, is:

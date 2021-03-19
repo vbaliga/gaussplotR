@@ -1,15 +1,15 @@
 ## Part of the gaussplotR package
-## Last updated: 2020-12-25 VBB
+## Last updated: 2021-03-18 VBB
 
 ############################# fit_gaussian_2D ##############################
 
-#' Determine the best-fit parameters for a specific 2D Gaussian model
+#' Determine the best-fit parameters for a specific 2D-Gaussian model
 #'
 #' @param data A data.frame that contains the raw data (generally rectilinearly
 #'   gridded data, but this is not a strict requirement). Columns must be named
 #'   \code{"X_values"}, \code{"Y_values"} and \code{"response"}.
 #' @param method Choice of \code{"elliptical"}, \code{"elliptical_log"}, or
-#'   \code{"circular"}. Determine which specific implementation of 2D Gaussian
+#'   \code{"circular"}. Determine which specific implementation of 2D-Gaussian
 #'   to use. See Details for more.
 #' @param constrain_amplitude Default FALSE; should the amplitude of the
 #'   Gaussian be set to the maximum value of the \code{"response"} variable
@@ -31,7 +31,7 @@
 #'   after using \code{stats::nls()}.
 #' @param ... Additional arguments passed to \code{stats::nls.control()}
 #'
-#' @details \code{stats::nls()} is used to fit parameters for a 2D Gaussian to
+#' @details \code{stats::nls()} is used to fit parameters for a 2D-Gaussian to
 #'   the supplied data. Each method uses (slightly) different sets of
 #'   parameters. Note that for a small (but non-trivial) proportion of data
 #'   sets, nonlinear least squares may fail due to singularities or other
@@ -41,14 +41,14 @@
 #'   Should this strategy fail, the user can make use of the \code{user_init}
 #'   argument to supply an alternate set of starting values.
 #'
-#'   The simplest method is \code{method = "circular"}. Here, the 2D Gaussian is
+#'   The simplest method is \code{method = "circular"}. Here, the 2D-Gaussian is
 #'   constrained to have a roughly circular shape (i.e. spread in X- and Y- are
 #'   roughly equal). If this method is used, the fitted parameters are: Amp
 #'   (amplitude), X_peak (x-axis peak location), Y_peak (y-axis peak location),
 #'   X_sig (spread along x-axis), and Y_sig (spread along y-axis).
 #'
 #'   A more generic method (and the default) is \code{method = "elliptical"}.
-#'   This allows the fitted 2D Gaussian to take a more ellipsoid shape (but note
+#'   This allows the fitted 2D-Gaussian to take a more ellipsoid shape (but note
 #'   that \code{method = "circular"} can be considered a special case of this).
 #'   If this method is used, the fitted parameters are: A_o (a constant term),
 #'   Amp (amplitude), theta (rotation, in radians, from the x-axis in the
@@ -67,7 +67,7 @@
 #'   "elliptical_log"}, the \code{"constrain_orientation"} argument can be used
 #'   to specify how the orientation is set. In most cases, the user should use
 #'   the default "unconstrained" setting for this argument. Doing so will
-#'   provide the best-fit 2D Gaussian (assuming that the solution yielded by
+#'   provide the best-fit 2D-Gaussian (assuming that the solution yielded by
 #'   \code{stats::nls()} converges on the global optimum).
 #'
 #'   Setting \code{constrain_orientation} to a numeric (e.g.
@@ -77,7 +77,7 @@
 #'   \code{method = "elliptical"}, the theta parameter dictates the rotation, in
 #'   radians, from the x-axis in the clockwise direction. In contrast, the
 #'   \code{method = "elliptical_log"} procedure uses a Q parameter to determine
-#'   the orientation of the 2D Gaussian. Setting \code{constrain_orientation =
+#'   the orientation of the 2D-Gaussian. Setting \code{constrain_orientation =
 #'   0} will result in a diagonally-oriented Gaussian, whereas setting
 #'   \code{constrain_orientation = -1} will result in horizontal orientation.
 #'   See Priebe et al. 2003 for more details.

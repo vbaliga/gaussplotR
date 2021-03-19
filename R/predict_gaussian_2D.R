@@ -3,7 +3,7 @@
 
 ############################# predict_gaussian_2D ##############################
 
-#' Predict values from a fitted 2D gaussian
+#' Predict values from a fitted 2D-Gaussian
 #'
 #' @param fit_object Either the output of \code{gaussplotR::fit_gaussian_2D()}
 #' or a list that contains coefficients and fit methods (see Details).
@@ -35,7 +35,7 @@
 #' amplitude = "unconstrained", orientation = NA)}.
 #'
 #' @return A data.frame with the supplied \code{X_values} and \code{Y_values}
-#'   along with the predicted values of the 2D gaussian
+#'   along with the predicted values of the 2D-Gaussian
 #'   (\code{predicted_values})
 #'
 #' @author Vikram B. Baliga

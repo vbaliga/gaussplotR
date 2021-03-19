@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_volume_gaussian_2D.R
 \name{get_volume_gaussian_2D}
 \alias{get_volume_gaussian_2D}
-\title{Compute volume under 2D gaussian}
+\title{Compute volume under 2D-Gaussian}
 \usage{
 get_volume_gaussian_2D(X_sig, Y_sig)
 }
@@ -15,10 +15,10 @@ get_volume_gaussian_2D(X_sig, Y_sig)
 Numeric value(s) indicating the computed volume(s)
 }
 \description{
-Compute volume under 2D gaussian
+Compute volume under 2D-Gaussian
 }
 \details{
-Volume under the 2D gaussian is computed as:
+Volume under the 2D-Gaussian is computed as:
 \code{2 * pi * sqrt(abs(X_sig)) * sqrt(abs(Y_sig))}
 
 Numeric vectors can be supplied to \code{X_sig} and \code{Y_sig}. If vectors

@@ -2,7 +2,7 @@
 % Please edit documentation in R/rgl_gaussian_2D.R
 \name{rgl_gaussian_2D}
 \alias{rgl_gaussian_2D}
-\title{Produce a 3D plot of the 2D Gaussian via rgl}
+\title{Produce a 3D plot of the 2D-Gaussian via rgl}
 \usage{
 rgl_gaussian_2D(
   gauss_data,
@@ -42,7 +42,7 @@ An rgl object (i.e. of the class 'rglHighlevel'). See
 \code{rgl::plot3d()} for details.
 }
 \description{
-Produce a 3D plot of the 2D Gaussian via rgl
+Produce a 3D plot of the 2D-Gaussian via rgl
 }
 \examples{
 if (interactive()) {

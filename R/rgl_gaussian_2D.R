@@ -3,7 +3,7 @@
 
 ############################### rgl_gaussian_2D ################################
 
-#' Produce a 3D plot of the 2D Gaussian via rgl
+#' Produce a 3D plot of the 2D-Gaussian via rgl
 #'
 #' @param gauss_data Data.frame with X_values, Y_values, and predicted_values,
 #'   e.g. exported from \code{predict_gaussian_2D()}

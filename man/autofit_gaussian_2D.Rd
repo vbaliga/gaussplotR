@@ -2,7 +2,7 @@
 % Please edit documentation in R/autofit_gaussian_2D.R
 \name{autofit_gaussian_2D}
 \alias{autofit_gaussian_2D}
-\title{Automatically determine the best-fitting 2D Gaussian for a data set}
+\title{Automatically determine the best-fitting 2D-Gaussian for a data set}
 \usage{
 autofit_gaussian_2D(
   data,
@@ -44,7 +44,7 @@ in the returned list as \code{$model_comparison}. This table is obtained
 via \code{compare_gaussian_fits()}.
 }
 \description{
-Automatically determine the best-fitting 2D Gaussian for a data set
+Automatically determine the best-fitting 2D-Gaussian for a data set
 }
 \details{
 This function runs \code{fit_gaussian_2D()} three times: once for

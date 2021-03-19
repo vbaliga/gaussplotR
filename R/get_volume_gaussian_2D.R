@@ -3,12 +3,12 @@
 
 ########################## get_volume_gaussian_2D #############################
 
-#' Compute volume under 2D gaussian
+#' Compute volume under 2D-Gaussian
 #'
 #' @param X_sig numeric value(s) of the x-axis spread (sigma)
 #' @param Y_sig numeric value(s) of the y-axis spread (sigma)
 #'
-#' @details Volume under the 2D gaussian is computed as:
+#' @details Volume under the 2D-Gaussian is computed as:
 #' \code{2 * pi * sqrt(abs(X_sig)) * sqrt(abs(Y_sig))}
 #'
 #' Numeric vectors can be supplied to \code{X_sig} and \code{Y_sig}. If vectors

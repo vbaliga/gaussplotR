@@ -2,7 +2,7 @@
 % Please edit documentation in R/compare_gaussian_fits.R
 \name{compare_gaussian_fits}
 \alias{compare_gaussian_fits}
-\title{Compare fitted 2D Gaussians and determine the best-fitting model}
+\title{Compare fitted 2D-Gaussians and determine the best-fitting model}
 \usage{
 compare_gaussian_fits(fit_objects_list, comparison_method = "rmse")
 }
@@ -25,7 +25,7 @@ comparison_method that was selected.}
 }
 }
 \description{
-Compare fitted 2D Gaussians and determine the best-fitting model
+Compare fitted 2D-Gaussians and determine the best-fitting model
 }
 \details{
 For the argument \code{fit_objects_list}, a list of fitted model

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggplot_gaussian_2D.R
 \name{ggplot_gaussian_2D}
 \alias{ggplot_gaussian_2D}
-\title{Plot a 2D Gaussian via ggplot}
+\title{Plot a 2D-Gaussian via ggplot}
 \usage{
 ggplot_gaussian_2D(
   gauss_data,
@@ -54,10 +54,10 @@ to 1 scale?}
 }
 \value{
 A ggplot object that uses metR::geom_contour_fill() to display the
-2D Gaussian
+2D-Gaussian
 }
 \description{
-Plot a 2D Gaussian via ggplot
+Plot a 2D-Gaussian via ggplot
 }
 \examples{
 if (interactive()) {

@@ -38,7 +38,7 @@ devtools::install_github("vbaliga/gaussplotR")
 ## Example
 
 The function `fit_gaussian_2D()` is the workhorse of `gaussplotR`. It
-uses `stats::nls()` to find the best-fitting parameters of a 2D Gaussian
+uses `stats::nls()` to find the best-fitting parameters of a 2D-Gaussian
 fit to supplied data based on one of three formula choices. The function
 `autofit_gaussian_2D()` can be used to automatically figure out the best
 formula choice and arrive at the best-fitting parameters.
@@ -165,9 +165,18 @@ summary(gauss_auto)
 #>    "elliptical" "unconstrained" "unconstrained"
 ```
 
+## Contributing and/or raising Issues
+
+Feedback on bugs, improvements, and/or feature requests are all welcome.
+Please see the Issues templates on GitHub to make a bug fix request or
+feature request.
+
+To contribute code via a pull request, please consult the Contributing
+Guide first.
+
 ## Citation
 
-Baliga, VB. 2020. gaussplotR: Fit, predict, and plot 2D gaussians in R.
+Baliga, VB. 2020. gaussplotR: Fit, predict, and plot 2D-Gaussians in R.
 R package version 0.2.3. <https://cran.r-project.org/package=gaussplotR>
 
 ## License

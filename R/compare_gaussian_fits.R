@@ -3,7 +3,7 @@
 
 ############################# compare_gaussian_fits ############################
 
-#' Compare fitted 2D Gaussians and determine the best-fitting model
+#' Compare fitted 2D-Gaussians and determine the best-fitting model
 #'
 #' @param fit_objects_list A list of outputs from \code{fit_gaussian_2D()}. See
 #' Details for more

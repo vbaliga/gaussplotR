@@ -2,7 +2,7 @@
 % Please edit documentation in R/predict_gaussian_2D.R
 \name{predict_gaussian_2D}
 \alias{predict_gaussian_2D}
-\title{Predict values from a fitted 2D gaussian}
+\title{Predict values from a fitted 2D-Gaussian}
 \usage{
 predict_gaussian_2D(fit_object, X_values, Y_values, ...)
 }
@@ -18,11 +18,11 @@ or a list that contains coefficients and fit methods (see Details).}
 }
 \value{
 A data.frame with the supplied \code{X_values} and \code{Y_values}
-along with the predicted values of the 2D gaussian
+along with the predicted values of the 2D-Gaussian
 (\code{predicted_values})
 }
 \description{
-Predict values from a fitted 2D gaussian
+Predict values from a fitted 2D-Gaussian
 }
 \details{
 This function assumes Gaussian parameters have been fitted beforehand. No

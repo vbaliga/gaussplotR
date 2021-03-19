@@ -3,7 +3,7 @@
 
 ############################## autofit_gaussian_2D #############################
 
-#' Automatically determine the best-fitting 2D Gaussian for a data set
+#' Automatically determine the best-fitting 2D-Gaussian for a data set
 #'
 #' @param data A data.frame that contains the raw data (generally rectilinearly
 #'   gridded data, but this is not a strict requirement). Columns must be named
