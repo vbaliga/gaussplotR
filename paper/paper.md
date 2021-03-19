@@ -22,15 +22,16 @@ affiliations:
 
 Should the need to model the relationship between bivariate data and a response
 variable arise, two-dimensional (2D) Gaussian models are often the most
-appropriate choice. For example, Priebe et. al., [@Priebe2003] characterized
-motion-sensitive neurons by fitting 2D-Gaussian functions to neurons' response
-rates as spatial and temporal frequencies of visual stimuli were varied. The
-width and orientation of these fitted 2D-Gaussian surfaces provides insight on
-whether a neuron is "tuned" to particular spatial or temporal domains.
-Two-dimensional Gaussians are also used in other scientific disciplines such as
-physics [@Wu1998; @Kravtsov2004], materials sciences [@Riekel1999], and image
-processing [@Hanuman2013; @Ketenci2013], particularly in medical imaging
-[@Wu2019; @Qadir2020].
+appropriate choice. For example, Priebe et. al. characterized motion-sensitive
+neurons in the brains of macaques by fitting 2D-Gaussian functions to neurons'
+response rates as spatial and temporal frequencies of visual stimuli were varied
+[@Priebe2003]. The width and orientation of these fitted 2D-Gaussian surfaces
+provides insight on whether a neuron is "tuned" to particular spatial or
+temporal domains. Two-dimensional Gaussians are also used in other scientific
+disciplines such as physics [@Wu1998; @Kravtsov2004], materials sciences
+[@Riekel1999], and image processing [@Hanuman2013; @Ketenci2013], particularly
+in medical imaging [@Wu2019;
+@Qadir2020].
 
 Fitting 2D-Gaussian models to data is not always a straightforward process, as
 finding appropriate values for the model's parameters relies on complex
