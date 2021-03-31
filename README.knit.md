@@ -1,60 +1,62 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+
 
 # gaussplotR <img src='man/figures/logo.png' align="right" height="138.5" />
 
 <!-- badges: start -->
-
-[![Project Status: Active – The project has reached a stable, usable
-state and is being actively
-developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![R build
-status](https://github.com/vbaliga/gaussplotR/workflows/R-CMD-check/badge.svg)](https://github.com/vbaliga/gaussplotR/actions)
-[![Codecov test
-coverage](https://codecov.io/gh/vbaliga/gaussplotR/graph/badge.svg)](https://codecov.io/gh/vbaliga/gaussplotR?branch=master)  
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![R build status](https://github.com/vbaliga/gaussplotR/workflows/R-CMD-check/badge.svg)](https://github.com/vbaliga/gaussplotR/actions)
+[![Codecov test coverage](https://codecov.io/gh/vbaliga/gaussplotR/graph/badge.svg)](https://codecov.io/gh/vbaliga/gaussplotR?branch=master)  
 [![status](https://joss.theoj.org/papers/685673937faee896ddd4a48d825280cf/status.svg)](https://joss.theoj.org/papers/685673937faee896ddd4a48d825280cf)  
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4041073.svg)](https://doi.org/10.5281/zenodo.4041073)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/gaussplotR)](https://CRAN.R-project.org/package=gaussplotR)
+[![CRAN status](https://www.r-pkg.org/badges/version/gaussplotR)](https://CRAN.R-project.org/package=gaussplotR)
 <!-- badges: end -->
 
-`gaussplotR` provides functions to fit two-dimensional Gaussian
-functions, predict values from such functions, and produce plots of
-predicted data.
+`gaussplotR` provides functions to fit two-dimensional Gaussian functions,
+predict values from such functions, and produce plots of predicted data.
 
 ## Installation
 
 You can install `gaussplotR` from CRAN via:
 
-``` r
+
+```r
 install.packages("gaussplotR")
 ```
 
 Or to get the latest (developmental) version through github, use:
+  
 
-``` r
+```r
 devtools::install_github("vbaliga/gaussplotR")
 ```
 
+
 ## Example
 
-The function `fit_gaussian_2D()` is the workhorse of `gaussplotR`. It
-uses `stats::nls()` to find the best-fitting parameters of a 2D-Gaussian
-fit to supplied data based on one of three formula choices. The function
-`autofit_gaussian_2D()` can be used to automatically figure out the best
-formula choice and arrive at the best-fitting parameters.
+The function `fit_gaussian_2D()` is the workhorse of `gaussplotR`. It uses
+`stats::nls()` to find the best-fitting parameters of a 2D-Gaussian fit to
+supplied data based on one of three formula choices. The function
+`autofit_gaussian_2D()` can be used to automatically figure out the best formula
+choice and arrive at the best-fitting parameters.
 
-The `predict_gaussian_2D()` function can then be used to predict values
-from the Gaussian over a supplied grid of X- and Y-values (generated
-here via `expand.grid()`). This is useful if the original data is
-relatively sparse and interpolation of values is desired.
+The `predict_gaussian_2D()` function can then be used to predict values from
+the Gaussian over a supplied grid of X- and Y-values (generated here via 
+`expand.grid()`). This is useful if the original data is relatively sparse and
+interpolation of values is desired.
 
-Plotting can then be achieved via `ggplot_gaussian_2D()`, but note that
-the `data.frame` created by `predict_gaussian_2D()` can be supplied to
-other plotting frameworks such as `lattice::levelplot()`. A 3D plot can
-also be produced via `rgl_gaussian_2D()` (not shown here).
+Plotting can then be achieved via `ggplot_gaussian_2D()`, but note that the 
+`data.frame` created by `predict_gaussian_2D()` can be supplied to other 
+plotting frameworks such as `lattice::levelplot()`. A 3D plot can also be 
+produced via `rgl_gaussian_2D()` (not shown here).
 
-``` r
+
+```r
 library(gaussplotR)
 
 ## Load the sample data set
@@ -90,7 +92,7 @@ ggplot_gaussian_2D(gauss_data_ue)
 
 <img src="man/figures/README-example-1.png" width="100%" />
 
-``` r
+```r
 
 ## And another example plot via lattice::levelplot()
 library(lattice)
@@ -106,7 +108,7 @@ lattice::levelplot(
 
 <img src="man/figures/README-example-2.png" width="100%" />
 
-``` r
+```r
 
 #### Example 2: Constrained elliptical_log ####
 ## This fits a constrained elliptical, as in Priebe et al. 2003
@@ -136,13 +138,14 @@ ggplot_gaussian_2D(gauss_data_cel)
 
 <img src="man/figures/README-example-3.png" width="100%" />
 
-Should you be interested in having `gaussplotR` try to automatically
-determine the best choice of `method` for `fit_gaussian_2D()`, the
-`autofit_gaussian_2D()` function can come in handy. The default is to
-select the `method` that produces a fit with the lowest `rmse`, but
-other choices include `rss` and `AIC`.
+Should you be interested in having `gaussplotR` try to automatically determine
+the best choice of `method` for `fit_gaussian_2D()`, the `autofit_gaussian_2D()`
+function can come in handy. The default is to select the `method` that 
+produces a fit with the lowest `rmse`, but other choices include `rss` and 
+`AIC`.
 
-``` r
+
+```r
 ## Use autofit_gaussian_2D() to automatically decide the best 
 ## model to use
 gauss_auto <-
@@ -168,21 +171,21 @@ summary(gauss_auto)
 
 ## Contributing and/or raising Issues
 
-Feedback on bugs, improvements, and/or feature requests are all welcome.
-Please see the Issues templates on GitHub to make a bug fix request or
-feature request.
+Feedback on bugs, improvements, and/or feature requests are all welcome. 
+Please see the Issues templates on GitHub to make a bug fix request or feature 
+request.
 
-To contribute code via a pull request, please consult the Contributing
-Guide first.
+To contribute code via a pull request, please consult the Contributing Guide 
+first.
+
 
 ## Citation
 
-Baliga, VB. 2021. gaussplotR: Fit, predict, and plot 2D-Gaussians in R.
-Journal of Open Source Software, 6(59), 3074.
-<https://doi.org/10.21105/joss.03074>
+Baliga, VB. 2021. gaussplotR: Fit, predict, and plot 2D-Gaussians in R. Journal of Open Source Software, 6(59), 3074. https://doi.org/10.21105/joss.03074
+
 
 ## License
 
-GPL (\>= 3) + file LICENSE
+GPL (>= 3) + file LICENSE
 
 🐢

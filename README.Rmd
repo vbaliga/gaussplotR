@@ -19,7 +19,8 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![R build status](https://github.com/vbaliga/gaussplotR/workflows/R-CMD-check/badge.svg)](https://github.com/vbaliga/gaussplotR/actions)
-[![Codecov test coverage](https://codecov.io/gh/vbaliga/gaussplotR/graph/badge.svg)](https://codecov.io/gh/vbaliga/gaussplotR?branch=master)
+[![Codecov test coverage](https://codecov.io/gh/vbaliga/gaussplotR/graph/badge.svg)](https://codecov.io/gh/vbaliga/gaussplotR?branch=master)  
+[![status](https://joss.theoj.org/papers/685673937faee896ddd4a48d825280cf/status.svg)](https://joss.theoj.org/papers/685673937faee896ddd4a48d825280cf)  
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4041073.svg)](https://doi.org/10.5281/zenodo.4041073)
 [![CRAN status](https://www.r-pkg.org/badges/version/gaussplotR)](https://CRAN.R-project.org/package=gaussplotR)
 <!-- badges: end -->
@@ -165,8 +166,7 @@ first.
 
 ## Citation
 
-Baliga, VB. 2020. gaussplotR: Fit, predict, and plot 2D-Gaussians in R. 
-R package version 0.2.3. https://cran.r-project.org/package=gaussplotR
+Baliga, VB. 2021. gaussplotR: Fit, predict, and plot 2D-Gaussians in R. Journal of Open Source Software, 6(59), 3074. https://doi.org/10.21105/joss.03074
 
 
 ## License

@@ -1,0 +1,17 @@
+
+bibentry(bibtype = "Article",
+         title = "gaussplotR: Fit, Predict and Plot 2D-Gaussians in R",
+         author = c(
+          person(
+             given = "Vikram B.",
+             family = "Baliga",
+             role = c("aut", "cre"),
+             comment = c(ORCID = "0000-0002-9367-8974"))
+          ),
+         year = "2021",
+         journal = "Journal of Open Source Software",
+         volume = "6",
+         number = "59",
+         pages = "3074",
+         doi = "10.21105/joss.03074"
+         )

@@ -1,3 +1,10 @@
+# gaussplotR 0.2.4
+* Post-peer review at the Journal of Open Source Software.
+* `print()` and `summary()` on objects that are output from `fit_gaussian_2D()`
+now round parameter estimates to two decimal places.
+* R version requirement downgraded to R >= 3.3.0 
+
+
 # gaussplotR 0.2.2
 * Newest functions enhance the automation of comparing among various Gaussian 
 fit models.  
