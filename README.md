@@ -30,7 +30,7 @@ You can install `gaussplotR` from CRAN via:
 install.packages("gaussplotR")
 ```
 
-Or to get the latest (developmental) version through github, use:
+Or to get the latest (developmental) version through GitHub, use:
 
 ``` r
 devtools::install_github("vbaliga/gaussplotR")

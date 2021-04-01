@@ -8,7 +8,7 @@
   "description": "\n    Functions to fit two-dimensional Gaussian functions, predict values from\n    fits, and produce plots of predicted data via either 'ggplot2' or base R \n    plotting.",
   "name": "gaussplotR: Fit, Predict and Plot 2D Gaussians",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -154,7 +154,7 @@
   ],
   "codeRepository": "https://github.com/vbaliga/gaussplotR",
   "readme": "https://github.com/vbaliga/gaussplotR/blob/master/README.md",
-  "fileSize": "2814.327KB",
+  "fileSize": "2814.876KB",
   "developmentStatus": "https://www.repostatus.org/#active",
   "issueTracker": "https://github.com/vbaliga/gaussplotR/issues",
   "keywords": [
