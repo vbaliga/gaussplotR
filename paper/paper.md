@@ -22,10 +22,10 @@ affiliations:
 
 Should the need to model the relationship between bivariate data and a response
 variable arise, two-dimensional (2D) Gaussian models are often the most
-appropriate choice. For example, Priebe et. al. characterized motion-sensitive
+appropriate choice. For example, @Priebe2003 characterized motion-sensitive
 neurons in the brains of macaques by fitting 2D-Gaussian functions to neurons'
-response rates as spatial and temporal frequencies of visual stimuli were varied
-[@Priebe2003]. The width and orientation of these fitted 2D-Gaussian surfaces
+response rates as spatial and temporal frequencies of visual stimuli were varied.
+The width and orientation of these fitted 2D-Gaussian surfaces
 provides insight on whether a neuron is "tuned" to particular spatial or
 temporal domains. Two-dimensional Gaussians are also used in other scientific
 disciplines such as physics [@Wu1998; @Kravtsov2004], materials sciences
@@ -82,7 +82,7 @@ choices is designed for a specific use case. The most generic method (and the
 default) is `method = "elliptical"`. This allows the fitted 2D-Gaussian to take
 an ellipsoid shape, and this will likely be the best option for most use cases.
 A slightly-altered method to fit an ellipsoid 2D-Gaussian is available in
-`method = "elliptical_log"`. This method follows Priebe et al., [@Priebe2003]
+`method = "elliptical_log"`. This method follows @Priebe2003
 and is geared towards use with log2-transformed data. A third option is `method
 = "circular"`. This produces a very simple 2D-Gaussian that is constrained to
 have to have a roughly circular shape (i.e. spread in X- and Y- are roughly
