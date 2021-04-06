@@ -11,7 +11,7 @@ bibentry(bibtype = "Article",
          year = "2021",
          journal = "Journal of Open Source Software",
          volume = "6",
-         number = "59",
+         number = "60",
          pages = "3074",
          doi = "10.21105/joss.03074"
          )

@@ -98,7 +98,7 @@
       <h1 data-toc-skip>Fitting 2D-Gaussians to Data</h1>
                         <h4 class="author">Vikram B. Baliga</h4>
             
-            <h4 class="date">2021-04-01</h4>
+            <h4 class="date">2021-04-06</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/vbaliga/gaussplotR/blob/master/vignettes/fit_gaussian_2D.Rmd"><code>vignettes/fit_gaussian_2D.Rmd</code></a></small>
       <div class="hidden name"><code>fit_gaussian_2D.Rmd</code></div>
@@ -191,7 +191,7 @@
 <span class="co">#&gt; [1] "list"           "gaussplotR_fit"</span>
 </pre></div>
 <p>Fitting an unconstrained ellipse returns an object (here: <code>gauss_fit_ue</code>) that is a <code>data.frame</code> with one column per fitted parameter. The fitted parameters are: <code>A_o</code> (a constant term), <code>Amp</code> (amplitude), <code>theta</code> (rotation, in radians, from the x-axis in the clockwise direction), <code>X_peak</code> (x-axis peak location), <code>Y_peak</code> (y-axis peak location), <code>a</code> (width of Gaussian along x-axis), and <code>b</code> (width of Gaussian along y-axis).</p>
-<p>Note that the <code>data.frame</code> in <code>gauss_fit_ue$fit_method</code> indicates the fitting method and whether amplitude and/or orientatinon were constrained. This <code>data.frame</code> is used by <code><a href="../reference/predict_gaussian_2D.html">predict_gaussian_2D()</a></code> to automatically determine what method (and therefore, identity of parameters) was used and then sample points from that fitted Gaussian.</p>
+<p>Note that the <code>data.frame</code> in <code>gauss_fit_ue$fit_method</code> indicates the fitting method and whether amplitude and/or orientation were constrained. This <code>data.frame</code> is used by <code><a href="../reference/predict_gaussian_2D.html">predict_gaussian_2D()</a></code> to automatically determine what method (and therefore, identity of parameters) was used and then sample points from that fitted Gaussian.</p>
 <p>We can elect to sample more points from the fitted Gaussian by feeding in a grid of x- and y- values on which to predict (via <code><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid()</a></code>.</p>
 <p>Then, the fitted object <code>gauss_fit_ue</code> along with the grid of points can be supplied to <code>predict_gaussian_2D</code> to sample more points from the fit, which can be useful for plotting.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">

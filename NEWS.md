@@ -1,3 +1,7 @@
+# gaussplotR 0.2.5
+* Citation information updated  
+* Ready for updating CRAN
+
 # gaussplotR 0.2.4
 * Post-peer review at the Journal of Open Source Software.
 * `print()` and `summary()` on objects that are output from `fit_gaussian_2D()`

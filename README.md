@@ -178,7 +178,7 @@ Guide first.
 ## Citation
 
 Baliga, VB. 2021. gaussplotR: Fit, predict, and plot 2D-Gaussians in R.
-Journal of Open Source Software, 6(59), 3074.
+Journal of Open Source Software, 6(60), 3074.
 <https://doi.org/10.21105/joss.03074>
 
 ## License

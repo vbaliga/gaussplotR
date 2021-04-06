@@ -154,7 +154,7 @@
   ],
   "codeRepository": "https://github.com/vbaliga/gaussplotR",
   "readme": "https://github.com/vbaliga/gaussplotR/blob/master/README.md",
-  "fileSize": "2814.876KB",
+  "fileSize": "2815.222KB",
   "developmentStatus": "https://www.repostatus.org/#active",
   "issueTracker": "https://github.com/vbaliga/gaussplotR/issues",
   "keywords": [
@@ -196,7 +196,7 @@
       "sameAs": "https://doi.org/10.21105/joss.03074",
       "isPartOf": {
         "@type": "PublicationIssue",
-        "issueNumber": "59",
+        "issueNumber": "60",
         "datePublished": "2021",
         "isPartOf": {
           "@type": ["PublicationVolume", "Periodical"],
