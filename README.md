@@ -12,7 +12,7 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 status](https://github.com/vbaliga/gaussplotR/workflows/R-CMD-check/badge.svg)](https://github.com/vbaliga/gaussplotR/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/vbaliga/gaussplotR/graph/badge.svg)](https://codecov.io/gh/vbaliga/gaussplotR?branch=master)  
-[![status](https://joss.theoj.org/papers/685673937faee896ddd4a48d825280cf/status.svg)](https://joss.theoj.org/papers/685673937faee896ddd4a48d825280cf)  
+[![status](https://joss.theoj.org/papers/10.21105/joss.03074/status.svg)](https://joss.theoj.org/papers/10.21105/joss.03074)  
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4041073.svg)](https://doi.org/10.5281/zenodo.4041073)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/gaussplotR)](https://CRAN.R-project.org/package=gaussplotR)
@@ -85,13 +85,14 @@ gauss_data_ue <-
 
 ## Plot via ggplot2 and metR
 library(ggplot2); library(metR)
+#> Warning: package 'ggplot2' was built under R version 4.0.5
+#> Warning: package 'metR' was built under R version 4.0.5
 ggplot_gaussian_2D(gauss_data_ue)
 ```
 
 <img src="man/figures/README-example-1.png" width="100%" />
 
 ``` r
-
 ## And another example plot via lattice::levelplot()
 library(lattice)
 lattice::levelplot(
@@ -107,7 +108,6 @@ lattice::levelplot(
 <img src="man/figures/README-example-2.png" width="100%" />
 
 ``` r
-
 #### Example 2: Constrained elliptical_log ####
 ## This fits a constrained elliptical, as in Priebe et al. 2003
 gauss_fit_cel <-
@@ -183,6 +183,6 @@ Journal of Open Source Software, 6(60), 3074.
 
 ## License
 
-GPL (\>= 3) + file LICENSE
+GPL (&gt;= 3) + file LICENSE
 
 🐢

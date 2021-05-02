@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![R build status](https://github.com/vbaliga/gaussplotR/workflows/R-CMD-check/badge.svg)](https://github.com/vbaliga/gaussplotR/actions)
 [![Codecov test coverage](https://codecov.io/gh/vbaliga/gaussplotR/graph/badge.svg)](https://codecov.io/gh/vbaliga/gaussplotR?branch=master)  
-[![status](https://joss.theoj.org/papers/685673937faee896ddd4a48d825280cf/status.svg)](https://joss.theoj.org/papers/685673937faee896ddd4a48d825280cf)  
+[![status](https://joss.theoj.org/papers/10.21105/joss.03074/status.svg)](https://joss.theoj.org/papers/10.21105/joss.03074)  
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4041073.svg)](https://doi.org/10.5281/zenodo.4041073)
 [![CRAN status](https://www.r-pkg.org/badges/version/gaussplotR)](https://CRAN.R-project.org/package=gaussplotR)
 <!-- badges: end -->

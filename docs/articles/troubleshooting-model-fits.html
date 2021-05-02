@@ -92,13 +92,13 @@
 
       
 
-      </header><div class="row">
+      </header><script src="troubleshooting-model-fits_files/header-attrs-2.7.5/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Troubleshooting model fits</h1>
                         <h4 class="author">Vikram B. Baliga</h4>
             
-            <h4 class="date">2021-04-06</h4>
+            <h4 class="date">2021-05-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/vbaliga/gaussplotR/blob/master/vignettes/troubleshooting-model-fits.Rmd"><code>vignettes/troubleshooting-model-fits.Rmd</code></a></small>
       <div class="hidden name"><code>troubleshooting-model-fits.Rmd</code></div>
@@ -111,30 +111,28 @@
 <p>Code within <code><a href="../reference/fit_gaussian_2D.html">fit_gaussian_2D()</a></code> will first scan the supplied dataset to guesstimate sensible initial parameters, which hopefully sidesteps these issues. But there is no guarantee this strategy will always work.</p>
 <p>This vignette will offer some guidance on what to do when <code><a href="https://rdrr.io/r/stats/nls.html">stats::nls()</a></code> fails to converge, including the use of optional parameters in <code><a href="../reference/fit_gaussian_2D.html">fit_gaussian_2D()</a></code> that are meant to help you address these issues.</p>
 <p>Let’s start by loading <code>gaussplotR</code> and getting some sample data loaded up:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/vbaliga/gaussplotR">gaussplotR</a></span>)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/vbaliga/gaussplotR">gaussplotR</a></span><span class="op">)</span>
 
 <span class="co">## Load the sample data set</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">gaussplot_sample_data</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">gaussplot_sample_data</span><span class="op">)</span>
 
 <span class="co">## The raw data we'd like to use are in columns 1:3</span>
-<span class="kw">samp_dat</span> <span class="op">&lt;-</span>
-  <span class="kw">gaussplot_sample_data</span>[,<span class="fl">1</span><span class="op">:</span><span class="fl">3</span>]
-</pre></div>
+<span class="va">samp_dat</span> <span class="op">&lt;-</span>
+  <span class="va">gaussplot_sample_data</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></code></pre></div>
 <div id="singular-gradients" class="section level2">
 <h2 class="hasAnchor">
 <a href="#singular-gradients" class="anchor"></a>Singular gradients</h2>
 <p>One common problem is that of singular gradients. I will intentionally comment out the next block of code because running it will produce the singular gradient error, and generating errors in an R Markdown file will prevent its rendering. Please un-comment the example below to see.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co">## Un-comment this example if you'd like to see a singular gradient error</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## Un-comment this example if you'd like to see a singular gradient error</span>
 <span class="co"># gauss_fit_cir &lt;-</span>
 <span class="co">#   fit_gaussian_2D(samp_dat,</span>
 <span class="co">#                   constrain_amplitude = TRUE,</span>
-<span class="co">#                   method = "circular")</span>
-</pre></div>
+<span class="co">#                   method = "circular")</span></code></pre></div>
 <p>The output from the above example should be:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="co">#&gt; Error in stats::nls(response ~ Amp_init * exp(-((((X_values - X_peak)^2)/(2 *  : </span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#&gt; Error in stats::nls(response ~ Amp_init * exp(-((((X_values - X_peak)^2)/(2 *  : </span>
 <span class="co">#&gt;   singular gradient</span>
 <span class="co">#&gt; Called from: stats::nls(response ~ Amp_init * exp(-((((X_values - X_peak)^2)/(2 * </span>
 <span class="co">#&gt;     X_sig^2) + ((Y_values - Y_peak)^2)/(2 * Y_sig^2)))), start = c(X_peak = #&gt; _peak_init, &gt;</span>
@@ -145,21 +143,19 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Error: no more error handlers available (recursive errors?); invoking 'abort' restart</span>
 <span class="co">#&gt; Error during wrapup: INTEGER() can only be applied to a 'integer', not a 'unknown type #&gt; #29'</span>
-<span class="co">#&gt; Error: no more error handlers available (recursive errors?); invoking 'abort' restart</span>
-</pre></div>
+<span class="co">#&gt; Error: no more error handlers available (recursive errors?); invoking 'abort' restart</span></code></pre></div>
 <p>There are a couple tools in <code>gaussplotR</code> that can help you address this problem.</p>
 <p>A good first step is to enable the optional argument <code>print_initial_params</code> in <code><a href="../reference/fit_gaussian_2D.html">fit_gaussian_2D()</a></code> by setting it to <code>TRUE</code>. Again, please un-comment this next block, since it will still produce an error:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="co">## Un-comment this example if you'd like to see a singular gradient error</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## Un-comment this example if you'd like to see a singular gradient error</span>
 <span class="co"># gauss_fit_cir &lt;-</span>
 <span class="co">#   fit_gaussian_2D(samp_dat,</span>
 <span class="co">#                   constrain_amplitude = TRUE,</span>
 <span class="co">#                   method = "circular",</span>
-<span class="co">#                   print_initial_params = TRUE)</span>
-</pre></div>
+<span class="co">#                   print_initial_params = TRUE)</span></code></pre></div>
 <p>Though this block of code will not work, you will at least see something helpful at the beginning of the error message:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="co">#&gt; Initial parameters:</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#&gt; Initial parameters:</span>
 <span class="co">#&gt;       Amp    X_peak    Y_peak     X_sig     Y_sig </span>
 <span class="co">#&gt; 25.725293 -2.000000  3.000000  2.482892  2.500000 </span>
 <span class="co">#&gt; Error in stats::nls(response ~ Amp_init * exp(-((((X_values - X_peak)^2)/(2 *  : </span>
@@ -173,23 +169,22 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Error: no more error handlers available (recursive errors?); invoking 'abort' restart</span>
 <span class="co">#&gt; Error during wrapup: INTEGER() can only be applied to a 'integer', not a 'unknown type #&gt; #29'</span>
-<span class="co">#&gt; Error: no more error handlers available (recursive errors?); invoking 'abort' restart</span>
-</pre></div>
+<span class="co">#&gt; Error: no more error handlers available (recursive errors?); invoking 'abort' restart</span></code></pre></div>
 <p>Those first three lines indicate the initial values that were used. Often, singular gradients will arise when initial values for parameters were poorly chosen (sorry!).</p>
 <p>What you can do is supply your own set of initial values. To do this, use the optional argument <code>user_init</code> within <code><a href="../reference/fit_gaussian_2D.html">fit_gaussian_2D()</a></code>. You will need to supply a numeric vector that is of the same length as the number of parameters for your chosen model. The values you supply must be provided in the same order they appear in the Initial parameters message. They do not need to be named; values alone will suffice.</p>
 <p>This next example will work. I’ll keep <code>print_initial_params</code> on too, since it can be nice to see:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="co">## This should run with no errors</span>
-<span class="kw">gauss_fit_cir_user</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="../reference/fit_gaussian_2D.html">fit_gaussian_2D</a></span>(<span class="kw">samp_dat</span>,
-                  constrain_amplitude = <span class="fl">TRUE</span>,
-                  method = <span class="st">"circular"</span>,
-                  user_init = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">25.72529</span>, <span class="op">-</span><span class="fl">2.5</span>, <span class="fl">1.7</span>, <span class="fl">1.3</span>, <span class="fl">1.6</span>),
-                  print_initial_params = <span class="fl">TRUE</span>)
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## This should run with no errors</span>
+<span class="va">gauss_fit_cir_user</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/fit_gaussian_2D.html">fit_gaussian_2D</a></span><span class="op">(</span><span class="va">samp_dat</span>,
+                  constrain_amplitude <span class="op">=</span> <span class="cn">TRUE</span>,
+                  method <span class="op">=</span> <span class="st">"circular"</span>,
+                  user_init <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">25.72529</span>, <span class="op">-</span><span class="fl">2.5</span>, <span class="fl">1.7</span>, <span class="fl">1.3</span>, <span class="fl">1.6</span><span class="op">)</span>,
+                  print_initial_params <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; Initial parameters:</span>
 <span class="co">#&gt;      Amp   X_peak   Y_peak    X_sig    Y_sig </span>
 <span class="co">#&gt; 25.72529 -2.50000  1.70000  1.30000  1.60000</span>
-<span class="kw">gauss_fit_cir_user</span>
+<span class="va">gauss_fit_cir_user</span>
 <span class="co">#&gt; Model coefficients</span>
 <span class="co">#&gt;    Amp X_peak Y_peak X_sig Y_sig</span>
 <span class="co">#&gt;  25.73  -2.55   1.86  1.27   1.5</span>
@@ -198,8 +193,7 @@
 <span class="co">#&gt;  906.88 5.02   906.88 228.32</span>
 <span class="co">#&gt; Fitting methods</span>
 <span class="co">#&gt;        method     amplitude   orientation </span>
-<span class="co">#&gt;    "circular" "constrained"            NA</span>
-</pre></div>
+<span class="co">#&gt;    "circular" "constrained"            NA</span></code></pre></div>
 <p>Note that although we are constraining the amplitude, the value of <code>Amp</code> must still be provided (here it is <code>25.72529</code>).</p>
 <p>It may take some trial and error to find a set of <code>user_init</code> values that gets your model to converge. It often makes sense to think about what values are feasible for each parameter. For example, it should be relatively straightforward to think of ranges of possible values for <code>X_peak</code> and <code>Y_peak</code>. I often find that finding good initial values for the “spread” parameters (such as <code>X_sig</code> and <code>Y_sig</code>) is the tough nut to crack, so I recommend tweaking those parameters first.</p>
 </div>
@@ -219,12 +213,12 @@
 <p>Our scapegoat here is setting <code>constrain_amplitude = TRUE</code>. Often, when constraining parameters in a nonlinear model, you’ll find yourself in a scenario where the QR decomposition of the gradient matrix is not of full column rank.</p>
 <p>Constraining parameters (amplitude or orientation) will lead to poorer-fitting Gaussians anyway, so these features should only be used if you have an <em>a priori</em> reason to do so (see examples in Priebe et al. 2003<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>)</p>
 <p>Turning off the <code>constrain_amplitude</code> constraint alleviates the problem in this particular case:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="co">## This should run with no errors</span>
-<span class="kw">gauss_fit_cir</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="../reference/fit_gaussian_2D.html">fit_gaussian_2D</a></span>(<span class="kw">samp_dat</span>,
-                  method = <span class="st">"circular"</span>)
-<span class="kw">gauss_fit_cir</span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## This should run with no errors</span>
+<span class="va">gauss_fit_cir</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="../reference/fit_gaussian_2D.html">fit_gaussian_2D</a></span><span class="op">(</span><span class="va">samp_dat</span>,
+                  method <span class="op">=</span> <span class="st">"circular"</span><span class="op">)</span>
+<span class="va">gauss_fit_cir</span>
 <span class="co">#&gt; Model coefficients</span>
 <span class="co">#&gt;    Amp X_peak Y_peak X_sig Y_sig</span>
 <span class="co">#&gt;  23.18  -2.55   1.81  1.32  1.64</span>
@@ -233,15 +227,14 @@
 <span class="co">#&gt;  899.61    5   899.61 230.03</span>
 <span class="co">#&gt; Fitting methods</span>
 <span class="co">#&gt;          method       amplitude     orientation </span>
-<span class="co">#&gt;      "circular" "unconstrained"              NA</span>
-</pre></div>
+<span class="co">#&gt;      "circular" "unconstrained"              NA</span></code></pre></div>
 <p>Hope this helps!</p>
 <p>🐢</p>
 </div>
 <div class="footnotes">
 <hr>
 <ol>
-<li id="fn1"><p>Priebe NJ, Cassanello CR, Lisberger SG. The neural representation of speed in macaque area MT/V5. J Neurosci. 2003 Jul 2;23(13):5650-61. doi: 10.1523/JNEUROSCI.23-13-05650.2003.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p>Priebe NJ, Cassanello CR, Lisberger SG. The neural representation of speed in macaque area MT/V5. J Neurosci. 2003 Jul 2;23(13):5650-61. doi: 10.1523/JNEUROSCI.23-13-05650.2003.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
   </div>
@@ -261,7 +254,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
