@@ -5,7 +5,7 @@ articles:
   fit_gaussian_2D: fit_gaussian_2D.html
   formulas-used-by-fit-gaussian-2D: formulas-used-by-fit-gaussian-2D.html
   troubleshooting-model-fits: troubleshooting-model-fits.html
-last_built: 2021-05-02T19:23Z
+last_built: 2021-07-28T17:55Z
 urls:
   reference: https://vbaliga.github.io/gaussplotR//reference
   article: https://vbaliga.github.io/gaussplotR//articles
