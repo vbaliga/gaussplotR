@@ -13,4 +13,4 @@
 ^docs$
 ^pkgdown$
 ^paper$
-^CITATION.cff$
+^CITATION\.cff$
