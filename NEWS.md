@@ -1,3 +1,7 @@
+# gaussplotR 0.2.6
+* Added R2 and adjusted R2 computations. To get these, predictions from 
+Gaussians are simply regressed against original response data. 
+
 # gaussplotR 0.2.5
 * Citation information updated  
 * Ready for updating CRAN

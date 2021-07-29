@@ -22,8 +22,8 @@
 ##'  model (or if a named list was not provided, a model number is given in
 ##'  the order of the original supplied list). }
 ##'  \item{"comparison_table"} {A data.frame detailing the rss, rmse, deviance,
-##'  and AIC of the fitted models. The data.frame is sorted by the
-##'  comparison_method that was selected.}
+##'  , AIC, R2, and adjusted R2 of the fitted models. The data.frame is sorted
+##'  by the comparison_method that was selected.}
 ##' }
 #'
 #' @author Vikram B. Baliga
@@ -93,23 +93,23 @@ Please run fit_gaussian_2D() on your data prior to using this function."
   ## comparison_method
   if (!is.character(comparison_method)) {
     stop(
-      "comparison_method must be one of: 'rmse', 'rss', 'AIC'"
+"'comparison_method' must be one of: 'rmse', 'rss', 'AIC', 'R2', or 'R2_adj'"
     )
   }
-  comparison_method_choices <- c("rmse", "rss", "AIC")
+  comparison_method_choices <- c("rmse", "rss", "AIC", "R2", "R2_adj")
   if (!comparison_method %in% comparison_method_choices) {
     stop(
-      "comparison_method must be one of: 'rmse', 'rss', 'AIC'"
+"'comparison_method' must be one of: 'rmse', 'rss', 'AIC', 'R2', or 'R2_adj'"
     )
   }
 
   ## Allocate a matrix to fill
   table_mat <- matrix(nrow =
                         length(fit_objects_list),
-                      ncol = 4)
+                      ncol = 6)
   ## Extract all the model_error_stats from each object in the list
   for (i in seq_along(fit_objects_list)) {
-    for (j in 1:4) {
+    for (j in 1:6) {
       table_mat[i, j] <-
         fit_objects_list[[i]]$model_error_stats[1, j]
     }
@@ -150,6 +150,20 @@ Please run fit_gaussian_2D() on your data prior to using this function."
   if (comparison_method == "AIC"){
     table <-
       table[base::order(table$rmse),]
+    preferred_model <-
+      rownames(table)[1]
+  }
+
+  if (comparison_method == "R2"){
+    table <-
+      table[base::order(table$R2),]
+    preferred_model <-
+      rownames(table)[1]
+  }
+
+  if (comparison_method == "R2_adj"){
+    table <-
+      table[base::order(table$R2_adj),]
     preferred_model <-
       rownames(table)[1]
   }

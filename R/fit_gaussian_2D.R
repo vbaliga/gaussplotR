@@ -95,7 +95,7 @@
 ##'  \item{"coefs"} {A data.frame of fitted model parameters.}
 ##'  \item{"model"} {The model object, fitted by \code{stats::nls()}.}
 ##'  \item{"model_error_stats"} {A data.frame detailing the rss, rmse, deviance,
-##'  and AIC of the fitted model.}
+##'  AIC, R2 and adjusted R2 of the fitted model.}
 ##'  \item{"fit_method"} {A character vector that indicates which method and
 ##'  orientation strategy was used by this function.}
 ##' }
@@ -375,7 +375,10 @@ fit_gaussian_2D <- function(data,
             rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_generic) ^
                                                  2)),
             deviance = stats::deviance(fit_generic),
-            AIC = stats::AIC(fit_generic)
+            AIC = stats::AIC(fit_generic),
+            R2 = summary(stats::lm(predict(fit_generic) ~ data$response))$r.squared,
+            R2_adj =
+              summary(stats::lm(predict(fit_generic) ~ data$response))$adj.r.squared
           )
 
         ## construct output and return
@@ -438,7 +441,10 @@ fit_gaussian_2D <- function(data,
             rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_generic) ^
                                                  2)),
             deviance = stats::deviance(fit_generic),
-            AIC = stats::AIC(fit_generic)
+            AIC = stats::AIC(fit_generic),
+            R2 = summary(stats::lm(predict(fit_generic) ~ data$response))$r.squared,
+            R2_adj =
+              summary(stats::lm(predict(fit_generic) ~ data$response))$adj.r.squared
           )
 
         ## construct output and return
@@ -533,7 +539,14 @@ fit_gaussian_2D <- function(data,
           rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_generic_const) ^
                                                2)),
           deviance = stats::deviance(fit_generic_const),
-          AIC = stats::AIC(fit_generic_const)
+          AIC = stats::AIC(fit_generic_const),
+          R2 = summary(stats::lm(
+            predict(fit_generic_const) ~ data$response
+          ))$r.squared,
+          R2_adj =
+            summary(stats::lm(
+              predict(fit_generic_const) ~ data$response
+            ))$adj.r.squared
         )
 
       ## construct the output and return
@@ -599,7 +612,14 @@ fit_gaussian_2D <- function(data,
           rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_generic_const) ^
                                                2)),
           deviance = stats::deviance(fit_generic_const),
-          AIC = stats::AIC(fit_generic_const)
+          AIC = stats::AIC(fit_generic_const),
+          R2 = summary(stats::lm(
+            predict(fit_generic_const) ~ data$response
+          ))$r.squared,
+          R2_adj =
+            summary(stats::lm(
+              predict(fit_generic_const) ~ data$response
+            ))$adj.r.squared
         )
 
       ## construct the output and return
@@ -696,7 +716,10 @@ fit_gaussian_2D <- function(data,
             rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_el) ^
                                                  2)),
             deviance = stats::deviance(fit_el),
-            AIC = stats::AIC(fit_el)
+            AIC = stats::AIC(fit_el),
+            R2 = summary(stats::lm(predict(fit_el) ~ data$response))$r.squared,
+            R2_adj =
+              summary(stats::lm(predict(fit_el) ~ data$response))$adj.r.squared
           )
 
         ## construct the output and return
@@ -753,7 +776,10 @@ fit_gaussian_2D <- function(data,
             rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_el) ^
                                                  2)),
             deviance = stats::deviance(fit_el),
-            AIC = stats::AIC(fit_el)
+            AIC = stats::AIC(fit_el),
+            R2 = summary(stats::lm(predict(fit_el) ~ data$response))$r.squared,
+            R2_adj =
+              summary(stats::lm(predict(fit_el) ~ data$response))$adj.r.squared
           )
 
         ## construct the output and return
@@ -838,7 +864,10 @@ fit_gaussian_2D <- function(data,
             rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_el) ^
                                                  2)),
             deviance = stats::deviance(fit_el),
-            AIC = stats::AIC(fit_el)
+            AIC = stats::AIC(fit_el),
+            R2 = summary(stats::lm(predict(fit_el) ~ data$response))$r.squared,
+            R2_adj =
+              summary(stats::lm(predict(fit_el) ~ data$response))$adj.r.squared
           )
 
         ## construct the output and return
@@ -894,7 +923,10 @@ fit_gaussian_2D <- function(data,
             rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_el) ^
                                                  2)),
             deviance = stats::deviance(fit_el),
-            AIC = stats::AIC(fit_el)
+            AIC = stats::AIC(fit_el),
+            R2 = summary(stats::lm(predict(fit_el) ~ data$response))$r.squared,
+            R2_adj =
+              summary(stats::lm(predict(fit_el) ~ data$response))$adj.r.squared
           )
 
         # construct the output and return
@@ -986,7 +1018,10 @@ fit_gaussian_2D <- function(data,
           rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_circ) ^
                                                2)),
           deviance = stats::deviance(fit_circ),
-          AIC = stats::AIC(fit_circ)
+          AIC = stats::AIC(fit_circ),
+          R2 = summary(stats::lm(predict(fit_circ) ~ data$response))$r.squared,
+          R2_adj =
+            summary(stats::lm(predict(fit_circ) ~ data$response))$adj.r.squared
         )
 
       ## construct the output and return
@@ -1043,7 +1078,10 @@ fit_gaussian_2D <- function(data,
           rmse = sqrt((1 / nrow(data)) * sum(stats::resid(fit_circ) ^
                                                2)),
           deviance = stats::deviance(fit_circ),
-          AIC = stats::AIC(fit_circ)
+          AIC = stats::AIC(fit_circ),
+          R2 = summary(stats::lm(predict(fit_circ) ~ data$response))$r.squared,
+          R2_adj =
+            summary(stats::lm(predict(fit_circ) ~ data$response))$adj.r.squared
         )
 
       ## construct the output and return

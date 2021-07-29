@@ -20,8 +20,8 @@ A list with the components:
 model (or if a named list was not provided, a model number is given in
 the order of the original supplied list). }
 \item{"comparison_table"} {A data.frame detailing the rss, rmse, deviance,
-and AIC of the fitted models. The data.frame is sorted by the
-comparison_method that was selected.}
+, AIC, R2, and adjusted R2 of the fitted models. The data.frame is sorted
+by the comparison_method that was selected.}
 }
 }
 \description{

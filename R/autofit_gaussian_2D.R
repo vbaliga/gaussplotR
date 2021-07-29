@@ -81,13 +81,13 @@ autofit_gaussian_2D <- function(data,
   ## comparison_method
   if (!is.character(comparison_method)) {
     stop(
-      "'comparison_method' must be one of: 'rmse', 'rss', 'AIC'"
+"'comparison_method' must be one of: 'rmse', 'rss', 'AIC', 'R2', or 'R2_adj'"
     )
   }
-  comparison_method_choices <- c("rmse", "rss", "AIC")
+  comparison_method_choices <- c("rmse", "rss", "AIC", "R2", "R2_adj")
   if (!comparison_method %in% comparison_method_choices) {
     stop(
-      "'comparison_method' must be one of: 'rmse', 'rss', 'AIC'"
+"'comparison_method' must be one of: 'rmse', 'rss', 'AIC', 'R2', or 'R2_adj'"
     )
   }
 
